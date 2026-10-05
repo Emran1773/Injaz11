@@ -1,0 +1,27 @@
+{
+    "name": "Injaz1 — نظام الإنجاز الشخصي",
+    "short_name": "Injaz1",
+    "description": "نظام المهام والتنبيهات والتحفيز الشخصي",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#080b12",
+    "theme_color": "#f4b942",
+    "lang": "ar",
+    "dir": "rtl",
+    "icons": [
+        {
+            "src": "./icons/icon-192.jpeg",
+            "sizes": "192x192",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./icons/icon-512.jpeg",
+            "sizes": "512x512",
+            "type": "image/jpeg",
+            "purpose": "any maskable"
+        }
+    ]
+}

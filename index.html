@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<!-- =========================================================
+     INJAZ1 — ARABIC FONTS
+========================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;500;600;700&family=Rakkas&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap"
+    rel="stylesheet"
+>
+
+<link rel="stylesheet" href="style.css?v=2.0.0">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#0b0f19">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+
+    <meta name="application-name" content="Injaz1">
+
+    <meta name="apple-mobile-web-app-title" content="Injaz1">
+
+    <meta name="description"
+          content="Injaz1 — نظام المهام والتنبيهات والتحفيز">
+
+
+    <!-- PWA -->
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icons -->
+
+    <link rel="icon"
+          type="image/jpeg"
+          sizes="192x192"
+          href="icons/icon-192.jpeg">
+
+    <link rel="apple-touch-icon"
+          href="icons/icon-192.jpeg">
+
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Injaz1</title>
+
+</head>
+
+
+<body>
+
+
+<div class="app-shell">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                <span>I</span>
+            </div>
+
+            <div class="brand-info">
+                <strong>Injaz1</strong>
+                <small>نظام الإنجاز الشخصي</small>
+            </div>
+
+        </div>
+
+
+        <nav class="main-nav">
+
+            <button class="nav-item active"
+                    data-section="dashboard">
+
+                <span class="nav-icon">⌂</span>
+                <span>الرئيسية</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="tasks">
+
+                <span class="nav-icon">✓</span>
+                <span>المهام</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="focus">
+
+                <span class="nav-icon">◷</span>
+                <span>التركيز</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="statistics">
+
+                <span class="nav-icon">▥</span>
+                <span>الإحصائيات</span>
+
+            </button>
+
+
+            <button class="nav-item"
+                    data-section="settings">
+
+                <span class="nav-icon">⚙</span>
+                <span>الإعدادات</span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="streak-card">
+
+                <div class="streak-icon">🔥</div>
+
+                <div>
+                    <strong id="sidebarStreak">0</strong>
+                    <span>يوم إنجاز متتالي</span>
+                </div>
+
+            </div>
+
+
+            <div class="app-version">
+                Injaz1 · v1.0.0
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <button class="mobile-menu"
+                    id="mobileMenu"
+                    aria-label="القائمة">
+
+                ☰
+
+            </button>
+
+
+            <div class="page-heading">
+
+                <span id="currentDate">اليوم</span>
+
+                <h1 id="pageTitle">
+                    لوحة الإنجاز
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+
+                <button class="icon-button notification-button"
+                        id="notificationButton"
+                        aria-label="التنبيهات">
+
+                    🔔
+
+                    <span class="notification-dot hidden"
+                          id="notificationDot"></span>
+
+                </button>
+
+
+                <button class="profile-button"
+                        id="profileButton"
+                        aria-label="الملف الشخصي">
+
+                    <span class="profile-avatar">
+                        ع
+                    </span>
+
+                    <span class="profile-name">
+                        عمران
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================== -->
+
+        <section class="page-section active"
+                 id="dashboardSection">
+
+
+            <div class="welcome-area">
+
+                <div>
+
+                    <span class="eyebrow">
+                        INJAZ1
+                    </span>
+
+                    <h2 id="welcomeTitle">
+                        أهلاً بك يا عمران 👋
+                    </h2>
+
+                    <p id="motivationText">
+                        ابدأ بخطوة واحدة، ودع الإنجاز يتبعها.
+                    </p>
+
+                </div>
+
+
+                <button class="primary-button"
+                        id="addTaskButton">
+
+                    <span>＋</span>
+                    مهمة جديدة
+
+                </button>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+
+                <article class="stat-card">
+
+                    <div class="stat-card-icon">
+                        ✓
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            مهام اليوم
+                        </span>
+
+                        <strong id="todayTasksCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-card-icon">
+                        ⚡
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            مكتملة
+                        </span>
+
+                        <strong id="completedTasksCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-card-icon">
+                        ⭐
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            النقاط
+                        </span>
+
+                        <strong id="pointsCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-card-icon">
+                        🔥
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>
+                            السلسلة
+                        </span>
+
+                        <strong>
+                            <span id="streakCount">0</span>
+                            يوم
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <article class="progress-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="card-label">
+                            إنجاز اليوم
+                        </span>
+
+                        <h3 id="progressTitle">
+                            أكمل يومك بقوة
+                        </h3>
+
+                    </div>
+
+
+                    <strong class="progress-percent"
+                            id="progressPercent">
+
+                        0%
+
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div class="progress-bar"
+                         id="progressBar"
+                         style="width:0%">
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-footer">
+
+                    <span id="progressText">
+                        0 من 0 مهام مكتملة
+                    </span>
+
+                    <span id="remainingText">
+                        ابدأ الآن
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- NEXT TASK -->
+
+            <div class="content-grid">
+
+
+                <section class="tasks-panel">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="card-label">
+                                الآن
+                            </span>
+
+                            <h3>
+                                المهام القادمة
+                            </h3>
+
+                        </div>
+
+
+                        <button class="text-button"
+                                data-section-target="tasks">
+
+                            عرض الكل
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="task-list"
+                         id="upcomingTasks">
+
+                        <div class="empty-state"
+                             id="emptyUpcoming">
+
+                            <div class="empty-icon">
+                                ✓
+                            </div>
+
+                            <h4>
+                                لا توجد مهام بعد
+                            </h4>
+
+                            <p>
+                                أضف أول مهمة وابدأ يومك.
+                            </p>
+
+
+                            <button class="secondary-button"
+                                    id="emptyAddTask">
+
+                                إضافة مهمة
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- MOTIVATION -->
+
+                <aside class="motivation-card">
+
+
+                    <div class="motivation-top">
+
+                        <span class="motivation-badge">
+                            رسالة اليوم
+                        </span>
+
+                        <span class="motivation-symbol">
+                            ✦
+                        </span>
+
+                    </div>
+
+
+                    <div class="motivation-quote"
+                         id="dailyQuote">
+
+                        «الإنجاز لا يحتاج إلى يوم مثالي؛
+                        يحتاج إلى بداية صادقة.»
+
+                    </div>
+
+
+                    <div class="motivation-line"></div>
+
+
+                    <span class="motivation-footer">
+                        استمر، فكل خطوة تُحسب.
+                    </span>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TASKS
+        ========================== -->
+
+        <section class="page-section"
+                 id="tasksSection">
+
+
+            <div class="section-page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        TASKS
+                    </span>
+
+                    <h2>
+                        مهامي
+                    </h2>
+
+                    <p>
+                        نظّم يومك، ثم أنجزه.
+                    </p>
+
+                </div>
+
+
+                <button class="primary-button"
+                        id="addTaskButton2">
+
+                    <span>＋</span>
+                    مهمة جديدة
+
+                </button>
+
+            </div>
+
+
+            <div class="task-filters">
+
+                <button class="filter-button active"
+                        data-filter="all">
+
+                    الكل
+
+                </button>
+
+                <button class="filter-button"
+                        data-filter="pending">
+
+                    قيد التنفيذ
+
+                </button>
+
+                <button class="filter-button"
+                        data-filter="completed">
+
+                    مكتملة
+
+                </button>
+
+                <button class="filter-button"
+                        data-filter="important">
+
+                    مهمة
+
+                </button>
+
+            </div>
+
+
+            <div class="full-task-list"
+                 id="allTasksList">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ✓
+                    </div>
+
+                    <h4>
+                        لا توجد مهام
+                    </h4>
+
+                    <p>
+                        أضف مهمة جديدة للبدء.
+                    </p>
+
+                    <button class="secondary-button"
+                            id="emptyAddTask2">
+
+                        إضافة مهمة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOCUS
+        ========================== -->
+
+        <section class="page-section"
+                 id="focusSection">
+
+
+            <div class="section-page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        FOCUS MODE
+                    </span>
+
+                    <h2>
+                        وضع التركيز
+                    </h2>
+
+                    <p>
+                        مهمة واحدة. تركيز كامل.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="focus-container">
+
+
+                <div class="focus-card">
+
+                    <span class="focus-status"
+                          id="focusStatus">
+
+                        جاهز للبدء
+
+                    </span>
+
+
+                    <div class="focus-task-name"
+                         id="focusTaskName">
+
+                        اختر مهمة للتركيز
+
+                    </div>
+
+
+                    <div class="timer"
+                         id="focusTimer">
+
+                        25:00
+
+                    </div>
+
+
+                    <div class="focus-progress">
+
+                        <div id="focusProgressBar"></div>
+
+                    </div>
+
+
+                    <div class="focus-controls">
+
+
+                        <button class="secondary-button"
+                                id="focusReset">
+
+                            إعادة
+
+                        </button>
+
+
+                        <button class="primary-button focus-start"
+                                id="focusStart">
+
+                            بدء التركيز
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================== -->
+
+        <section class="page-section"
+                 id="statisticsSection">
+
+
+            <div class="section-page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        STATISTICS
+                    </span>
+
+                    <h2>
+                        إحصائيات الإنجاز
+                    </h2>
+
+                    <p>
+                        راقب تقدمك وابنِ عاداتك.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="statistics-grid">
+
+
+                <article class="large-stat-card">
+
+                    <span>
+                        إجمالي المهام
+                    </span>
+
+                    <strong id="totalTasksStat">
+                        0
+                    </strong>
+
+                    <small>
+                        مهمة أضفتها إلى Injaz1
+                    </small>
+
+                </article>
+
+
+                <article class="large-stat-card">
+
+                    <span>
+                        المهام المكتملة
+                    </span>
+
+                    <strong id="completedStat">
+                        0
+                    </strong>
+
+                    <small>
+                        استمر في التقدم
+                    </small>
+
+                </article>
+
+
+                <article class="large-stat-card">
+
+                    <span>
+                        النقاط
+                    </span>
+
+                    <strong id="pointsStat">
+                        0
+                    </strong>
+
+                    <small>
+                        نقاط الإنجاز
+                    </small>
+
+                </article>
+
+
+                <article class="large-stat-card">
+
+                    <span>
+                        أطول سلسلة
+                    </span>
+
+                    <strong id="bestStreakStat">
+                        0
+                    </strong>
+
+                    <small>
+                        يومًا متتاليًا
+                    </small>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SETTINGS
+        ========================== -->
+
+        <section class="page-section"
+                 id="settingsSection">
+
+
+            <div class="section-page-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        SETTINGS
+                    </span>
+
+                    <h2>
+                        الإعدادات
+                    </h2>
+
+                    <p>
+                        خصص تجربة Injaz1 كما تريد.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <strong>
+                            اسم المستخدم
+                        </strong>
+
+                        <span>
+                            الاسم الذي يظهر في لوحة الإنجاز
+                        </span>
+
+                    </div>
+
+
+                    <input type="text"
+                           id="userNameInput"
+                           class="setting-input"
+                           value="عمران"
+                           maxlength="30">
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <strong>
+                            التنبيهات
+                        </strong>
+
+                        <span>
+                            السماح بتنبيهات المهام
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input type="checkbox"
+                               id="notificationsToggle"
+                               checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <strong>
+                            النغمات
+                        </strong>
+
+                        <span>
+                            تشغيل صوت التنبيه عند حلول المهمة
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input type="checkbox"
+                               id="soundsToggle"
+                               checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <strong>
+                            التحفيز
+                        </strong>
+
+                        <span>
+                            عرض العبارات التحفيزية اليومية
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input type="checkbox"
+                               id="motivationToggle"
+                               checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =========================
+     ADD TASK MODAL
+========================== -->
+
+<div class="modal-overlay"
+     id="taskModal">
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    NEW TASK
+                </span>
+
+                <h2>
+                    إضافة مهمة
+                </h2>
+
+            </div>
+
+
+            <button class="modal-close"
+                    id="closeTaskModal"
+                    aria-label="إغلاق">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form id="taskForm">
+
+
+            <div class="form-group">
+
+                <label for="taskTitle">
+                    اسم المهمة
+                </label>
+
+                <input type="text"
+                       id="taskTitle"
+                       name="title"
+                       placeholder="مثال: مراجعة القرآن"
+                       autocomplete="off"
+                       required
+                       maxlength="120">
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="taskDate">
+                        التاريخ
+                    </label>
+
+                    <input type="date"
+                           id="taskDate"
+                           name="date"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="taskTime">
+                        الوقت
+                    </label>
+
+                    <input type="time"
+                           id="taskTime"
+                           name="time"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label for="taskCategory">
+                        التصنيف
+                    </label>
+
+                    <select id="taskCategory"
+                            name="category">
+
+                        <option value="study">
+                            📚 دراسة
+                        </option>
+
+                        <option value="quran">
+                            📖 قرآن
+                        </option>
+
+                        <option value="archery">
+                            🏹 رماية
+                        </option>
+
+                        <option value="reading">
+                            📚 قراءة
+                        </option>
+
+                        <option value="programming">
+                            💻 برمجة
+                        </option>
+
+                        <option value="content">
+                            🎬 صناعة محتوى
+                        </option>
+
+                        <option value="personal">
+                            ◆ شخصي
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="taskPriority">
+                        الأولوية
+                    </label>
+
+                    <select id="taskPriority"
+                            name="priority">
+
+                        <option value="normal">
+                            عادية
+                        </option>
+
+                        <option value="important">
+                            مهمة
+                        </option>
+
+                        <option value="urgent">
+                            عاجلة
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="taskDuration">
+                    مدة التركيز
+                </label>
+
+                <select id="taskDuration"
+                        name="duration">
+
+                    <option value="15">
+                        15 دقيقة
+                    </option>
+
+                    <option value="25"
+                            selected>
+                        25 دقيقة
+                    </option>
+
+                    <option value="30">
+                        30 دقيقة
+                    </option>
+
+                    <option value="45">
+                        45 دقيقة
+                    </option>
+
+                    <option value="60">
+                        60 دقيقة
+                    </option>
+
+                    <option value="90">
+                        90 دقيقة
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group checkbox-group">
+
+                <label class="check-label">
+
+                    <input type="checkbox"
+                           id="taskReminder"
+                           name="reminder"
+                           checked>
+
+                    <span class="custom-check"></span>
+
+                    <span>
+                        تفعيل التنبيه
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+
+                <button type="button"
+                        class="secondary-button"
+                        id="cancelTask">
+
+                    إلغاء
+
+                </button>
+
+
+                <button type="submit"
+                        class="primary-button">
+
+                    إضافة المهمة
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     NOTIFICATION PANEL
+========================== -->
+
+<div class="notification-panel"
+     id="notificationPanel">
+
+
+    <div class="notification-panel-header">
+
+        <div>
+
+            <strong>
+                التنبيهات
+            </strong>
+
+            <span id="notificationCount">
+                0
+            </span>
+
+        </div>
+
+
+        <button id="closeNotificationPanel">
+            ×
+        </button>
+
+    </div>
+
+
+    <div id="notificationList">
+
+        <div class="notification-empty">
+            لا توجد تنبيهات حاليًا.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================== -->
+
+<div class="toast"
+     id="toast">
+
+
+    <div class="toast-icon"
+         id="toastIcon">
+
+        ✓
+
+    </div>
+
+
+    <div class="toast-content">
+
+        <strong id="toastTitle">
+            تم الإنجاز
+        </strong>
+
+        <span id="toastMessage">
+            أحسنت! استمر.
+        </span>
+
+    </div>
+
+
+    <button id="closeToast">
+        ×
+    </button>
+
+</div>
+
+
+<!-- =========================
+     AUDIO
+========================== -->
+
+<audio id="reminderSound"
+       preload="auto"
+       src="sounds/reminder.mp3">
+</audio>
+
+
+<audio id="importantSound"
+       preload="auto"
+       src="sounds/important.mp3">
+</audio>
+
+
+<audio id="successSound"
+       preload="auto"
+       src="sounds/success.mp3">
+</audio>
+
+
+<!-- =========================
+     CONFIG
+========================== -->
+
+<script>
+
+window.INJAZ_CONFIG = {
+
+    appName: "Injaz1",
+
+    version: "1.0.0",
+
+    today: new Date().toISOString().split("T")[0],
+
+    api: null,
+
+    storageKey: "injaz1_data"
+
+};
+
+</script>
+
+
+<!-- APP -->
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>
