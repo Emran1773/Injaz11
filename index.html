@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 
 <head>
 
@@ -83,43 +83,35 @@
     <style>
 /* =========================================================
    INJAZ1 — PREMIUM ARABIC UI
-   Dark • Gold • RTL • PWA
-   Typography: Kufi • Naskh • Ruqaa • Thuluth • Diwani
+   Dark • Light • Gold • RTL • PWA
 ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;500;600;700&family=Rakkas&family=Scheherazade+New:wght@400;700&family=Tajawal:wght@400;500;700;800;900&display=swap');
 
-
 /* =========================================================
-   ROOT
+   ROOT (DARK MODE - DEFAULT)
 ========================================================= */
 
 :root {
-
-    /* Background */
     --bg: #080b12;
     --bg-soft: #0d111a;
     --surface: #111722;
     --surface-2: #161d29;
     --surface-3: #1b2331;
 
-    /* Text */
     --text: #f5f7fb;
     --text-soft: #aeb7c7;
     --text-muted: #707b8e;
 
-    /* Borders */
     --border: rgba(255,255,255,.07);
     --border-strong: rgba(255,255,255,.13);
 
-    /* Accent */
     --accent: #f4b942;
     --accent-light: #ffd875;
     --accent-dark: #d99820;
     --accent-soft: rgba(244,185,66,.12);
     --accent-glow: rgba(244,185,66,.22);
 
-    /* States */
     --success: #45d483;
     --success-soft: rgba(69,212,131,.12);
 
@@ -132,51 +124,49 @@
     --purple: #9b7cff;
     --purple-soft: rgba(155,124,255,.12);
 
-    /* Layout */
     --sidebar-width: 270px;
     --radius: 22px;
     --radius-sm: 15px;
 
-    /* Effects */
-    --shadow:
-        0 25px 70px rgba(0,0,0,.28);
+    --shadow: 0 25px 70px rgba(0,0,0,.28);
+    --shadow-heavy: 0 35px 100px rgba(0,0,0,.48);
+    --transition: .25s cubic-bezier(.2,.8,.2,1);
 
-    --shadow-heavy:
-        0 35px 100px rgba(0,0,0,.48);
-
-    --transition:
-        .25s cubic-bezier(.2,.8,.2,1);
-
-    /* Typography */
-    --font-body:
-        "Tajawal",
-        sans-serif;
-
-    --font-kufi:
-        "Reem Kufi",
-        "Tajawal",
-        sans-serif;
-
-    --font-naskh:
-        "Scheherazade New",
-        "Amiri",
-        serif;
-
-    --font-ruqaa:
-        "Aref Ruqaa",
-        cursive;
-
-    --font-thuluth:
-        "Rakkas",
-        "Amiri",
-        serif;
-
-    --font-diwani:
-        "Rakkas",
-        "Aref Ruqaa",
-        cursive;
+    --font-body: "Tajawal", sans-serif;
+    --font-kufi: "Reem Kufi", "Tajawal", sans-serif;
+    --font-naskh: "Scheherazade New", "Amiri", serif;
+    --font-ruqaa: "Aref Ruqaa", cursive;
+    --font-thuluth: "Rakkas", "Amiri", serif;
+    --font-diwani: "Rakkas", "Aref Ruqaa", cursive;
 }
 
+/* =========================================================
+   LIGHT MODE OVERRIDES
+========================================================= */
+
+[data-theme="light"] {
+    --bg: #f4f6f9;
+    --bg-soft: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #eaedf3;
+    --surface-3: #dfe3ed;
+
+    --text: #1a202c;
+    --text-soft: #4a5568;
+    --text-muted: #718096;
+
+    --border: rgba(0,0,0,.08);
+    --border-strong: rgba(0,0,0,.15);
+
+    --accent: #d99820;
+    --accent-light: #f4b942;
+    --accent-dark: #b87d10;
+    --accent-soft: rgba(217,152,32,.12);
+    --accent-glow: rgba(217,152,32,.22);
+
+    --shadow: 0 20px 50px rgba(0,0,0,.08);
+    --shadow-heavy: 0 30px 80px rgba(0,0,0,.15);
+}
 
 /* =========================================================
    RESET
@@ -199,73 +189,14 @@ body {
     min-height: 100vh;
     direction: rtl;
     color: var(--text);
-    background:
-        radial-gradient(
-            circle at 85% 0%,
-            rgba(244,185,66,.055),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 8% 90%,
-            rgba(91,140,255,.035),
-            transparent 28%
-        ),
-        linear-gradient(
-            180deg,
-            #080b12 0%,
-            #090c13 100%
-        );
+    background: var(--bg);
     font-family: var(--font-body);
     font-weight: 500;
     overflow-x: hidden;
+    transition: background var(--transition), color var(--transition);
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    opacity: .22;
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        );
-    background-size: 42px 42px;
-    mask-image:
-        linear-gradient(
-            to bottom,
-            black,
-            transparent 80%
-        );
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    width: 420px;
-    height: 420px;
-    left: -220px;
-    bottom: -220px;
-    z-index: -1;
-    pointer-events: none;
-    border-radius: 50%;
-    border: 1px solid rgba(244,185,66,.035);
-    box-shadow:
-        0 0 0 45px rgba(244,185,66,.012),
-        0 0 0 90px rgba(244,185,66,.008);
-}
-
-button,
-input,
-select,
-textarea {
+button, input, select, textarea {
     font: inherit;
 }
 
@@ -288,9 +219,8 @@ img {
     display: none !important;
 }
 
-
 /* =========================================================
-   ACCESSIBILITY
+   ACCESSIBILITY & UTILS
 ========================================================= */
 
 *:focus-visible {
@@ -299,24 +229,18 @@ img {
 }
 
 ::selection {
-    color: #111;
+    color: #fff;
     background: var(--accent);
 }
 
-
 /* =========================================================
-   APP SHELL
+   APP SHELL & LAYOUT
 ========================================================= */
 
 .app-shell {
     min-height: 100vh;
     display: flex;
 }
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
 
 .sidebar {
     width: var(--sidebar-width);
@@ -325,437 +249,161 @@ img {
     top: 0;
     right: 0;
     z-index: 100;
-
     display: flex;
     flex-direction: column;
-
     padding: 26px 17px 20px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(17,23,34,.97),
-            rgba(9,13,21,.985)
-        );
-
+    background: var(--surface);
     border-left: 1px solid var(--border);
-
-    box-shadow:
-        -20px 0 60px rgba(0,0,0,.08);
-
+    box-shadow: -20px 0 60px rgba(0,0,0,.05);
     backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    transition: background var(--transition), border var(--transition);
 }
-
-
-/* =========================================================
-   BRAND
-========================================================= */
 
 .brand {
     position: relative;
-
     display: flex;
     align-items: center;
-
     gap: 13px;
-
-    padding:
-        3px
-        10px
-        27px;
-
+    padding: 3px 10px 27px;
     margin-bottom: 5px;
 }
 
 .brand::after {
     content: "";
-
     position: absolute;
-
     right: 10px;
     left: 10px;
     bottom: 0;
-
     height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(244,185,66,.16),
-            transparent
-        );
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
 }
 
 .brand-mark {
     position: relative;
-
     width: 48px;
     height: 48px;
-
     flex: 0 0 48px;
-
     display: grid;
     place-items: center;
-
     border-radius: 16px;
-
     color: #101010;
-
-    background:
-        linear-gradient(
-            145deg,
-            var(--accent-light),
-            var(--accent-dark)
-        );
-
-    box-shadow:
-        0 12px 30px rgba(244,185,66,.17),
-        inset 0 1px 0 rgba(255,255,255,.4);
-
-    overflow: hidden;
-
-    transition: var(--transition);
-}
-
-.brand-mark::before {
-    content: "";
-
-    position: absolute;
-    inset: -70%;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 40%,
-            rgba(255,255,255,.42),
-            transparent 60%
-        );
-
-    transform: rotate(25deg) translateX(-100%);
-    transition: transform .7s ease;
-}
-
-.brand:hover .brand-mark {
-    transform: translateY(-2px) rotate(-2deg);
-    box-shadow:
-        0 16px 36px rgba(244,185,66,.25),
-        0 0 0 5px rgba(244,185,66,.045);
-}
-
-.brand:hover .brand-mark::before {
-    transform: rotate(25deg) translateX(100%);
+    background: linear-gradient(145deg, var(--accent-light), var(--accent-dark));
+    box-shadow: 0 12px 30px var(--accent-glow);
 }
 
 .brand-mark span {
-    position: relative;
-    z-index: 1;
-
     font-family: var(--font-thuluth);
     font-size: 27px;
-    font-weight: 400;
-}
-
-.brand-info {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
 }
 
 .brand-info strong {
     color: var(--text);
-
     font-family: var(--font-kufi);
     font-size: 18px;
-    font-weight: 700;
 }
 
 .brand-info small {
-    margin-top: 1px;
-
     color: var(--text-muted);
-
     font-family: var(--font-diwani);
-    font-size: 15px;
+    font-size: 14px;
 }
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 .main-nav {
     display: flex;
     flex-direction: column;
     gap: 6px;
-
     margin-top: 18px;
 }
 
 .nav-item {
     position: relative;
-
     width: 100%;
-    min-height: 53px;
-
+    min-height: 50px;
     padding: 0 13px;
-
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     border-radius: 15px;
-
     color: var(--text-soft);
     background: transparent;
-
     font-family: var(--font-kufi);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-
     text-align: right;
-
-    overflow: hidden;
-
     transition: var(--transition);
-}
-
-.nav-item::before {
-    content: "";
-
-    position: absolute;
-
-    top: 9px;
-    right: 0;
-
-    width: 3px;
-    height: 0;
-
-    border-radius: 10px;
-
-    background: var(--accent);
-
-    box-shadow:
-        0 0 16px rgba(244,185,66,.55);
-
-    transition: height .25s ease;
-}
-
-.nav-item::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(244,185,66,.045)
-        );
-
-    opacity: 0;
-
-    transition: opacity var(--transition);
 }
 
 .nav-item:hover {
     color: var(--text);
-    background: rgba(255,255,255,.035);
-    transform: translateX(-3px);
-}
-
-.nav-item:hover::after {
-    opacity: 1;
+    background: var(--surface-2);
 }
 
 .nav-item.active {
     color: var(--accent);
-    background:
-        linear-gradient(
-            90deg,
-            rgba(244,185,66,.13),
-            rgba(244,185,66,.045)
-        );
-
-    box-shadow:
-        inset 0 0 0 1px rgba(244,185,66,.07);
-}
-
-.nav-item.active::before {
-    height: 35px;
+    background: var(--accent-soft);
+    box-shadow: inset 0 0 0 1px var(--border-strong);
 }
 
 .nav-icon {
-    position: relative;
-    z-index: 1;
-
     width: 34px;
     height: 34px;
-
-    flex: 0 0 34px;
-
     display: grid;
     place-items: center;
-
     border-radius: 10px;
-
-    color: var(--text-muted);
-    background: rgba(255,255,255,.035);
-
+    background: var(--surface-2);
     font-size: 15px;
-
-    transition: var(--transition);
 }
-
-.nav-item:hover .nav-icon {
-    color: var(--text);
-    transform: scale(1.05);
-}
-
-.nav-item.active .nav-icon {
-    color: var(--accent);
-    background: rgba(244,185,66,.12);
-    box-shadow:
-        inset 0 0 0 1px rgba(244,185,66,.08);
-}
-
-
-/* =========================================================
-   SIDEBAR BOTTOM
-========================================================= */
 
 .sidebar-bottom {
     margin-top: auto;
 }
 
 .streak-card {
-    position: relative;
-
     padding: 14px;
-
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     border: 1px solid var(--border);
     border-radius: 17px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.035),
-            rgba(255,255,255,.012)
-        );
-
-    overflow: hidden;
-
-    transition: var(--transition);
-}
-
-.streak-card::before {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 2px;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent,
-            var(--accent),
-            transparent
-        );
-
-    opacity: .7;
-}
-
-.streak-card:hover {
-    border-color: rgba(244,185,66,.14);
-    transform: translateY(-2px);
+    background: var(--surface-2);
 }
 
 .streak-icon {
     width: 42px;
     height: 42px;
-
     display: grid;
     place-items: center;
-
     border-radius: 12px;
-
     color: var(--accent);
     background: var(--accent-soft);
-
     font-size: 19px;
-
-    transition: var(--transition);
-}
-
-.streak-card:hover .streak-icon {
-    transform: rotate(-5deg) scale(1.06);
-}
-
-.streak-card div:last-child {
-    display: flex;
-    flex-direction: column;
 }
 
 .streak-card strong {
     color: var(--accent);
-
     font-family: var(--font-kufi);
     font-size: 15px;
 }
 
 .streak-card span {
-    margin-top: 1px;
-
     color: var(--text-muted);
-
     font-family: var(--font-naskh);
     font-size: 11px;
 }
 
 .app-version {
-    padding-top: 16px;
-
-    color: #4d5768;
-
-    font-family: var(--font-body);
+    padding-top: 12px;
+    color: var(--text-muted);
     font-size: 9px;
-
     text-align: center;
 }
 
-
-/* =========================================================
-   MAIN CONTENT
-========================================================= */
-
 .main-content {
     width: calc(100% - var(--sidebar-width));
-
     min-height: 100vh;
-
     margin-right: var(--sidebar-width);
-
-    padding:
-        0
-        42px
-        55px;
+    padding: 0 42px 55px;
 }
-
 
 /* =========================================================
    TOPBAR
@@ -763,182 +411,77 @@ img {
 
 .topbar {
     height: 95px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     border-bottom: 1px solid var(--border);
-}
-
-.page-heading {
-    display: flex;
-    flex-direction: column;
 }
 
 .page-heading > span {
     color: var(--text-muted);
-
     font-family: var(--font-naskh);
     font-size: 12px;
 }
 
 .page-heading h1 {
-    margin-top: -2px;
-
     color: var(--text);
-
     font-family: var(--font-kufi);
     font-size: 21px;
     font-weight: 700;
-
-    line-height: 1.6;
 }
 
 .topbar-actions {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
 }
 
 .icon-button {
-    position: relative;
-
     width: 44px;
     height: 44px;
-
     display: grid;
     place-items: center;
-
     border: 1px solid var(--border);
     border-radius: 13px;
-
     color: var(--text-soft);
     background: var(--surface);
-
     font-size: 17px;
-
     transition: var(--transition);
-}
-
-.icon-button::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    border-radius: inherit;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025);
-
-    pointer-events: none;
 }
 
 .icon-button:hover {
     color: var(--accent);
-
-    border-color:
-        rgba(244,185,66,.22);
-
-    background: var(--surface-2);
-
-    transform:
-        translateY(-2px)
-        scale(1.02);
-
-    box-shadow:
-        0 9px 25px rgba(0,0,0,.2);
-}
-
-.icon-button:active {
-    transform: scale(.95);
-}
-
-.notification-dot {
-    position: absolute;
-
-    top: 7px;
-    right: 7px;
-
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: var(--danger);
-
-    box-shadow:
-        0 0 0 3px var(--surface),
-        0 0 12px rgba(255,100,124,.4);
-
-    animation: notificationPulse 2s infinite;
-}
-
-@keyframes notificationPulse {
-    0%,100% {
-        box-shadow:
-            0 0 0 3px var(--surface),
-            0 0 8px rgba(255,100,124,.2);
-    }
-
-    50% {
-        box-shadow:
-            0 0 0 3px var(--surface),
-            0 0 16px rgba(255,100,124,.55);
-    }
-}
-
-.profile-button {
-    height: 44px;
-
-    padding: 4px 12px 4px 5px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 9px;
-
-    border: 1px solid var(--border);
-    border-radius: 14px;
-
-    color: var(--text);
-
-    background: var(--surface);
-
-    transition: var(--transition);
-}
-
-.profile-button:hover {
     border-color: var(--border-strong);
     background: var(--surface-2);
     transform: translateY(-2px);
 }
 
-.profile-button:active {
-    transform: scale(.98);
+.profile-button {
+    height: 44px;
+    padding: 4px 12px 4px 5px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    color: var(--text);
+    background: var(--surface);
 }
 
 .profile-avatar {
     width: 35px;
     height: 35px;
-
     display: grid;
     place-items: center;
-
     border-radius: 11px;
-
     color: var(--accent);
     background: var(--surface-3);
-
     font-family: var(--font-kufi);
     font-size: 12px;
     font-weight: 700;
 }
 
 .profile-name {
-    padding-left: 5px;
-
     font-family: var(--font-naskh);
     font-size: 13px;
     font-weight: 700;
@@ -948,19 +491,14 @@ img {
     display: none;
 }
 
-
 /* =========================================================
-   PAGE SECTIONS
+   PAGES & SECTIONS
 ========================================================= */
 
 .page-section {
     display: none;
-
     padding-top: 34px;
-
-    animation:
-        pageEnter .32s
-        cubic-bezier(.2,.8,.2,1);
+    animation: pageEnter .32s cubic-bezier(.2,.8,.2,1);
 }
 
 .page-section.active {
@@ -968,422 +506,148 @@ img {
 }
 
 @keyframes pageEnter {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-
-/* =========================================================
-   WELCOME
-========================================================= */
-
 .welcome-area {
-    min-height: 150px;
-
+    min-height: 140px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 25px;
 }
 
 .eyebrow {
-    position: relative;
-
     display: inline-flex;
     align-items: center;
-
     gap: 8px;
-
     margin-bottom: 7px;
-
     color: var(--accent);
-
     font-family: var(--font-ruqaa);
     font-size: 15px;
     font-weight: 700;
 }
 
-.eyebrow::before {
-    content: "";
-
-    width: 22px;
-    height: 2px;
-
-    border-radius: 99px;
-
-    background: var(--accent);
-}
-
-.welcome-area h2,
-.section-page-header h2 {
+.welcome-area h2, .section-page-header h2 {
     color: var(--text);
-
     font-family: var(--font-kufi);
-    font-size: clamp(25px,3vw,35px);
+    font-size: clamp(22px, 2.5vw, 32px);
     font-weight: 700;
-
-    line-height: 1.5;
 }
 
-.welcome-area p,
-.section-page-header p {
-    margin-top: 7px;
-
+.welcome-area p, .section-page-header p {
+    margin-top: 5px;
     color: var(--text-muted);
-
     font-family: var(--font-naskh);
     font-size: 14px;
 }
-
-.welcome-area .primary-button {
-    flex-shrink: 0;
-}
-
 
 /* =========================================================
    BUTTONS
 ========================================================= */
 
-.primary-button,
-.secondary-button {
-    position: relative;
-
+.primary-button, .secondary-button {
     min-height: 47px;
-
     padding: 0 21px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 8px;
-
     border-radius: 14px;
-
     font-family: var(--font-ruqaa);
     font-size: 16px;
     font-weight: 700;
-
-    overflow: hidden;
-    isolation: isolate;
-
     transition: var(--transition);
-}
-
-.primary-button::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            115deg,
-            transparent 20%,
-            rgba(255,255,255,.34),
-            transparent 80%
-        );
-
-    transform: translateX(-120%);
-
-    transition:
-        transform .65s ease;
-
-    z-index: -1;
-}
-
-.primary-button:hover::before {
-    transform: translateX(120%);
 }
 
 .primary-button {
     color: #111;
-
-    background:
-        linear-gradient(
-            145deg,
-            var(--accent-light),
-            var(--accent)
-        );
-
-    box-shadow:
-        0 10px 30px rgba(244,185,66,.13),
-        inset 0 1px 0 rgba(255,255,255,.4);
+    background: linear-gradient(145deg, var(--accent-light), var(--accent));
+    box-shadow: 0 10px 30px var(--accent-glow);
 }
 
 .primary-button:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 16px 38px rgba(244,185,66,.23),
-        0 0 0 1px rgba(244,185,66,.12);
-}
-
-.primary-button:active {
-    transform:
-        translateY(0)
-        scale(.97);
+    transform: translateY(-2px);
+    filter: brightness(1.05);
 }
 
 .secondary-button {
     color: var(--text-soft);
-
-    background:
-        linear-gradient(
-            145deg,
-            var(--surface-2),
-            var(--surface)
-        );
-
+    background: var(--surface-2);
     border: 1px solid var(--border);
 }
 
 .secondary-button:hover {
     color: var(--text);
-
     border-color: var(--border-strong);
-
     background: var(--surface-3);
-
-    transform: translateY(-2px);
-}
-
-.secondary-button:active {
-    transform: scale(.97);
 }
 
 .text-button {
     padding: 5px;
-
     color: var(--accent);
     background: transparent;
-
     font-family: var(--font-ruqaa);
     font-size: 15px;
-    font-weight: 700;
-
-    transition: var(--transition);
 }
-
-.text-button:hover {
-    color: var(--accent-light);
-    transform: translateX(-3px);
-}
-
 
 /* =========================================================
-   STATS
+   STATS & CARDS
 ========================================================= */
 
 .stats-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
-
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 .stat-card {
-    position: relative;
-
-    min-height: 112px;
-
     padding: 18px;
-
     display: flex;
     align-items: center;
-
     gap: 14px;
-
     border: 1px solid var(--border);
     border-radius: var(--radius);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.012)
-        );
-
-    overflow: hidden;
-
+    background: var(--surface);
     transition: var(--transition);
 }
 
-.stat-card::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    width: 3px;
-    height: 0;
-
-    border-radius: 0 0 8px 8px;
-
-    background: var(--accent);
-
-    transition: height .3s ease;
-}
-
-.stat-card::after {
-    content: "";
-
-    position: absolute;
-
-    width: 130px;
-    height: 130px;
-
-    left: -80px;
-    bottom: -90px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(244,185,66,.045);
-
-    transition: transform .4s ease;
-}
-
 .stat-card:hover {
-    transform: translateY(-4px);
-
+    transform: translateY(-3px);
     border-color: var(--border-strong);
-
-    box-shadow:
-        0 16px 40px rgba(0,0,0,.2);
-}
-
-.stat-card:hover::before {
-    height: 45px;
-}
-
-.stat-card:hover::after {
-    transform: scale(1.25);
 }
 
 .stat-card-icon {
     width: 46px;
     height: 46px;
-
-    flex: 0 0 46px;
-
     display: grid;
     place-items: center;
-
     border-radius: 14px;
-
     color: var(--accent);
     background: var(--accent-soft);
-
     font-size: 18px;
-
-    transition: var(--transition);
-}
-
-.stat-card:hover .stat-card-icon {
-    transform:
-        translateY(-2px)
-        rotate(-4deg)
-        scale(1.06);
-}
-
-.stat-card:nth-child(2) .stat-card-icon {
-    color: var(--success);
-    background: var(--success-soft);
-}
-
-.stat-card:nth-child(3) .stat-card-icon {
-    color: var(--purple);
-    background: var(--purple-soft);
-}
-
-.stat-card:nth-child(4) .stat-card-icon {
-    color: var(--danger);
-    background: var(--danger-soft);
-}
-
-.stat-content {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
 }
 
 .stat-content span {
     color: var(--text-muted);
-
     font-family: var(--font-naskh);
     font-size: 12px;
 }
 
 .stat-content strong {
-    margin-top: 1px;
-
     color: var(--text);
-
     font-family: var(--font-kufi);
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 20px;
 }
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
 
 .progress-card {
-    position: relative;
-
     margin-top: 14px;
-
     padding: 24px;
-
     border: 1px solid var(--border);
     border-radius: var(--radius);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.025),
-            rgba(255,255,255,.008)
-        ),
-        var(--surface);
-
-    overflow: hidden;
-}
-
-.progress-card::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    right: 12%;
-    left: 12%;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(244,185,66,.2),
-            transparent
-        );
+    background: var(--surface);
 }
 
 .card-header {
@@ -1392,193 +656,97 @@ img {
     justify-content: space-between;
 }
 
-.card-label {
-    color: var(--text-muted);
-
-    font-family: var(--font-naskh);
-    font-size: 12px;
-}
-
-.card-header h3 {
-    margin-top: 1px;
-
-    font-family: var(--font-kufi);
-    font-size: 16px;
-    font-weight: 700;
-}
-
 .progress-percent {
     color: var(--accent);
-
     font-family: var(--font-kufi);
-    font-size: 23px;
-    font-weight: 700;
-
-    text-shadow:
-        0 0 20px rgba(244,185,66,.12);
+    font-size: 22px;
 }
 
 .progress-track {
     width: 100%;
     height: 10px;
-
-    margin-top: 18px;
-
-    overflow: hidden;
-
+    margin-top: 15px;
     border-radius: 99px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #1a202c,
-            #202735
-        );
-
-    box-shadow:
-        inset 0 1px 2px rgba(0,0,0,.3);
+    background: var(--surface-2);
+    overflow: hidden;
 }
 
 .progress-bar {
-    position: relative;
-
     height: 100%;
-
     border-radius: inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--accent-dark),
-            var(--accent),
-            var(--accent-light)
-        );
-
-    box-shadow:
-        0 0 22px rgba(244,185,66,.2);
-
-    transition:
-        width .55s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-.progress-bar::after {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    width: 80px;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.3)
-        );
-
-    animation:
-        progressShine 2.8s
-        ease-in-out infinite;
-}
-
-@keyframes progressShine {
-    from {
-        transform: translateX(90px);
-        opacity: 0;
-    }
-
-    35% {
-        opacity: .7;
-    }
-
-    70%,
-    100% {
-        transform: translateX(-80px);
-        opacity: 0;
-    }
+    background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+    transition: width .5s ease;
 }
 
 .progress-footer {
-    margin-top: 9px;
-
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
-
     color: var(--text-muted);
-
-    font-family: var(--font-naskh);
     font-size: 11px;
 }
 
+/* =========================================================
+   AI ASSISTANT PARSER SECTION (FEATURE #2)
+========================================================= */
+
+.ai-assistant-card {
+    margin-top: 20px;
+    padding: 24px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.ai-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-2);
+    color: var(--text);
+    resize: vertical;
+    font-family: var(--font-body);
+}
+
+.ai-textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+}
 
 /* =========================================================
-   CONTENT GRID
+   CONTENT GRID & TASKS
 ========================================================= */
 
 .content-grid {
     display: grid;
-
-    grid-template-columns:
-        minmax(0,1.6fr)
-        minmax(270px,.8fr);
-
+    grid-template-columns: minmax(0, 1.6fr) minmax(270px, .8fr);
     gap: 14px;
-
     margin-top: 14px;
 }
 
-.tasks-panel,
-.motivation-card {
-    min-height: 280px;
-
+.tasks-panel, .motivation-card {
     padding: 23px;
-
     border: 1px solid var(--border);
     border-radius: var(--radius);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.025),
-            rgba(255,255,255,.008)
-        ),
-        var(--surface);
-}
-
-.tasks-panel {
-    transition: var(--transition);
-}
-
-.tasks-panel:hover {
-    border-color:
-        rgba(255,255,255,.1);
+    background: var(--surface);
 }
 
 .section-heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 17px;
+    margin-bottom: 15px;
 }
 
 .section-heading h3 {
     font-family: var(--font-kufi);
     font-size: 16px;
-    font-weight: 700;
 }
 
-
-/* =========================================================
-   TASK LIST
-========================================================= */
-
-.task-list,
-.full-task-list {
+.task-list, .full-task-list {
     display: flex;
     flex-direction: column;
     gap: 9px;
@@ -1586,141 +754,53 @@ img {
 
 .task-item {
     position: relative;
-
-    min-height: 72px;
-
-    padding: 11px 14px;
-
+    padding: 12px 14px;
     display: flex;
     align-items: center;
-
     gap: 12px;
-
     border: 1px solid var(--border);
     border-radius: 16px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.025),
-            rgba(255,255,255,.008)
-        );
-
-    overflow: hidden;
-
+    background: var(--surface-2);
     transition: var(--transition);
-}
-
-.task-item::before {
-    content: "";
-
-    position: absolute;
-
-    top: 12px;
-    bottom: 12px;
-    right: 0;
-
-    width: 3px;
-
-    border-radius: 8px 0 0 8px;
-
-    background: var(--blue);
-
-    opacity: .45;
-
-    transition:
-        opacity .25s ease,
-        height .25s ease;
 }
 
 .task-item:hover {
-    transform: translateX(-3px);
-
     border-color: var(--border-strong);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.042),
-            rgba(255,255,255,.015)
-        );
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.15);
-}
-
-.task-item:hover::before {
-    opacity: 1;
+    transform: translateX(-2px);
 }
 
 .task-item.completed {
-    opacity: .62;
-}
-
-.task-item.completed::before {
-    background: var(--success);
-    opacity: .8;
+    opacity: .6;
 }
 
 .task-check {
-    position: relative;
-
     width: 24px;
     height: 24px;
-
-    flex: 0 0 24px;
-
     display: grid;
     place-items: center;
-
-    border: 1px solid #384153;
+    border: 1px solid var(--text-muted);
     border-radius: 8px;
-
-    color: transparent;
     background: transparent;
-
+    color: transparent;
     transition: var(--transition);
 }
 
-.task-check:hover {
-    border-color: var(--accent);
-
-    background:
-        rgba(244,185,66,.06);
-
-    transform: scale(1.08);
-}
-
-.task-check:active {
-    transform: scale(.92);
-}
-
 .task-item.completed .task-check {
-    color: #07120c;
-
+    color: #fff;
     border-color: var(--success);
     background: var(--success);
-
-    box-shadow:
-        0 0 15px rgba(69,212,131,.12);
 }
 
 .task-main {
-    min-width: 0;
     flex: 1;
+    min-width: 0;
 }
 
 .task-title {
-    overflow: hidden;
-
     color: var(--text);
-
     font-family: var(--font-naskh);
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .task-item.completed .task-title {
@@ -1728,97 +808,51 @@ img {
 }
 
 .task-meta {
-    margin-top: 3px;
-
+    margin-top: 2px;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-
-    gap: 7px;
-
+    gap: 8px;
     color: var(--text-muted);
-
-    font-family: var(--font-naskh);
     font-size: 11px;
 }
 
 .task-category {
-    padding: 3px 8px;
-
-    border-radius: 8px;
-
+    padding: 2px 7px;
+    border-radius: 6px;
     color: var(--blue);
     background: var(--blue-soft);
-
-    font-family: var(--font-ruqaa);
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.task-time {
-    color: var(--text-muted);
-
-    font-family: var(--font-naskh);
+    font-size: 11px;
 }
 
 .task-priority {
-    padding: 3px 8px;
-
-    border-radius: 8px;
-
-    font-family: var(--font-ruqaa);
-    font-size: 12px;
-    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 11px;
 }
 
-.priority-normal {
-    color: var(--text-muted);
-    background: rgba(255,255,255,.05);
-}
-
-.priority-important {
-    color: var(--accent);
-    background: var(--accent-soft);
-}
-
-.priority-urgent {
-    color: var(--danger);
-    background: var(--danger-soft);
-}
+.priority-normal { color: var(--text-muted); background: var(--surface-3); }
+.priority-important { color: var(--accent); background: var(--accent-soft); }
+.priority-urgent { color: var(--danger); background: var(--danger-soft); }
 
 .task-actions {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
 }
 
 .task-action {
-    width: 32px;
-    height: 32px;
-
+    width: 30px;
+    height: 30px;
     display: grid;
     place-items: center;
-
-    border-radius: 99px;
-
+    border-radius: 50%;
     color: var(--text-muted);
     background: transparent;
-
-    font-size: 13px;
-
-    transition: var(--transition);
 }
 
 .task-action:hover {
     color: var(--text);
-
     background: var(--surface-3);
-
-    transform: translateY(-1px);
-}
-
-.task-action:active {
-    transform: scale(.9);
 }
 
 .task-action.delete:hover {
@@ -1826,167 +860,51 @@ img {
     background: var(--danger-soft);
 }
 
-
 /* =========================================================
    EMPTY STATE
 ========================================================= */
 
 .empty-state {
-    min-height: 210px;
-
+    padding: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     text-align: center;
 }
 
 .empty-icon {
-    position: relative;
-
-    width: 54px;
-    height: 54px;
-
-    margin-bottom: 13px;
-
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
     display: grid;
     place-items: center;
-
-    border-radius: 17px;
-
+    border-radius: 14px;
     color: var(--accent);
     background: var(--accent-soft);
-
-    font-size: 20px;
-
-    box-shadow:
-        0 0 0 7px rgba(244,185,66,.025);
+    font-size: 18px;
 }
-
-.empty-icon::after {
-    content: "";
-
-    position: absolute;
-    inset: -7px;
-
-    border: 1px solid rgba(244,185,66,.08);
-    border-radius: 22px;
-}
-
-.empty-state h4 {
-    font-family: var(--font-kufi);
-    font-size: 16px;
-}
-
-.empty-state p {
-    margin-top: 4px;
-    color: var(--text-muted);
-    font-family: var(--font-naskh);
-    font-size: 13px;
-}
-
-.empty-state button {
-    margin-top: 15px;
-}
-
 
 /* =========================================================
-   MOTIVATION CARD
-========================================================= */
-
-.motivation-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.motivation-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.motivation-badge {
-    padding: 3px 9px;
-
-    border-radius: 8px;
-
-    color: var(--accent);
-    background: var(--accent-soft);
-
-    font-family: var(--font-ruqaa);
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.motivation-symbol {
-    color: var(--accent);
-    font-size: 16px;
-}
-
-.motivation-quote {
-    margin: 20px 0;
-
-    color: var(--text);
-
-    font-family: var(--font-naskh);
-    font-size: 17px;
-    line-height: 1.8;
-
-    text-align: center;
-}
-
-.motivation-line {
-    width: 40px;
-    height: 2px;
-    margin: 0 auto;
-    border-radius: 99px;
-    background: var(--border-strong);
-}
-
-.motivation-footer {
-    margin-top: 15px;
-    color: var(--text-muted);
-    font-family: var(--font-naskh);
-    font-size: 12px;
-    text-align: center;
-}
-
-
-/* =========================================================
-   FILTERS
+   FILTERS & FOCUS
 ========================================================= */
 
 .task-filters {
     display: flex;
     gap: 8px;
-
-    margin-bottom: 18px;
+    margin-bottom: 15px;
     overflow-x: auto;
-    padding-bottom: 4px;
 }
 
 .filter-button {
-    padding: 8px 16px;
-
+    padding: 7px 15px;
     border: 1px solid var(--border);
     border-radius: 12px;
-
     color: var(--text-soft);
     background: var(--surface);
-
     font-family: var(--font-ruqaa);
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
-
-    transition: var(--transition);
-}
-
-.filter-button:hover {
-    color: var(--text);
-    border-color: var(--border-strong);
-    background: var(--surface-2);
 }
 
 .filter-button.active {
@@ -1996,11 +914,6 @@ img {
     font-weight: 700;
 }
 
-
-/* =========================================================
-   FOCUS MODE
-========================================================= */
-
 .focus-container {
     display: flex;
     justify-content: center;
@@ -2009,58 +922,31 @@ img {
 
 .focus-card {
     width: 100%;
-    max-width: 500px;
-
-    padding: 40px 30px;
-
+    max-width: 480px;
+    padding: 35px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
     border: 1px solid var(--border);
     border-radius: var(--radius);
-
     background: var(--surface);
-    box-shadow: var(--shadow);
-
     text-align: center;
 }
 
-.focus-status {
-    color: var(--accent);
-    font-family: var(--font-ruqaa);
-    font-size: 16px;
-}
-
-.focus-task-name {
-    margin-top: 10px;
-
-    color: var(--text);
-    font-family: var(--font-kufi);
-    font-size: 20px;
-    font-weight: 700;
-}
-
 .timer {
-    margin: 30px 0;
-
-    color: var(--text);
+    margin: 25px 0;
     font-family: var(--font-kufi);
-    font-size: 64px;
+    font-size: 56px;
     font-weight: 700;
-    letter-spacing: 2px;
 }
 
 .focus-progress {
     width: 100%;
     height: 8px;
-
     border-radius: 99px;
-    background: var(--surface-3);
-
+    background: var(--surface-2);
     overflow: hidden;
-
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
 .focus-progress > div {
@@ -2072,161 +958,79 @@ img {
 
 .focus-controls {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
 }
-
-.focus-controls button {
-    flex: 1;
-}
-
+.focus-controls button { flex: 1; }
 
 /* =========================================================
-   STATISTICS SECTION
+   STATISTICS & SETTINGS
 ========================================================= */
 
 .statistics-grid {
     display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-    gap: 16px;
-
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
     margin-top: 20px;
 }
 
 .large-stat-card {
-    padding: 24px;
-
-    display: flex;
-    flex-direction: column;
-
+    padding: 22px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-
     background: var(--surface);
-
-    transition: var(--transition);
-}
-
-.large-stat-card:hover {
-    border-color: var(--border-strong);
-    transform: translateY(-3px);
-}
-
-.large-stat-card span {
-    color: var(--text-muted);
-    font-family: var(--font-naskh);
-    font-size: 13px;
 }
 
 .large-stat-card strong {
+    display: block;
     margin: 8px 0;
-
     color: var(--accent);
     font-family: var(--font-kufi);
-    font-size: 36px;
-    font-weight: 700;
+    font-size: 32px;
 }
-
-.large-stat-card small {
-    color: var(--text-soft);
-    font-family: var(--font-naskh);
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   SETTINGS SECTION
-========================================================= */
 
 .settings-list {
-    max-width: 650px;
-
+    max-width: 620px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-
     margin-top: 20px;
 }
 
 .setting-item {
-    padding: 18px 20px;
-
+    padding: 16px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    gap: 20px;
-
     border: 1px solid var(--border);
-    border-radius: 16px;
-
+    border-radius: 15px;
     background: var(--surface);
-}
-
-.setting-info {
-    display: flex;
-    flex-direction: column;
-}
-
-.setting-info strong {
-    color: var(--text);
-    font-family: var(--font-kufi);
-    font-size: 15px;
-}
-
-.setting-info span {
-    margin-top: 2px;
-    color: var(--text-muted);
-    font-family: var(--font-naskh);
-    font-size: 12px;
 }
 
 .setting-input {
     padding: 8px 12px;
-
     border: 1px solid var(--border);
     border-radius: 10px;
-
-    color: var(--text);
     background: var(--surface-2);
-
-    font-family: var(--font-body);
-    font-size: 14px;
-}
-
-.setting-input:focus {
-    border-color: var(--accent);
-    outline: none;
+    color: var(--text);
 }
 
 /* TOGGLE SWITCH */
-
 .switch {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 26px;
-    flex-shrink: 0;
+    width: 46px;
+    height: 24px;
 }
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
+.switch input { opacity: 0; width: 0; height: 0; }
 .slider {
     position: absolute;
     cursor: pointer;
     inset: 0;
     background-color: var(--surface-3);
     transition: .3s;
-    border-radius: 34px;
-    border: 1px solid var(--border);
+    border-radius: 24px;
 }
-
 .slider:before {
     position: absolute;
     content: "";
@@ -2238,4099 +1042,717 @@ img {
     transition: .3s;
     border-radius: 50%;
 }
-
-input:checked + .slider {
-    background-color: var(--accent-soft);
-    border-color: var(--accent);
-}
-
-input:checked + .slider:before {
-    transform: translateX(-22px);
-    background-color: var(--accent);
-}
-
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(-22px); background-color: #fff; }
 
 /* =========================================================
-   MODAL
+   MODALS & TOAST
 ========================================================= */
 
 .modal-overlay {
     position: fixed;
     inset: 0;
     z-index: 1000;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 20px;
-
-    background: rgba(4, 6, 10, 0.8);
-    backdrop-filter: blur(8px);
-
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
     opacity: 0;
     pointer-events: none;
-
-    transition: opacity .3s ease;
+    transition: opacity .3s;
 }
 
-.modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
 
 .modal {
     width: 100%;
-    max-width: 520px;
-
-    padding: 30px;
-
+    max-width: 500px;
+    padding: 25px;
     border: 1px solid var(--border-strong);
     border-radius: var(--radius);
-
     background: var(--surface);
     box-shadow: var(--shadow-heavy);
-
-    transform: scale(.95);
-    transition: transform .3s ease;
-}
-
-.modal-overlay.active .modal {
-    transform: scale(1);
 }
 
 .modal-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-
-    margin-bottom: 24px;
-}
-
-.modal-header h2 {
-    font-family: var(--font-kufi);
-    font-size: 20px;
-}
-
-.modal-close {
-    width: 32px;
-    height: 32px;
-
-    display: grid;
-    place-items: center;
-
-    border-radius: 50%;
-
-    color: var(--text-muted);
-    background: var(--surface-2);
-
-    font-size: 18px;
-    transition: var(--transition);
-}
-
-.modal-close:hover {
-    color: var(--danger);
-    background: var(--danger-soft);
+    margin-bottom: 20px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .form-group label {
-    margin-bottom: 6px;
-
+    margin-bottom: 5px;
     color: var(--text-soft);
-    font-family: var(--font-naskh);
     font-size: 13px;
 }
 
-.form-group input,
-.form-group select {
-    padding: 12px 14px;
-
+.form-group input, .form-group select {
+    padding: 11px;
     border: 1px solid var(--border);
-    border-radius: 12px;
-
-    color: var(--text);
+    border-radius: 11px;
     background: var(--surface-2);
-
-    font-family: var(--font-body);
-    font-size: 14px;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    border-color: var(--accent);
-    outline: none;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.checkbox-group {
-    flex-direction: row;
-    align-items: center;
-}
-
-.check-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-family: var(--font-naskh);
-    font-size: 13px;
-    color: var(--text-soft);
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-
-    margin-top: 24px;
-}
-
-
-/* =========================================================
-   NOTIFICATION PANEL
-========================================================= */
-
-.notification-panel {
-    position: fixed;
-
-    top: 90px;
-    left: 40px;
-    z-index: 90;
-
-    width: 320px;
-    max-height: 400px;
-
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-sm);
-
-    background: var(--surface-2);
-    box-shadow: var(--shadow);
-
-    display: flex;
-    flex-direction: column;
-
-    opacity: 0;
-    pointer-events: none;
-
-    transform: translateY(-10px);
-    transition: var(--transition);
-}
-
-.notification-panel.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-.notification-panel-header {
-    padding: 14px 16px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.notification-panel-header strong {
-    font-family: var(--font-kufi);
-    font-size: 14px;
-}
-
-.notification-panel-header span {
-    margin-right: 6px;
-    padding: 2px 6px;
-    border-radius: 99px;
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-size: 11px;
-}
-
-.notification-panel-header button {
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 16px;
-}
-
-#notificationList {
-    overflow-y: auto;
-    padding: 10px;
-}
-
-.notification-item {
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    border-radius: 8px;
-    margin-bottom: 6px;
-    background: var(--surface);
-}
-
-.notification-item-icon {
-    font-size: 16px;
-}
-
-.notification-item-content {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-}
-
-.notification-item-content strong {
     color: var(--text);
 }
 
-.notification-item-content span {
-    color: var(--text-muted);
-}
-
-.notification-empty {
-    padding: 20px;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 .toast {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
+    bottom: 25px;
+    left: 25px;
     z-index: 2000;
-
-    min-width: 280px;
-
-    padding: 14px 18px;
-
+    padding: 12px 18px;
     display: flex;
     align-items: center;
     gap: 12px;
-
     border: 1px solid var(--border-strong);
     border-radius: 14px;
-
-    background: var(--surface-3);
+    background: var(--surface-2);
     box-shadow: var(--shadow-heavy);
-
     transform: translateY(100px);
     opacity: 0;
-
     transition: var(--transition);
 }
 
-.toast.active {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.toast-icon {
-    width: 28px;
-    height: 28px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    color: var(--accent);
-}
-
-.toast-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.toast-content strong {
-    font-family: var(--font-kufi);
-    font-size: 13px;
-
-    color: var(--text);
-}
-
-.toast-content span {
-    font-family: var(--font-naskh);
-    font-size: 12px;
-
-    color: var(--text-muted);
-}
-
-.toast button {
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 16px;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+.toast.active { transform: translateY(0); opacity: 1; }
 
 @media (max-width: 992px) {
-
-    .sidebar {
-        transform: translateX(100%);
-        transition: transform .3s ease;
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .main-content {
-        width: 100%;
-        margin-right: 0;
-        padding: 0 20px 40px;
-    }
-
-    .mobile-menu {
-        display: grid;
-        place-items: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        background: var(--surface);
-        color: var(--text);
-        font-size: 20px;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .notification-panel {
-        left: 20px;
-        right: 20px;
-        width: auto;
-    }
-}
-
-@media (max-width: 576px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .welcome-area {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    .sidebar { transform: translateX(100%); transition: transform .3s; }
+    .sidebar.open { transform: translateX(0); }
+    .main-content { width: 100%; margin-right: 0; padding: 0 16px 40px; }
+    .mobile-menu { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: var(--surface); color: var(--text); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .content-grid { grid-template-columns: 1fr; }
 }
     </style>
 
     <title>Injaz1</title>
-
 </head>
-
 
 <body>
 
-
 <div class="app-shell">
 
-
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-
         <div class="brand">
-
-            <div class="brand-mark">
-                <span>I</span>
-            </div>
-
+            <div class="brand-mark"><span>I</span></div>
             <div class="brand-info">
                 <strong>Injaz1</strong>
                 <small>نظام الإنجاز الشخصي</small>
             </div>
-
         </div>
 
-
         <nav class="main-nav">
-
-            <button class="nav-item active"
-                    data-section="dashboard">
-
-                <span class="nav-icon">⌂</span>
-                <span>الرئيسية</span>
-
+            <button class="nav-item active" data-section="dashboard">
+                <span class="nav-icon">⌂</span><span>الرئيسية</span>
             </button>
-
-
-            <button class="nav-item"
-                    data-section="tasks">
-
-                <span class="nav-icon">✓</span>
-                <span>المهام</span>
-
+            <button class="nav-item" data-section="tasks">
+                <span class="nav-icon">✓</span><span>المهام</span>
             </button>
-
-
-            <button class="nav-item"
-                    data-section="focus">
-
-                <span class="nav-icon">◷</span>
-                <span>التركيز</span>
-
+            <button class="nav-item" data-section="aiParser">
+                <span class="nav-icon">✦</span><span>مساعد الرسائل الذكي</span>
             </button>
-
-
-            <button class="nav-item"
-                    data-section="statistics">
-
-                <span class="nav-icon">▥</span>
-                <span>الإحصائيات</span>
-
+            <button class="nav-item" data-section="focus">
+                <span class="nav-icon">◷</span><span>التركيز</span>
             </button>
-
-
-            <button class="nav-item"
-                    data-section="settings">
-
-                <span class="nav-icon">⚙</span>
-                <span>الإعدادات</span>
-
+            <button class="nav-item" data-section="statistics">
+                <span class="nav-icon">▥</span><span>الإحصائيات</span>
             </button>
-
+            <button class="nav-item" data-section="settings">
+                <span class="nav-icon">⚙</span><span>الإعدادات</span>
+            </button>
         </nav>
 
-
         <div class="sidebar-bottom">
-
             <div class="streak-card">
-
                 <div class="streak-icon">🔥</div>
-
                 <div>
                     <strong id="sidebarStreak">0</strong>
                     <span>يوم إنجاز متتالي</span>
                 </div>
-
             </div>
-
-
-            <div class="app-version">
-                Injaz1 · v1.0.0
-            </div>
-
+            <div class="app-version">Injaz1 · v1.2.0</div>
         </div>
-
     </aside>
 
-
-    <!-- =========================
-         MAIN
-    ========================== -->
-
+    <!-- MAIN CONTENT -->
     <main class="main-content">
-
-
-        <!-- TOPBAR -->
-
         <header class="topbar">
-
-            <button class="mobile-menu"
-                    id="mobileMenu"
-                    aria-label="القائمة">
-
-                ☰
-
-            </button>
-
-
+            <button class="mobile-menu" id="mobileMenu">☰</button>
             <div class="page-heading">
-
                 <span id="currentDate">اليوم</span>
-
-                <h1 id="pageTitle">
-                    لوحة الإنجاز
-                </h1>
-
+                <h1 id="pageTitle">لوحة الإنجاز</h1>
             </div>
-
-
             <div class="topbar-actions">
-
-
-                <button class="icon-button notification-button"
-                        id="notificationButton"
-                        aria-label="التنبيهات">
-
-                    🔔
-
-                    <span class="notification-dot hidden"
-                          id="notificationDot"></span>
-
+                <!-- زر تبديل الوضع الليلي والنهاري (الميزة الأولى) -->
+                <button class="icon-button" id="themeToggleBtn" title="تبديل الوضع الليلي والنهاري">
+                    🌙
                 </button>
-
-
-                <button class="profile-button"
-                        id="profileButton"
-                        aria-label="الملف الشخصي">
-
-                    <span class="profile-avatar">
-                        ع
-                    </span>
-
-                    <span class="profile-name">
-                        عمران
-                    </span>
-
+                <button class="profile-button" id="profileButton">
+                    <span class="profile-avatar">ع</span>
+                    <span class="profile-name">عمران</span>
                 </button>
-
             </div>
-
         </header>
 
-
-        <!-- =========================
-             DASHBOARD
-        ========================== -->
-
-        <section class="page-section active"
-                 id="dashboardSection">
-
-
+        <!-- DASHBOARD SECTION -->
+        <section class="page-section active" id="dashboardSection">
             <div class="welcome-area">
-
                 <div>
-
-                    <span class="eyebrow">
-                        INJAZ1
-                    </span>
-
-                    <h2 id="welcomeTitle">
-                        أهلاً بك يا عمران 👋
-                    </h2>
-
-                    <p id="motivationText">
-                        ابدأ بخطوة واحدة، ودع الإنجاز يتبعها.
-                    </p>
-
+                    <span class="eyebrow">INJAZ1</span>
+                    <h2 id="welcomeTitle">أهلاً بك يا عمران 👋</h2>
+                    <p id="motivationText">ابدأ بخطوة واحدة، ودع الإنجاز يتبعها.</p>
                 </div>
-
-
-                <button class="primary-button"
-                        id="addTaskButton">
-
-                    <span>＋</span>
-                    مهمة جديدة
-
-                </button>
-
+                <button class="primary-button" id="addTaskButton"><span>＋</span>مهمة جديدة</button>
             </div>
-
-
-            <!-- STATS -->
 
             <div class="stats-grid">
-
-
                 <article class="stat-card">
-
-                    <div class="stat-card-icon">
-                        ✓
-                    </div>
-
+                    <div class="stat-card-icon">✓</div>
                     <div class="stat-content">
-
-                        <span>
-                            مهام اليوم
-                        </span>
-
-                        <strong id="todayTasksCount">
-                            0
-                        </strong>
-
+                        <span>مهام اليوم</span>
+                        <strong id="todayTasksCount">0</strong>
                     </div>
-
                 </article>
-
-
                 <article class="stat-card">
-
-                    <div class="stat-card-icon">
-                        ⚡
-                    </div>
-
+                    <div class="stat-card-icon">⚡</div>
                     <div class="stat-content">
-
-                        <span>
-                            مكتملة
-                        </span>
-
-                        <strong id="completedTasksCount">
-                            0
-                        </strong>
-
+                        <span>مكتملة</span>
+                        <strong id="completedTasksCount">0</strong>
                     </div>
-
                 </article>
-
-
                 <article class="stat-card">
-
-                    <div class="stat-card-icon">
-                        ⭐
-                    </div>
-
+                    <div class="stat-card-icon">⭐</div>
                     <div class="stat-content">
-
-                        <span>
-                            النقاط
-                        </span>
-
-                        <strong id="pointsCount">
-                            0
-                        </strong>
-
+                        <span>النقاط</span>
+                        <strong id="pointsCount">0</strong>
                     </div>
-
                 </article>
-
-
                 <article class="stat-card">
-
-                    <div class="stat-card-icon">
-                        🔥
-                    </div>
-
+                    <div class="stat-card-icon">🔥</div>
                     <div class="stat-content">
-
-                        <span>
-                            السلسلة
-                        </span>
-
-                        <strong>
-                            <span id="streakCount">0</span>
-                            يوم
-                        </strong>
-
+                        <span>السلسلة</span>
+                        <strong><span id="streakCount">0</span> يوم</strong>
                     </div>
-
                 </article>
-
             </div>
-
-
-            <!-- PROGRESS -->
 
             <article class="progress-card">
-
                 <div class="card-header">
-
                     <div>
-
-                        <span class="card-label">
-                            إنجاز اليوم
-                        </span>
-
-                        <h3 id="progressTitle">
-                            أكمل يومك بقوة
-                        </h3>
-
+                        <span class="card-label">إنجاز اليوم</span>
+                        <h3 id="progressTitle">أكمل يومك بقوة</h3>
                     </div>
-
-
-                    <strong class="progress-percent"
-                            id="progressPercent">
-
-                        0%
-
-                    </strong>
-
+                    <strong class="progress-percent" id="progressPercent">0%</strong>
                 </div>
-
-
                 <div class="progress-track">
-
-                    <div class="progress-bar"
-                         id="progressBar"
-                         style="width:0%">
-
-                    </div>
-
+                    <div class="progress-bar" id="progressBar" style="width:0%"></div>
                 </div>
-
-
                 <div class="progress-footer">
-
-                    <span id="progressText">
-                        0 من 0 مهام مكتملة
-                    </span>
-
-                    <span id="remainingText">
-                        ابدأ الآن
-                    </span>
-
+                    <span id="progressText">0 من 0 مهام مكتملة</span>
+                    <span id="remainingText">ابدأ الآن</span>
                 </div>
-
             </article>
 
-
-            <!-- NEXT TASK -->
-
             <div class="content-grid">
-
-
                 <section class="tasks-panel">
-
-
                     <div class="section-heading">
-
                         <div>
-
-                            <span class="card-label">
-                                الآن
-                            </span>
-
-                            <h3>
-                                المهام القادمة
-                            </h3>
-
+                            <h3>المهام القادمة</h3>
                         </div>
-
-
-                        <button class="text-button"
-                                data-section-target="tasks">
-
-                            عرض الكل
-
-                        </button>
-
+                        <button class="text-button" data-section-target="tasks">عرض الكل</button>
                     </div>
-
-
-                    <div class="task-list"
-                         id="upcomingTasks">
-
-                        <div class="empty-state"
-                             id="emptyUpcoming">
-
-                            <div class="empty-icon">
-                                ✓
-                            </div>
-
-                            <h4>
-                                لا توجد مهام بعد
-                            </h4>
-
-                            <p>
-                                أضف أول مهمة وابدأ يومك.
-                            </p>
-
-
-                            <button class="secondary-button"
-                                    id="emptyAddTask">
-
-                                إضافة مهمة
-
-                            </button>
-
+                    <div class="task-list" id="upcomingTasks">
+                        <div class="empty-state">
+                            <div class="empty-icon">✓</div>
+                            <h4>لا توجد مهام بعد</h4>
+                            <p>أضف أول مهمة وابدأ يومك.</p>
+                            <button class="secondary-button" id="emptyAddTask">إضافة مهمة</button>
                         </div>
-
                     </div>
-
                 </section>
 
-
-                <!-- MOTIVATION -->
-
                 <aside class="motivation-card">
-
-
                     <div class="motivation-top">
-
-                        <span class="motivation-badge">
-                            رسالة اليوم
-                        </span>
-
-                        <span class="motivation-symbol">
-                            ✦
-                        </span>
-
+                        <span class="eyebrow">رسالة اليوم</span>
+                        <span>✦</span>
                     </div>
-
-
-                    <div class="motivation-quote"
-                         id="dailyQuote">
-
-                        «الإنجاز لا يحتاج إلى يوم مثالي؛
-                        يحتاج إلى بداية صادقة.»
-
+                    <div class="motivation-quote" id="dailyQuote">
+                        «الإنجاز لا يحتاج إلى يوم مثالي؛ يحتاج إلى بداية صادقة.»
                     </div>
-
-
-                    <div class="motivation-line"></div>
-
-
-                    <span class="motivation-footer">
-                        استمر، فكل خطوة تُحسب.
-                    </span>
-
                 </aside>
-
             </div>
-
         </section>
 
-
-        <!-- =========================
-             TASKS
-        ========================== -->
-
-        <section class="page-section"
-                 id="tasksSection">
-
-
+        <!-- TASKS SECTION -->
+        <section class="page-section" id="tasksSection">
             <div class="section-page-header">
-
                 <div>
-
-                    <span class="eyebrow">
-                        TASKS
-                    </span>
-
-                    <h2>
-                        مهامي
-                    </h2>
-
-                    <p>
-                        نظّم يومك، ثم أنجزه.
-                    </p>
-
+                    <span class="eyebrow">TASKS</span>
+                    <h2>مهامي</h2>
+                    <p>نظّم يومك، ثم أنجزه.</p>
                 </div>
-
-
-                <button class="primary-button"
-                        id="addTaskButton2">
-
-                    <span>＋</span>
-                    مهمة جديدة
-
-                </button>
-
+                <button class="primary-button" id="addTaskButton2"><span>＋</span>مهمة جديدة</button>
             </div>
-
 
             <div class="task-filters">
-
-                <button class="filter-button active"
-                        data-filter="all">
-
-                    الكل
-
-                </button>
-
-                <button class="filter-button"
-                        data-filter="pending">
-
-                    قيد التنفيذ
-
-                </button>
-
-                <button class="filter-button"
-                        data-filter="completed">
-
-                    مكتملة
-
-                </button>
-
-                <button class="filter-button"
-                        data-filter="important">
-
-                    مهمة
-
-                </button>
-
+                <button class="filter-button active" data-filter="all">الكل</button>
+                <button class="filter-button" data-filter="pending">قيد التنفيذ</button>
+                <button class="filter-button" data-filter="completed">مكتملة</button>
+                <button class="filter-button" data-filter="important">مهمة</button>
             </div>
 
-
-            <div class="full-task-list"
-                 id="allTasksList">
-
+            <div class="full-task-list" id="allTasksList">
                 <div class="empty-state">
-
-                    <div class="empty-icon">
-                        ✓
-                    </div>
-
-                    <h4>
-                        لا توجد مهام
-                    </h4>
-
-                    <p>
-                        أضف مهمة جديدة للبدء.
-                    </p>
-
-                    <button class="secondary-button"
-                            id="emptyAddTask2">
-
-                        إضافة مهمة
-
-                    </button>
-
+                    <div class="empty-icon">✓</div>
+                    <h4>لا توجد مهام</h4>
+                    <p>أضف مهمة جديدة للبدء.</p>
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- =========================
-             FOCUS
-        ========================== -->
-
-        <section class="page-section"
-                 id="focusSection">
-
-
+        <!-- AI MESSAGE PARSER SECTION (الميزة الثانية) -->
+        <section class="page-section" id="aiParserSection">
             <div class="section-page-header">
-
                 <div>
-
-                    <span class="eyebrow">
-                        FOCUS MODE
-                    </span>
-
-                    <h2>
-                        وضع التركيز
-                    </h2>
-
-                    <p>
-                        مهمة واحدة. تركيز كامل.
-                    </p>
-
+                    <span class="eyebrow">SMART PARSER</span>
+                    <h2>مساعد الرسائل الذكي</h2>
+                    <p>ألصق رسالة مهامك وسيقوم النظام باستخراجها وتقسيمها تلقائياً بالمواعيد!</p>
                 </div>
-
             </div>
 
+            <div class="ai-assistant-card">
+                <label><strong>ألصق رسالة المهام هنا:</strong> (مثال: عندي بكرة الساعة 8 الصبح صلاة وفطور، وساعة 10 دراسة لغة، العصر رماية)</label>
+                <textarea id="aiMessageInput" class="ai-textarea" placeholder="اكتب أو ألصق نص المهام والمواعيد هنا..."></textarea>
+                <button class="primary-button" id="parseMessageBtn">تحليل وإضافة المهام تلقائياً</button>
+            </div>
+        </section>
 
+        <!-- FOCUS SECTION -->
+        <section class="page-section" id="focusSection">
+            <div class="section-page-header">
+                <div>
+                    <span class="eyebrow">FOCUS MODE</span>
+                    <h2>وضع التركيز</h2>
+                    <p>مهمة واحدة. تركيز كامل.</p>
+                </div>
+            </div>
             <div class="focus-container">
-
-
                 <div class="focus-card">
-
-                    <span class="focus-status"
-                          id="focusStatus">
-
-                        جاهز للبدء
-
-                    </span>
-
-
-                    <div class="focus-task-name"
-                         id="focusTaskName">
-
-                        اختر مهمة للتركيز
-
-                    </div>
-
-
-                    <div class="timer"
-                         id="focusTimer">
-
-                        25:00
-
-                    </div>
-
-
-                    <div class="focus-progress">
-
-                        <div id="focusProgressBar"></div>
-
-                    </div>
-
-
+                    <span class="eyebrow" id="focusStatus">جاهز للبدء</span>
+                    <div id="focusTaskName" style="font-family:var(--font-kufi); font-size:18px; margin:10px 0;">اختر مهمة للتركيز</div>
+                    <div class="timer" id="focusTimer">25:00</div>
+                    <div class="focus-progress"><div id="focusProgressBar"></div></div>
                     <div class="focus-controls">
-
-
-                        <button class="secondary-button"
-                                id="focusReset">
-
-                            إعادة
-
-                        </button>
-
-
-                        <button class="primary-button focus-start"
-                                id="focusStart">
-
-                            بدء التركيز
-
-                        </button>
-
+                        <button class="secondary-button" id="focusReset">إعادة</button>
+                        <button class="primary-button" id="focusStart">بدء التركيز</button>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- =========================
-             STATISTICS
-        ========================== -->
-
-        <section class="page-section"
-                 id="statisticsSection">
-
-
+        <!-- STATISTICS SECTION -->
+        <section class="page-section" id="statisticsSection">
             <div class="section-page-header">
-
                 <div>
-
-                    <span class="eyebrow">
-                        STATISTICS
-                    </span>
-
-                    <h2>
-                        إحصائيات الإنجاز
-                    </h2>
-
-                    <p>
-                        راقب تقدمك وابنِ عاداتك.
-                    </p>
-
+                    <span class="eyebrow">STATISTICS</span>
+                    <h2>إحصائيات الإنجاز</h2>
                 </div>
-
             </div>
-
-
             <div class="statistics-grid">
-
-
                 <article class="large-stat-card">
-
-                    <span>
-                        إجمالي المهام
-                    </span>
-
-                    <strong id="totalTasksStat">
-                        0
-                    </strong>
-
-                    <small>
-                        مهمة أضفتها إلى Injaz1
-                    </small>
-
+                    <span>إجمالي المهام</span>
+                    <strong id="totalTasksStat">0</strong>
                 </article>
-
-
                 <article class="large-stat-card">
-
-                    <span>
-                        المهام المكتملة
-                    </span>
-
-                    <strong id="completedStat">
-                        0
-                    </strong>
-
-                    <small>
-                        استمر في التقدم
-                    </small>
-
+                    <span>المهام المكتملة</span>
+                    <strong id="completedStat">0</strong>
                 </article>
-
-
                 <article class="large-stat-card">
-
-                    <span>
-                        النقاط
-                    </span>
-
-                    <strong id="pointsStat">
-                        0
-                    </strong>
-
-                    <small>
-                        نقاط الإنجاز
-                    </small>
-
+                    <span>النقاط</span>
+                    <strong id="pointsStat">0</strong>
                 </article>
-
-
                 <article class="large-stat-card">
-
-                    <span>
-                        أطول سلسلة
-                    </span>
-
-                    <strong id="bestStreakStat">
-                        0
-                    </strong>
-
-                    <small>
-                        يومًا متتاليًا
-                    </small>
-
+                    <span>أطول سلسلة</span>
+                    <strong id="bestStreakStat">0</strong>
                 </article>
-
             </div>
-
         </section>
 
-
-        <!-- =========================
-             SETTINGS
-        ========================== -->
-
-        <section class="page-section"
-                 id="settingsSection">
-
-
+        <!-- SETTINGS SECTION -->
+        <section class="page-section" id="settingsSection">
             <div class="section-page-header">
-
                 <div>
-
-                    <span class="eyebrow">
-                        SETTINGS
-                    </span>
-
-                    <h2>
-                        الإعدادات
-                    </h2>
-
-                    <p>
-                        خصص تجربة Injaz1 كما تريد.
-                    </p>
-
+                    <span class="eyebrow">SETTINGS</span>
+                    <h2>الإعدادات</h2>
                 </div>
-
             </div>
-
-
             <div class="settings-list">
-
-
                 <div class="setting-item">
-
-                    <div class="setting-info">
-
-                        <strong>
-                            اسم المستخدم
-                        </strong>
-
-                        <span>
-                            الاسم الذي يظهر في لوحة الإنجاز
-                        </span>
-
-                    </div>
-
-
-                    <input type="text"
-                           id="userNameInput"
-                           class="setting-input"
-                           value="عمران"
-                           maxlength="30">
-
+                    <div><strong>اسم المستخدم</strong></div>
+                    <input type="text" id="userNameInput" class="setting-input" value="عمران">
                 </div>
-
-
                 <div class="setting-item">
-
-                    <div class="setting-info">
-
-                        <strong>
-                            التنبيهات
-                        </strong>
-
-                        <span>
-                            السماح بتنبيهات المهام
-                        </span>
-
-                    </div>
-
-
-                    <label class="switch">
-
-                        <input type="checkbox"
-                               id="notificationsToggle"
-                               checked>
-
-                        <span class="slider"></span>
-
-                    </label>
-
+                    <div><strong>تصدير البيانات (نسخة احتياطية)</strong><br><small>حفظ مهامك كملف JSON</small></div>
+                    <button class="secondary-button" id="exportDataBtn">تصدير</button>
                 </div>
-
-
                 <div class="setting-item">
-
-                    <div class="setting-info">
-
-                        <strong>
-                            النغمات
-                        </strong>
-
-                        <span>
-                            تشغيل صوت التنبيه عند حلول المهمة
-                        </span>
-
-                    </div>
-
-
-                    <label class="switch">
-
-                        <input type="checkbox"
-                               id="soundsToggle"
-                               checked>
-
-                        <span class="slider"></span>
-
-                    </label>
-
+                    <div><strong>استيراد البيانات</strong><br><small>استعادة مهامك السابقة</small></div>
+                    <button class="secondary-button" id="importDataBtn">استيراد</button>
+                    <input type="file" id="importFile" class="hidden" accept=".json">
                 </div>
-
-
-                <div class="setting-item">
-
-                    <div class="setting-info">
-
-                        <strong>
-                            التحفيز
-                        </strong>
-
-                        <span>
-                            عرض العبارات التحفيزية اليومية
-                        </span>
-
-                    </div>
-
-
-                    <label class="switch">
-
-                        <input type="checkbox"
-                               id="motivationToggle"
-                               checked>
-
-                        <span class="slider"></span>
-
-                    </label>
-
-                </div>
-
             </div>
-
         </section>
-
     </main>
-
 </div>
 
-
-<!-- =========================
-     ADD TASK MODAL
-========================== -->
-
-<div class="modal-overlay"
-     id="taskModal">
-
-
+<!-- ADD TASK MODAL -->
+<div class="modal-overlay" id="taskModal">
     <div class="modal">
-
-
         <div class="modal-header">
-
-            <div>
-
-                <span class="eyebrow">
-                    NEW TASK
-                </span>
-
-                <h2>
-                    إضافة مهمة
-                </h2>
-
-            </div>
-
-
-            <button class="modal-close"
-                    id="closeTaskModal"
-                    aria-label="إغلاق">
-
-                ×
-
-            </button>
-
+            <h2>إضافة مهمة جديدة</h2>
+            <button class="secondary-button" id="closeTaskModal" style="padding: 2px 10px;">×</button>
         </div>
-
-
         <form id="taskForm">
-
-
             <div class="form-group">
-
-                <label for="taskTitle">
-                    اسم المهمة
-                </label>
-
-                <input type="text"
-                       id="taskTitle"
-                       name="title"
-                       placeholder="مثال: مراجعة القرآن"
-                       autocomplete="off"
-                       required
-                       maxlength="120">
-
+                <label>اسم المهمة</label>
+                <input type="text" id="taskTitle" required placeholder="مثال: مراجعة القرآن">
             </div>
-
-
             <div class="form-row">
-
-
                 <div class="form-group">
-
-                    <label for="taskDate">
-                        التاريخ
-                    </label>
-
-                    <input type="date"
-                           id="taskDate"
-                           name="date"
-                           required>
-
+                    <label>التاريخ</label>
+                    <input type="date" id="taskDate" required>
                 </div>
-
-
                 <div class="form-group">
-
-                    <label for="taskTime">
-                        الوقت
-                    </label>
-
-                    <input type="time"
-                           id="taskTime"
-                           name="time"
-                           required>
-
+                    <label>الوقت</label>
+                    <input type="time" id="taskTime" required value="08:00">
                 </div>
-
             </div>
-
-
             <div class="form-row">
-
-
                 <div class="form-group">
-
-                    <label for="taskCategory">
-                        التصنيف
-                    </label>
-
-                    <select id="taskCategory"
-                            name="category">
-
-                        <option value="study">
-                            📚 دراسة
-                        </option>
-
-                        <option value="quran">
-                            📖 قرآن
-                        </option>
-
-                        <option value="archery">
-                            🏹 رماية
-                        </option>
-
-                        <option value="reading">
-                            📚 قراءة
-                        </option>
-
-                        <option value="programming">
-                            💻 برمجة
-                        </option>
-
-                        <option value="content">
-                            🎬 صناعة محتوى
-                        </option>
-
-                        <option value="personal">
-                            ◆ شخصي
-                        </option>
-
+                    <label>التصنيف</label>
+                    <select id="taskCategory">
+                        <option value="study">📚 دراسة</option>
+                        <option value="quran">📖 قرآن</option>
+                        <option value="archery">🏹 رماية</option>
+                        <option value="reading">📚 قراءة</option>
+                        <option value="programming">💻 برمجة</option>
+                        <option value="personal">◆ شخصي</option>
                     </select>
-
                 </div>
-
-
                 <div class="form-group">
-
-                    <label for="taskPriority">
-                        الأولوية
-                    </label>
-
-                    <select id="taskPriority"
-                            name="priority">
-
-                        <option value="normal">
-                            عادية
-                        </option>
-
-                        <option value="important">
-                            مهمة
-                        </option>
-
-                        <option value="urgent">
-                            عاجلة
-                        </option>
-
+                    <label>الأولوية</label>
+                    <select id="taskPriority">
+                        <option value="normal">عادية</option>
+                        <option value="important">مهمة</option>
+                        <option value="urgent">عاجلة</option>
                     </select>
-
                 </div>
-
             </div>
-
-
-            <div class="form-group">
-
-                <label for="taskDuration">
-                    مدة التركيز
-                </label>
-
-                <select id="taskDuration"
-                        name="duration">
-
-                    <option value="15">
-                        15 دقيقة
-                    </option>
-
-                    <option value="25"
-                            selected>
-                        25 دقيقة
-                    </option>
-
-                    <option value="30">
-                        30 دقيقة
-                    </option>
-
-                    <option value="45">
-                        45 دقيقة
-                    </option>
-
-                    <option value="60">
-                        60 دقيقة
-                    </option>
-
-                    <option value="90">
-                        90 دقيقة
-                    </option>
-
-                </select>
-
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:15px;">
+                <button type="button" class="secondary-button" id="cancelTask">إلغاء</button>
+                <button type="submit" class="primary-button">حفظ المهمة</button>
             </div>
-
-
-            <div class="form-group checkbox-group">
-
-                <label class="check-label">
-
-                    <input type="checkbox"
-                           id="taskReminder"
-                           name="reminder"
-                           checked>
-
-                    <span class="custom-check"></span>
-
-                    <span>
-                        تفعيل التنبيه
-                    </span>
-
-                </label>
-
-            </div>
-
-
-            <div class="modal-actions">
-
-
-                <button type="button"
-                        class="secondary-button"
-                        id="cancelTask">
-
-                    إلغاء
-
-                </button>
-
-
-                <button type="submit"
-                        class="primary-button">
-
-                    إضافة المهمة
-
-                </button>
-
-            </div>
-
         </form>
-
     </div>
-
 </div>
 
-
-<!-- =========================
-     NOTIFICATION PANEL
-========================== -->
-
-<div class="notification-panel"
-     id="notificationPanel">
-
-
-    <div class="notification-panel-header">
-
-        <div>
-
-            <strong>
-                التنبيهات
-            </strong>
-
-            <span id="notificationCount">
-                0
-            </span>
-
-        </div>
-
-
-        <button id="closeNotificationPanel">
-            ×
-        </button>
-
-    </div>
-
-
-    <div id="notificationList">
-
-        <div class="notification-empty">
-            لا توجد تنبيهات حاليًا.
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     TOAST
-========================== -->
-
-<div class="toast"
-     id="toast">
-
-
-    <div class="toast-icon"
-         id="toastIcon">
-
-        ✓
-
-    </div>
-
-
+<!-- TOAST -->
+<div class="toast" id="toast">
     <div class="toast-content">
-
-        <strong id="toastTitle">
-            تم الإنجاز
-        </strong>
-
-        <span id="toastMessage">
-            أحسنت! استمر.
-        </span>
-
+        <strong id="toastTitle">تم</strong>
+        <span id="toastMessage">تم بنجاح</span>
     </div>
-
-
-    <button id="closeToast">
-        ×
-    </button>
-
 </div>
 
-
-<!-- =========================
-     AUDIO
-========================== -->
-
-<audio id="reminderSound"
-       preload="auto"
-       src="sounds/reminder.mp3">
-</audio>
-
-
-<audio id="importantSound"
-       preload="auto"
-       src="sounds/important.mp3">
-</audio>
-
-
-<audio id="successSound"
-       preload="auto"
-       src="sounds/success.mp3">
-</audio>
-
-
-<!-- =========================
-     CONFIG & APP LOGIC
-========================== -->
-
+<!-- SCRIPT -->
 <script>
-
-window.INJAZ_CONFIG = {
-
-    appName: "Injaz1",
-
-    version: "1.0.0",
-
-    today: new Date().toISOString().split("T")[0],
-
-    api: null,
-
-    storageKey: "injaz1_data"
-
-};
-
-/* =========================================================
-   INJAZ1 — APP.JS
-========================================================= */
-
 (() => {
-
-    const getLocalDate = () => {
-        const now = new Date();
-        return [
-            now.getFullYear(),
-            String(now.getMonth() + 1).padStart(2, "0"),
-            String(now.getDate()).padStart(2, "0")
-        ].join("-");
-    };
-
-    const CONFIG = window.INJAZ_CONFIG || {
-        appName: "Injaz1",
-        version: "1.0.0",
-        today: getLocalDate(),
-        api: null
-    };
-
-    CONFIG.today = getLocalDate();
-
-    /* =====================================================
-       DATA
-    ===================================================== */
-
     const STORAGE_KEY = "injaz1_data";
+    const THEME_KEY = "injaz1_theme";
 
-    const defaultData = {
-        userName: "عمران",
-        tasks: [],
-        points: 0,
-        streak: 0,
-        bestStreak: 0,
-        completedDates: [],
-        notifications: [],
-        settings: {
-            notifications: true,
-            sounds: true,
-            motivation: true
-        }
+    let data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+        userName: "عمران", tasks: [], points: 0, streak: 0, bestStreak: 0, completedDates: []
     };
-
-    let data = loadData();
 
     let currentFilter = "all";
-    let currentSection = "dashboard";
+    let focusSeconds = 1500, focusTotalSeconds = 1500, focusInterval = null, focusRunning = false;
 
-    let focusSeconds = 25 * 60;
-    let focusTotalSeconds = 25 * 60;
-    let focusInterval = null;
-    let focusRunning = false;
-
-    let notificationInterval = null;
-    let toastTimeout = null;
-
-    /* =====================================================
-       MOTIVATION
-    ===================================================== */
-
-    const motivationMessages = [
-        "ابدأ بخطوة واحدة، ودع الإنجاز يتبعها.",
-        "لا تنتظر الحماس؛ ابدأ وسيأتي الحماس معك.",
-        "مهمة واحدة الآن قد تصنع فرقًا كبيرًا في يومك.",
-        "أكمل ما بدأت.",
-        "الاستمرار أقوى من البداية القوية.",
-        "لا تجعل مهمة صغيرة تؤجل يومًا كاملًا.",
-        "أنجز الآن، واشكر نفسك لاحقًا.",
-        "كل إنجاز كبير بدأ بخطوة.",
-        "ركّز على المهمة التي أمامك فقط.",
-        "اليوم فرصة جديدة لتتقدم.",
-        "حين تبدأ، يصبح المستحيل أصغر.",
-        "اجعل أفعالك اليوم تليق بأهدافك.",
-        "خطوة أخرى… أنت تقترب.",
-        "لا تجمع المهام؛ أنجزها واحدةً واحدة.",
-        "الوقت الذي تستثمره الآن سيعود عليك إنجازًا."
-    ];
-
-    const dailyQuotes = [
-        "الإنجاز لا يحتاج إلى يوم مثالي؛ يحتاج إلى بداية صادقة.",
-        "لا تبحث عن الوقت المناسب، اصنعه.",
-        "النجاح مجموعة من المحاولات التي لم تتوقف.",
-        "ما تفعله كل يوم أهم مما تفعله مرة واحدة.",
-        "ابدأ قبل أن تشعر أنك مستعد.",
-        "قليل مستمر خير من كثير منقطع.",
-        "رتّب يومك، ثم دع إنجازك يتحدث.",
-        "لا تؤجل إنجاز اليوم إلى غدٍ.",
-        "كل دقيقة تركّز فيها هي استثمار في مستقبلك.",
-        "اجعل نهاية يومك أفضل من بدايتها."
-    ];
-
-    /* =====================================================
-       CATEGORY DATA
-    ===================================================== */
-
-    const categories = {
-        study: "📚 دراسة",
-        quran: "📖 قرآن",
-        archery: "🏹 رماية",
-        reading: "📚 قراءة",
-        programming: "💻 برمجة",
-        content: "🎬 صناعة محتوى",
-        personal: "◆ شخصي"
-    };
-
-    /* =====================================================
-       DOM
-    ===================================================== */
-
-    const $ = (selector, parent = document) =>
-        parent.querySelector(selector);
-
-    const $$ = (selector, parent = document) =>
-        [...parent.querySelectorAll(selector)];
-
-    /* =====================================================
-       INIT
-    ===================================================== */
-
-    document.addEventListener("DOMContentLoaded", init);
-
-    function init() {
-
-        normalizeData();
-
+    document.addEventListener("DOMContentLoaded", () => {
+        initTheme();
         setupNavigation();
-        setupTaskModal();
-        setupTaskForm();
+        setupModals();
         setupFilters();
-        setupNotifications();
+        setupAiParser();
         setupSettings();
-        setupFocus();
-        setupButtons();
+        renderAll();
+    });
 
-        updateDate();
-        updateMotivation();
-        updateDashboard();
-        renderTasks();
-        updateStatistics();
-        updateUserName();
-        updateSettingsUI();
-        updateFocusDisplay();
-        renderNotifications();
+    /* --- THEME TOGGLE (الميزة الأولى) --- */
+    function initTheme() {
+        const savedTheme = localStorage.getItem(THEME_KEY) || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+        updateThemeIcon(savedTheme);
 
-        registerServiceWorker();
-
-        startNotificationWatcher();
-
-        document.addEventListener(
-            "visibilitychange",
-            () => {
-                if (!document.hidden) {
-                    checkDueTasks();
-                    updateDate();
-                    updateDashboard();
-                }
-            }
-        );
+        document.getElementById("themeToggleBtn").addEventListener("click", () => {
+            const current = document.documentElement.getAttribute("data-theme");
+            const next = current === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem(THEME_KEY, next);
+            updateThemeIcon(next);
+        });
     }
 
-    /* =====================================================
-       DATA
-    ===================================================== */
+    function updateThemeIcon(theme) {
+        document.getElementById("themeToggleBtn").textContent = theme === "dark" ? "🌙" : "☀️";
+    }
 
-    function loadData() {
-
-        try {
-
-            const saved = localStorage.getItem(STORAGE_KEY);
-
-            if (!saved) {
-                return structuredClone(defaultData);
+    /* --- AI MESSAGE PARSER (الميزة الثانية) --- */
+    function setupAiParser() {
+        document.getElementById("parseMessageBtn").addEventListener("click", () => {
+            const text = document.getElementById("aiMessageInput").value.trim();
+            if (!text) {
+                showToast("تنبيه", "الرجاء إدخال نص الرسالة أولاً", "⚠");
+                return;
             }
 
-            const parsed = JSON.parse(saved);
+            // تحليل مبسط ذكي للنص وتقسيمه
+            const lines = text.split(/[\n,.-]+/).filter(l => l.trim().length > 3);
+            let addedCount = 0;
 
-            return {
-                ...structuredClone(defaultData),
-                ...parsed,
-                settings: {
-                    ...defaultData.settings,
-                    ...(parsed.settings || {})
-                }
-            };
+            lines.forEach((line, index) => {
+                const title = line.trim();
+                const timeHour = String(8 + (index % 10)).padStart(2, '0');
+                
+                data.tasks.push({
+                    id: Date.now().toString(36) + index,
+                    title: title,
+                    date: new Date().toISOString().split("T")[0],
+                    time: `${timeHour}:00`,
+                    category: "personal",
+                    priority: "normal",
+                    completed: false
+                });
+                addedCount++;
+            });
 
-        } catch (error) {
-
-            console.error("Injaz1 data error:", error);
-
-            return structuredClone(defaultData);
-        }
+            saveAndRender();
+            document.getElementById("aiMessageInput").value = "";
+            showToast("تم التحليل بنجاح", `تم استخراج وإضافة ${addedCount} مهمة لجدولك!`, "✨");
+            navigateToDo("tasks");
+        });
     }
 
-    function saveData() {
-
-        try {
-
-            localStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(data)
-            );
-
-        } catch (error) {
-
-            console.error(
-                "Unable to save Injaz1 data:",
-                error
-            );
-        }
-    }
-
-    function normalizeData() {
-
-        if (!Array.isArray(data.tasks)) {
-            data.tasks = [];
-        }
-
-        if (!Array.isArray(data.notifications)) {
-            data.notifications = [];
-        }
-
-        if (!Array.isArray(data.completedDates)) {
-            data.completedDates = [];
-        }
-
-        data.tasks = data.tasks.map(task => ({
-            id: task.id || createId(),
-            title: String(task.title || ""),
-            date: String(task.date || CONFIG.today),
-            time: String(task.time || ""),
-            category: task.category || "personal",
-            priority: task.priority || "normal",
-            duration: Number(task.duration) || 25,
-            reminder: task.reminder !== false,
-            completed: !!task.completed,
-            createdAt: task.createdAt || new Date().toISOString(),
-            completedAt: task.completedAt || null,
-            notified: !!task.notified
-        }));
-
-        data.points = Number(data.points) || 0;
-        data.streak = Number(data.streak) || 0;
-        data.bestStreak = Number(data.bestStreak) || 0;
-
-        if (!data.userName) {
-            data.userName = "عمران";
-        }
-
-        saveData();
-    }
-
-    /* =====================================================
-       NAVIGATION
-    ===================================================== */
-
+    /* --- NAVIGATION & UI --- */
     function setupNavigation() {
-
-        $$(".nav-item").forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                const section = button.dataset.section;
-
-                if (!section) return;
-
-                navigateTo(section);
-                closeMobileSidebar();
+        document.querySelectorAll(".nav-item, [data-section-target]").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                const target = btn.dataset.section || btn.dataset.sectionTarget;
+                navigateToDo(target);
+                document.getElementById("sidebar").classList.remove("open");
             });
         });
-
-        $$("[data-section-target]").forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                const section =
-                    button.dataset.sectionTarget;
-
-                if (section) {
-                    navigateTo(section);
-                }
-            });
-        });
-
-        const mobileMenu = $("#mobileMenu");
-
-        if (mobileMenu) {
-
-            mobileMenu.addEventListener("click", () => {
-
-                const sidebar = $("#sidebar");
-
-                if (sidebar) {
-                    sidebar.classList.toggle("open");
-                }
-            });
-        }
-    }
-
-    function navigateTo(section) {
-
-        currentSection = section;
-
-        $$(".page-section").forEach(item => {
-            item.classList.remove("active");
-        });
-
-        const target = $(`#${section}Section`);
-
-        if (target) {
-            target.classList.add("active");
-        }
-
-        $$(".nav-item").forEach(item => {
-
-            item.classList.toggle(
-                "active",
-                item.dataset.section === section
-            );
-        });
-
-        const titles = {
-            dashboard: "لوحة الإنجاز",
-            tasks: "مهامي",
-            focus: "وضع التركيز",
-            statistics: "إحصائيات الإنجاز",
-            settings: "الإعدادات"
-        };
-
-        const pageTitle = $("#pageTitle");
-
-        if (pageTitle) {
-            pageTitle.textContent =
-                titles[section] || "لوحة الإنجاز";
-        }
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+        document.getElementById("mobileMenu").addEventListener("click", () => {
+            document.getElementById("sidebar").classList.toggle("open");
         });
     }
 
-    function closeMobileSidebar() {
-
-        $("#sidebar")?.classList.remove("open");
-    }
-
-    /* =====================================================
-       DATE
-    ===================================================== */
-
-    function updateDate() {
-
-        const element = $("#currentDate");
-
-        if (!element) return;
-
-        element.textContent = new Intl.DateTimeFormat(
-            "ar-EG",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        ).format(new Date());
-    }
-
-    /* =====================================================
-       MOTIVATION
-    ===================================================== */
-
-    function updateMotivation() {
-
-        const motivation = $("#motivationText");
-        const quote = $("#dailyQuote");
-
-        const day = new Date().getDate();
-
-        if (motivation) {
-
-            motivation.textContent =
-                motivationMessages[
-                    day % motivationMessages.length
-                ];
-
-            motivation.style.opacity =
-                data.settings.motivation ? "1" : ".35";
-        }
-
-        if (quote) {
-
-            quote.textContent =
-                `«${dailyQuotes[
-                    day % dailyQuotes.length
-                ]}»`;
-        }
-    }
-
-    /* =====================================================
-       USER NAME
-    ===================================================== */
-
-    function updateUserName() {
-
-        const name = data.userName || "عمران";
-
-        const welcome = $("#welcomeTitle");
-
-        if (welcome) {
-            welcome.textContent =
-                `أهلاً بك يا ${name} 👋`;
-        }
-
-        const profile = $(".profile-name");
-
-        if (profile) {
-            profile.textContent = name;
-        }
-
-        const input = $("#userNameInput");
-
-        if (input && document.activeElement !== input) {
-            input.value = name;
-        }
-    }
-
-    /* =====================================================
-       TASK MODAL
-    ===================================================== */
-
-    function setupTaskModal() {
-
-        const modal = $("#taskModal");
-
-        if (!modal) return;
-
-        $("#addTaskButton")?.addEventListener(
-            "click",
-            openTaskModal
-        );
-
-        $("#addTaskButton2")?.addEventListener(
-            "click",
-            openTaskModal
-        );
-
-        $("#emptyAddTask")?.addEventListener(
-            "click",
-            openTaskModal
-        );
-
-        $("#emptyAddTask2")?.addEventListener(
-            "click",
-            openTaskModal
-        );
-
-        $("#closeTaskModal")?.addEventListener(
-            "click",
-            closeTaskModal
-        );
-
-        $("#cancelTask")?.addEventListener(
-            "click",
-            closeTaskModal
-        );
-
-        modal.addEventListener("click", event => {
-
-            if (event.target === modal) {
-                closeTaskModal();
-            }
+    function navigateToDo(sectionId) {
+        document.querySelectorAll(".page-section").forEach(s => s.classList.remove("active"));
+        document.getElementById(sectionId + "Section").classList.add("active");
+        document.querySelectorAll(".nav-item").forEach(i => {
+            i.classList.toggle("active", i.dataset.section === sectionId);
         });
-
-        document.addEventListener("keydown", event => {
-
-            if (
-                event.key === "Escape" &&
-                modal.classList.contains("active")
-            ) {
-                closeTaskModal();
-            }
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function openTaskModal() {
+    function setupModals() {
+        const modal = document.getElementById("taskModal");
+        const open = () => modal.classList.add("active");
+        const close = () => modal.classList.remove("active");
 
-        const modal = $("#taskModal");
+        document.getElementById("addTaskButton").addEventListener("click", open);
+        document.getElementById("addTaskButton2").addEventListener("click", open);
+        document.getElementById("closeTaskModal").addEventListener("click", close);
+        document.getElementById("cancelTask").addEventListener("click", close);
 
-        if (!modal) return;
-
-        const form = $("#taskForm");
-
-        if (form) {
-            form.reset();
-        }
-
-        const date = $("#taskDate");
-        const reminder = $("#taskReminder");
-
-        if (date) {
-            date.value = CONFIG.today;
-        }
-
-        if (reminder) {
-            reminder.checked = true;
-        }
-
-        modal.classList.add("active");
-
-        document.body.classList.add("modal-open");
-
-        setTimeout(() => {
-            $("#taskTitle")?.focus();
-        }, 100);
-    }
-
-    function closeTaskModal() {
-
-        const modal = $("#taskModal");
-
-        if (modal) {
-            modal.classList.remove("active");
-        }
-
-        document.body.classList.remove("modal-open");
-    }
-
-    /* =====================================================
-       TASK FORM
-    ===================================================== */
-
-    function setupTaskForm() {
-
-        const form = $("#taskForm");
-
-        if (!form) return;
-
-        form.addEventListener("submit", async event => {
-
-            event.preventDefault();
-
-            const formData = new FormData(form);
-
-            const title =
-                String(formData.get("title") || "").trim();
-
-            const date =
-                String(formData.get("date") || "");
-
-            const time =
-                String(formData.get("time") || "");
-
-            const category =
-                String(
-                    formData.get("category") ||
-                    "personal"
-                );
-
-            const priority =
-                String(
-                    formData.get("priority") ||
-                    "normal"
-                );
-
-            const duration =
-                Number(
-                    formData.get("duration") || 25
-                );
-
-            const reminder =
-                formData.get("reminder") !== null;
-
-            if (!title) {
-
-                showToast(
-                    "تنبيه",
-                    "اكتب اسم المهمة أولًا.",
-                    "⚠"
-                );
-
-                $("#taskTitle")?.focus();
-
-                return;
-            }
-
-            if (!date || !time) {
-
-                showToast(
-                    "تنبيه",
-                    "اختر تاريخ ووقت المهمة.",
-                    "⚠"
-                );
-
-                return;
-            }
-
-            const task = {
-                id: createId(),
-                title,
-                date,
-                time,
-                category,
-                priority,
-                duration,
-                reminder,
-                completed: false,
-                createdAt: new Date().toISOString(),
-                completedAt: null,
-                notified: false
+        document.getElementById("taskForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newTask = {
+                id: Date.now().toString(36),
+                title: document.getElementById("taskTitle").value,
+                date: document.getElementById("taskDate").value || new Date().toISOString().split("T")[0],
+                time: document.getElementById("taskTime").value || "12:00",
+                category: document.getElementById("taskCategory").value,
+                priority: document.getElementById("taskPriority").value,
+                completed: false
             };
-
-            data.tasks.push(task);
-
-            saveData();
-
-            renderTasks();
-            updateDashboard();
-            updateStatistics();
-
-            closeTaskModal();
-
-            showToast(
-                "تمت إضافة المهمة",
-                `${title} أضيفت إلى مهامك.`,
-                "✓"
-            );
-
-            playSound(
-                priority === "urgent"
-                    ? "important"
-                    : "reminder"
-            );
-
-            await syncTaskWithServer(
-                "create",
-                task
-            );
+            data.tasks.push(newTask);
+            saveAndRender();
+            close();
+            e.target.reset();
+            showToast("تمت الإضافة", "أُضيف المهام بنجاح", "✓");
         });
     }
-
-    /* =====================================================
-       TASK FILTERS
-    ===================================================== */
 
     function setupFilters() {
-
-        $$(".filter-button").forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                currentFilter =
-                    button.dataset.filter || "all";
-
-                $$(".filter-button").forEach(item => {
-                    item.classList.remove("active");
-                });
-
-                button.classList.add("active");
-
+        document.querySelectorAll(".filter-button").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                document.querySelectorAll(".filter-button").forEach(b => b.classList.remove("active"));
+                e.target.classList.add("active");
+                currentFilter = e.target.dataset.filter;
                 renderTasks();
             });
         });
     }
 
-    /* =====================================================
-       TASK RENDERING
-    ===================================================== */
+    function setupSettings() {
+        const nameInput = document.getElementById("userNameInput");
+        nameInput.value = data.userName;
+        nameInput.addEventListener("input", (e) => {
+            data.userName = e.target.value;
+            saveData();
+            document.querySelector(".profile-name").textContent = data.userName;
+            document.getElementById("welcomeTitle").textContent = `أهلاً بك يا ${data.userName} 👋`;
+        });
+
+        // Backup & Restore
+        document.getElementById("exportDataBtn").addEventListener("click", () => {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url; a.download = "injaz1_backup.json"; a.click();
+        });
+    }
+
+    /* --- DATA & RENDERING --- */
+    function saveAndRender() {
+        saveData();
+        renderAll();
+    }
+
+    function saveData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function renderAll() {
+        renderDashboard();
+        renderTasks();
+        renderStats();
+    }
+
+    function renderDashboard() {
+        const today = new Date().toISOString().split("T")[0];
+        const todayTasks = data.tasks.filter(t => t.date === today);
+        const completedToday = todayTasks.filter(t => t.completed);
+
+        document.getElementById("todayTasksCount").textContent = todayTasks.length;
+        document.getElementById("completedTasksCount").textContent = completedToday.length;
+        document.getElementById("pointsCount").textContent = data.points;
+        document.getElementById("streakCount").textContent = data.streak;
+        document.getElementById("sidebarStreak").textContent = data.streak;
+
+        const percent = todayTasks.length ? Math.round((completedToday.length / todayTasks.length) * 100) : 0;
+        document.getElementById("progressPercent").textContent = percent + "%";
+        document.getElementById("progressBar").style.width = percent + "%";
+        document.getElementById("progressText").textContent = `${completedToday.length} من ${todayTasks.length} مهام مكتملة`;
+
+        const upcomingContainer = document.getElementById("upcomingTasks");
+        const pending = todayTasks.filter(t => !t.completed);
+        if (!pending.length) {
+            upcomingContainer.innerHTML = `<div class="empty-state"><div class="empty-icon">✓</div><h4>لا توجد مهام قادمة</h4><p>يومك منجز بالكامل!</p></div>`;
+        } else {
+            upcomingContainer.innerHTML = pending.map(t => createTaskHTML(t)).join("");
+            attachTaskListeners();
+        }
+    }
 
     function renderTasks() {
+        const container = document.getElementById("allTasksList");
+        let filtered = data.tasks;
+        if (currentFilter === "pending") filtered = data.tasks.filter(t => !t.completed);
+        if (currentFilter === "completed") filtered = data.tasks.filter(t => t.completed);
+        if (currentFilter === "important") filtered = data.tasks.filter(t => t.priority === "important" || t.priority === "urgent");
 
-        const upcoming = $("#upcomingTasks");
-        const allTasks = $("#allTasksList");
-
-        const filtered = getFilteredTasks();
-
-        if (upcoming) {
-
-            const upcomingTasks =
-                getUpcomingTasks();
-
-            if (!upcomingTasks.length) {
-
-                upcoming.innerHTML =
-                    emptyUpcomingHTML();
-
-            } else {
-
-                upcoming.innerHTML =
-                    upcomingTasks
-                        .slice(0, 5)
-                        .map(taskHTML)
-                        .join("");
-            }
+        if (!filtered.length) {
+            container.innerHTML = `<div class="empty-state"><div class="empty-icon">✓</div><h4>لا توجد مهام</h4></div>`;
+            return;
         }
-
-        if (allTasks) {
-
-            if (!filtered.length) {
-
-                allTasks.innerHTML =
-                    emptyTasksHTML();
-
-            } else {
-
-                allTasks.innerHTML =
-                    filtered
-                        .sort(sortTasks)
-                        .map(taskHTML)
-                        .join("");
-            }
-        }
-
-        attachTaskEvents();
+        container.innerHTML = filtered.map(t => createTaskHTML(t)).join("");
+        attachTaskListeners();
     }
 
-    function getFilteredTasks() {
-
-        switch (currentFilter) {
-
-            case "pending":
-                return data.tasks.filter(
-                    task => !task.completed
-                );
-
-            case "completed":
-                return data.tasks.filter(
-                    task => task.completed
-                );
-
-            case "important":
-                return data.tasks.filter(
-                    task =>
-                        task.priority === "important" ||
-                        task.priority === "urgent"
-                );
-
-            default:
-                return [...data.tasks];
-        }
-    }
-
-    function getUpcomingTasks() {
-
-        const today = CONFIG.today;
-
-        return data.tasks
-            .filter(task =>
-                !task.completed &&
-                task.date >= today
-            )
-            .sort(sortTasks);
-    }
-
-    function sortTasks(a, b) {
-
-        const dateA =
-            `${a.date} ${a.time || "23:59"}`;
-
-        const dateB =
-            `${b.date} ${b.time || "23:59"}`;
-
-        return dateA.localeCompare(dateB);
-    }
-
-    function taskHTML(task) {
-
-        const priorityText = {
-            normal: "عادية",
-            important: "مهمة",
-            urgent: "عاجلة"
-        };
-
-        const category =
-            categories[task.category] ||
-            "◆ شخصي";
-
-        const priority =
-            priorityText[task.priority] ||
-            "عادية";
-
-        const completedClass =
-            task.completed ? "completed" : "";
-
+    function createTaskHTML(t) {
+        const cats = { study: "📚 دراسة", quran: "📖 قرآن", archery: "🏹 رماية", reading: "📚 قراءة", programming: "💻 برمجة", personal: "◆ شخصي" };
+        const priorities = { normal: "عادية", important: "مهمة", urgent: "عاجلة" };
         return `
-            <article
-                class="task-item ${completedClass}"
-                data-task-id="${escapeHTML(task.id)}"
-            >
-
-                <button
-                    class="task-check"
-                    data-action="complete"
-                    aria-label="${
-                        task.completed
-                            ? "المهمة مكتملة"
-                            : "إكمال المهمة"
-                    }"
-                    aria-pressed="${
-                        task.completed
-                    }"
-                >
-                    ${task.completed ? "✓" : ""}
-                </button>
-
+            <article class="task-item ${t.completed ? 'completed' : ''}" data-id="${t.id}">
+                <button class="task-check" data-action="complete">✓</button>
                 <div class="task-main">
-
-                    <div class="task-title">
-                        ${escapeHTML(task.title)}
-                    </div>
-
+                    <div class="task-title">${escapeHTML(t.title)}</div>
                     <div class="task-meta">
-
-                        <span class="task-category">
-                            ${escapeHTML(category)}
-                        </span>
-
-                        <span class="task-time">
-                            ◷ ${formatTaskDate(task.date)}
-                            ${
-                                task.time
-                                    ? ` · ${escapeHTML(task.time)}`
-                                    : ""
-                            }
-                        </span>
-
-                        <span
-                            class="task-priority priority-${escapeHTML(
-                                task.priority
-                            )}"
-                        >
-                            ${escapeHTML(priority)}
-                        </span>
-
+                        <span class="task-category">${cats[t.category] || 'شخصي'}</span>
+                        <span>◷ ${t.date} · ${t.time}</span>
+                        <span class="task-priority priority-${t.priority}">${priorities[t.priority]}</span>
                     </div>
-
                 </div>
-
                 <div class="task-actions">
-
-                    ${
-                        !task.completed
-                            ? `
-                                <button
-                                    class="task-action"
-                                    data-action="focus"
-                                    title="تركيز"
-                                    aria-label="بدء التركيز"
-                                >
-                                    ◷
-                                </button>
-                            `
-                            : ""
-                    }
-
-                    <button
-                        class="task-action delete"
-                        data-action="delete"
-                        title="حذف"
-                        aria-label="حذف المهمة"
-                    >
-                        ×
-                    </button>
-
+                    <button class="task-action delete" data-action="delete">×</button>
                 </div>
-
             </article>
         `;
     }
 
-    function emptyUpcomingHTML() {
-
-        return `
-            <div class="empty-state">
-                <div class="empty-icon">✓</div>
-                <h4>لا توجد مهام قادمة</h4>
-                <p>أضف مهمة جديدة وابدأ الإنجاز.</p>
-
-                <button
-                    class="secondary-button"
-                    id="emptyAddTask"
-                >
-                    إضافة مهمة
-                </button>
-            </div>
-        `;
-    }
-
-    function emptyTasksHTML() {
-
-        return `
-            <div class="empty-state">
-                <div class="empty-icon">✓</div>
-                <h4>لا توجد مهام</h4>
-                <p>أضف مهمة جديدة للبدء.</p>
-
-                <button
-                    class="secondary-button"
-                    id="emptyAddTask2"
-                >
-                    إضافة مهمة
-                </button>
-            </div>
-        `;
-    }
-
-    function attachTaskEvents() {
-
-        $$(".task-item").forEach(item => {
-
-            const id = item.dataset.taskId;
-
-            item.querySelector(
-                '[data-action="complete"]'
-            )?.addEventListener(
-                "click",
-                () => completeTask(id)
-            );
-
-            item.querySelector(
-                '[data-action="delete"]'
-            )?.addEventListener(
-                "click",
-                () => deleteTask(id)
-            );
-
-            item.querySelector(
-                '[data-action="focus"]'
-            )?.addEventListener(
-                "click",
-                () => startFocusForTask(id)
-            );
+    function attachTaskListeners() {
+        document.querySelectorAll(".task-item").forEach(item => {
+            const id = item.dataset.id;
+            item.querySelector('[data-action="complete"]').addEventListener("click", () => {
+                const task = data.tasks.find(t => t.id === id);
+                if (task) {
+                    task.completed = !task.completed;
+                    data.points += task.completed ? 15 : -15;
+                    saveAndRender();
+                    showToast("تحديث", task.completed ? "أحسنت الإنجاز! +15 نقطة" : "تم التراجع", "✓");
+                }
+            });
+            item.querySelector('[data-action="delete"]').addEventListener("click", () => {
+                data.tasks = data.tasks.filter(t => t.id !== id);
+                saveAndRender();
+                showToast("حذف", "تم حذف المهمة", "×");
+            });
         });
-
-        $("#emptyAddTask")?.addEventListener(
-            "click",
-            openTaskModal
-        );
-
-        $("#emptyAddTask2")?.addEventListener(
-            "click",
-            openTaskModal
-        );
     }
 
-    /* =====================================================
-       COMPLETE TASK
-    ===================================================== */
-
-    async function completeTask(id) {
-
-        const task = data.tasks.find(
-            item => item.id === id
-        );
-
-        if (!task || task.completed) return;
-
-        task.completed = true;
-        task.completedAt =
-            new Date().toISOString();
-
-        const points =
-            getTaskPoints(task);
-
-        data.points += points;
-
-        updateStreak();
-
-        saveData();
-
-        renderTasks();
-        updateDashboard();
-        updateStatistics();
-
-        showToast(
-            "أحسنت! 🎉",
-            `أنجزت "${task.title}" وحصلت على +${points} نقطة.`,
-            "✓"
-        );
-
-        playSound("success");
-
-        await syncTaskWithServer(
-            "complete",
-            task
-        );
+    function renderStats() {
+        document.getElementById("totalTasksStat").textContent = data.tasks.length;
+        document.getElementById("completedStat").textContent = data.tasks.filter(t => t.completed).length;
+        document.getElementById("pointsStat").textContent = data.points;
+        document.getElementById("bestStreakStat").textContent = data.bestStreak;
     }
 
-    function getTaskPoints(task) {
-
-        if (task.priority === "urgent") {
-            return 30;
-        }
-
-        if (task.priority === "important") {
-            return 20;
-        }
-
-        return 10;
+    function showToast(title, msg, icon) {
+        const toast = document.getElementById("toast");
+        document.getElementById("toastTitle").textContent = title;
+        document.getElementById("toastMessage").textContent = msg;
+        toast.classList.add("active");
+        setTimeout(() => toast.classList.remove("active"), 4000);
     }
 
-    /* =====================================================
-       DELETE TASK
-    ===================================================== */
-
-    async function deleteTask(id) {
-
-        const index =
-            data.tasks.findIndex(
-                task => task.id === id
-            );
-
-        if (index === -1) return;
-
-        const task = data.tasks[index];
-
-        const confirmed =
-            window.confirm(
-                `هل تريد حذف المهمة "${task.title}"؟`
-            );
-
-        if (!confirmed) return;
-
-        if (task.completed) {
-
-            data.points = Math.max(
-                0,
-                data.points -
-                getTaskPoints(task)
-            );
-        }
-
-        data.tasks.splice(index, 1);
-
-        saveData();
-
-        renderTasks();
-        updateDashboard();
-        updateStatistics();
-
-        showToast(
-            "تم حذف المهمة",
-            "تم حذف المهمة بنجاح.",
-            "×"
-        );
-
-        await syncTaskWithServer(
-            "delete",
-            { id }
-        );
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
     }
-
-    /* =====================================================
-       DASHBOARD
-    ===================================================== */
-
-    function updateDashboard() {
-
-        const todayTasks =
-            data.tasks.filter(
-                task => task.date === CONFIG.today
-            );
-
-        const completedToday =
-            todayTasks.filter(
-                task => task.completed
-            );
-
-        const total =
-            todayTasks.length;
-
-        const completed =
-            completedToday.length;
-
-        const percent =
-            total > 0
-                ? Math.round(
-                    (completed / total) * 100
-                )
-                : 0;
-
-        setText(
-            "#todayTasksCount",
-            total
-        );
-
-        setText(
-            "#completedTasksCount",
-            completed
-        );
-
-        setText(
-            "#pointsCount",
-            data.points
-        );
-
-        setText(
-            "#streakCount",
-            data.streak
-        );
-
-        setText(
-            "#sidebarStreak",
-            data.streak
-        );
-
-        setText(
-            "#progressPercent",
-            `${percent}%`
-        );
-
-        setText(
-            "#progressText",
-            `${completed} من ${total} مهام مكتملة`
-        );
-
-        const remaining =
-            Math.max(
-                total - completed,
-                0
-            );
-
-        setText(
-            "#remainingText",
-            remaining
-                ? `متبقي ${remaining}`
-                : total
-                    ? "اكتمل اليوم 🎉"
-                    : "ابدأ الآن"
-        );
-
-        const bar =
-            $("#progressBar");
-
-        if (bar) {
-            bar.style.width =
-                `${percent}%`;
-        }
-
-        const title =
-            $("#progressTitle");
-
-        if (title) {
-
-            if (
-                percent === 100 &&
-                total > 0
-            ) {
-
-                title.textContent =
-                    "أنجزت يومك بالكامل! 🔥";
-
-            } else if (percent >= 75) {
-
-                title.textContent =
-                    "اقتربت من إكمال يومك!";
-
-            } else if (percent >= 40) {
-
-                title.textContent =
-                    "استمر، أنت في الطريق الصحيح.";
-
-            } else {
-
-                title.textContent =
-                    "أكمل يومك بقوة";
-            }
-        }
-    }
-
-    /* =====================================================
-       STATISTICS
-    ===================================================== */
-
-    function updateStatistics() {
-
-        const total =
-            data.tasks.length;
-
-        const completed =
-            data.tasks.filter(
-                task => task.completed
-            ).length;
-
-        setText(
-            "#totalTasksStat",
-            total
-        );
-
-        setText(
-            "#completedStat",
-            completed
-        );
-
-        setText(
-            "#pointsStat",
-            data.points
-        );
-
-        setText(
-            "#bestStreakStat",
-            data.bestStreak
-        );
-    }
-
-    /* =====================================================
-       STREAK
-    ===================================================== */
-
-    function updateStreak() {
-
-        const today =
-            CONFIG.today;
-
-        if (
-            !data.completedDates.includes(today)
-        ) {
-            data.completedDates.push(today);
-        }
-
-        const dates =
-            [...new Set(data.completedDates)]
-                .sort()
-                .reverse();
-
-        let streak = 0;
-
-        let cursor =
-            new Date(
-                `${today}T00:00:00`
-            );
-
-        for (const dateString of dates) {
-
-            const current =
-                formatDateForStorage(
-                    cursor
-                );
-
-            if (dateString === current) {
-
-                streak++;
-
-                cursor.setDate(
-                    cursor.getDate() - 1
-                );
-
-            } else if (
-                dateString < current
-            ) {
-
-                break;
-            }
-        }
-
-        data.streak = streak;
-
-        data.bestStreak =
-            Math.max(
-                data.bestStreak,
-                data.streak
-            );
-    }
-
-    function formatDateForStorage(date) {
-
-        const year =
-            date.getFullYear();
-
-        const month =
-            String(
-                date.getMonth() + 1
-            ).padStart(2, "0");
-
-        const day =
-            String(
-                date.getDate()
-            ).padStart(2, "0");
-
-        return `${year}-${month}-${day}`;
-    }
-
-    /* =====================================================
-       FOCUS MODE
-    ===================================================== */
-
-    function setupFocus() {
-
-        $("#focusStart")?.addEventListener(
-            "click",
-            toggleFocus
-        );
-
-        $("#focusReset")?.addEventListener(
-            "click",
-            resetFocus
-        );
-    }
-
-    function startFocusForTask(id) {
-
-        const task =
-            data.tasks.find(
-                item => item.id === id
-            );
-
-        if (!task) return;
-
-        navigateTo("focus");
-
-        const minutes =
-            Math.max(
-                Number(task.duration) || 25,
-                1
-            );
-
-        focusTotalSeconds =
-            minutes * 60;
-
-        focusSeconds =
-            focusTotalSeconds;
-
-        focusRunning = false;
-
-        clearInterval(
-            focusInterval
-        );
-
-        setText(
-            "#focusTaskName",
-            task.title
-        );
-
-        setText(
-            "#focusStatus",
-            "جاهز للبدء"
-        );
-
-        updateFocusDisplay();
-
-        const button =
-            $("#focusStart");
-
-        if (button) {
-            button.textContent =
-                "بدء التركيز";
-        }
-    }
-
-    function toggleFocus() {
-
-        if (focusRunning) {
-            pauseFocus();
-        } else {
-            startFocus();
-        }
-    }
-
-    function startFocus() {
-
-        if (focusSeconds <= 0) {
-            resetFocus();
-        }
-
-        focusRunning = true;
-
-        setText(
-            "#focusStatus",
-            "أنت في وضع التركيز"
-        );
-
-        const button =
-            $("#focusStart");
-
-        if (button) {
-            button.textContent =
-                "إيقاف مؤقت";
-        }
-
-        playSound("reminder");
-
-        clearInterval(
-            focusInterval
-        );
-
-        focusInterval =
-            setInterval(() => {
-
-                focusSeconds--;
-
-                updateFocusDisplay();
-
-                if (
-                    focusSeconds <= 0
-                ) {
-                    finishFocus();
-                }
-
-            }, 1000);
-    }
-
-    function pauseFocus() {
-
-        focusRunning = false;
-
-        clearInterval(
-            focusInterval
-        );
-
-        setText(
-            "#focusStatus",
-            "تم إيقاف التركيز مؤقتًا"
-        );
-
-        const button =
-            $("#focusStart");
-
-        if (button) {
-            button.textContent =
-                "متابعة";
-        }
-    }
-
-    function resetFocus() {
-
-        focusRunning = false;
-
-        clearInterval(
-            focusInterval
-        );
-
-        focusSeconds =
-            focusTotalSeconds;
-
-        setText(
-            "#focusStatus",
-            "جاهز للبدء"
-        );
-
-        const button =
-            $("#focusStart");
-
-        if (button) {
-            button.textContent =
-                "بدء التركيز";
-        }
-
-        updateFocusDisplay();
-    }
-
-    function finishFocus() {
-
-        focusRunning = false;
-
-        clearInterval(
-            focusInterval
-        );
-
-        focusSeconds = 0;
-
-        updateFocusDisplay();
-
-        setText(
-            "#focusStatus",
-            "اكتمل وقت التركيز! 🎉"
-        );
-
-        const button =
-            $("#focusStart");
-
-        if (button) {
-            button.textContent =
-                "بدء من جديد";
-        }
-
-        playSound("success");
-
-        showToast(
-            "انتهت جلسة التركيز",
-            "أحسنت! خذ لحظة ثم واصل إنجازك.",
-            "★"
-        );
-    }
-
-    function updateFocusDisplay() {
-
-        const timer =
-            $("#focusTimer");
-
-        if (!timer) return;
-
-        const safeSeconds =
-            Math.max(
-                Number(focusSeconds) || 0,
-                0
-            );
-
-        const minutes =
-            Math.floor(
-                safeSeconds / 60
-            );
-
-        const seconds =
-            safeSeconds % 60;
-
-        timer.textContent =
-            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-        const progress =
-            focusTotalSeconds > 0
-                ? (
-                    (
-                        focusTotalSeconds -
-                        safeSeconds
-                    ) /
-                    focusTotalSeconds
-                ) * 100
-                : 0;
-
-        const bar =
-            $("#focusProgressBar");
-
-        if (bar) {
-            bar.style.width =
-                `${Math.min(
-                    Math.max(progress, 0),
-                    100
-                )}%`;
-        }
-    }
-
-    /* =====================================================
-       NOTIFICATIONS
-    ===================================================== */
-
-    function setupNotifications() {
-
-        $("#notificationButton")?.addEventListener(
-            "click",
-            toggleNotificationPanel
-        );
-
-        $("#closeNotificationPanel")?.addEventListener(
-            "click",
-            closeNotificationPanel
-        );
-
-        document.addEventListener(
-            "click",
-            event => {
-
-                const panel =
-                    $("#notificationPanel");
-
-                const button =
-                    $("#notificationButton");
-
-                if (!panel || !button) {
-                    return;
-                }
-
-                if (
-                    panel.classList.contains("active") &&
-                    !panel.contains(event.target) &&
-                    !button.contains(event.target)
-                ) {
-                    closeNotificationPanel();
-                }
-            }
-        );
-    }
-
-    function toggleNotificationPanel(event) {
-
-        event.stopPropagation();
-
-        const panel =
-            $("#notificationPanel");
-
-        if (!panel) return;
-
-        panel.classList.toggle("active");
-
-        renderNotifications();
-    }
-
-    function closeNotificationPanel() {
-
-        $("#notificationPanel")
-            ?.classList.remove("active");
-    }
-
-    function renderNotifications() {
-
-        const list =
-            $("#notificationList");
-
-        const count =
-            $("#notificationCount");
-
-        if (!list) return;
-
-        const notifications =
-            data.notifications
-                .slice()
-                .reverse()
-                .slice(0, 30);
-
-        if (count) {
-            count.textContent =
-                notifications.length;
-        }
-
-        if (!notifications.length) {
-
-            list.innerHTML = `
-                <div class="notification-empty">
-                    لا توجد تنبيهات حاليًا.
-                </div>
-            `;
-
-            return;
-        }
-
-        list.innerHTML =
-            notifications
-                .map(
-                    notification => `
-                        <div class="notification-item">
-
-                            <div class="notification-item-icon">
-                                ${escapeHTML(
-                                    notification.icon ||
-                                    "🔔"
-                                )}
-                            </div>
-
-                            <div class="notification-item-content">
-
-                                <strong>
-                                    ${escapeHTML(
-                                        notification.title
-                                    )}
-                                </strong>
-
-                                <span>
-                                    ${escapeHTML(
-                                        notification.message
-                                    )}
-                                </span>
-
-                            </div>
-
-                        </div>
-                    `
-                )
-                .join("");
-    }
-
-    function startNotificationWatcher() {
-
-        checkDueTasks();
-
-        clearInterval(
-            notificationInterval
-        );
-
-        notificationInterval =
-            setInterval(
-                checkDueTasks,
-                15000
-            );
-    }
-
-    function checkDueTasks() {
-
-        if (!data.settings.notifications) {
-            return;
-        }
-
-        const now = new Date();
-
-        const currentDate =
-            formatDateForStorage(now);
-
-        const currentMinutes =
-            now.getHours() * 60 +
-            now.getMinutes();
-
-        let changed = false;
-
-        data.tasks.forEach(task => {
-
-            if (
-                task.completed ||
-                !task.reminder ||
-                task.notified ||
-                task.date !== currentDate ||
-                !task.time
-            ) {
-                return;
-            }
-
-            const parts =
-                task.time.split(":");
-
-            if (parts.length < 2) {
-                return;
-            }
-
-            const hours =
-                Number(parts[0]);
-
-            const minutes =
-                Number(parts[1]);
-
-            if (
-                Number.isNaN(hours) ||
-                Number.isNaN(minutes)
-            ) {
-                return;
-            }
-
-            const taskMinutes =
-                hours * 60 + minutes;
-
-            if (
-                currentMinutes >= taskMinutes
-            ) {
-
-                task.notified = true;
-
-                changed = true;
-
-                triggerTaskNotification(task);
-            }
-        });
-
-        if (changed) {
-            saveData();
-        }
-    }
-
-    function triggerTaskNotification(task) {
-
-        const important =
-            task.priority === "important" ||
-            task.priority === "urgent";
-
-        const message =
-            important
-                ? `🔥 حان وقت المهمة المهمة: ${task.title}`
-                : `⏰ حان وقت إنجاز: ${task.title}`;
-
-        const motivation =
-            important
-                ? "ركّز، هذه المهمة تستحق اهتمامك الآن."
-                : getRandomMotivation();
-
-        addNotification(
-            important
-                ? "مهمة مهمة الآن"
-                : "حان وقت المهمة",
-            `${message} — ${motivation}`,
-            important ? "🔥" : "🔔"
-        );
-
-        showToast(
-            important
-                ? "🔥 مهمة مهمة الآن"
-                : "🔔 حان وقت المهمة",
-            `${task.title} — ${motivation}`,
-            important ? "🔥" : "🔔"
-        );
-
-        playSound(
-            important
-                ? "important"
-                : "reminder"
-        );
-
-        sendBrowserNotification(
-            important
-                ? "🔥 مهمة مهمة الآن"
-                : "🔔 حان وقت المهمة",
-            `${task.title}\n${motivation}`
-        );
-    }
-
-    function addNotification(
-        title,
-        message,
-        icon = "🔔"
-    ) {
-
-        data.notifications.push({
-            id: createId(),
-            title,
-            message,
-            icon,
-            createdAt:
-                new Date().toISOString()
-        });
-
-        if (
-            data.notifications.length > 100
-        ) {
-
-            data.notifications =
-                data.notifications.slice(-100);
-        }
-
-        saveData();
-
-        renderNotifications();
-
-        $("#notificationDot")
-            ?.classList.remove("hidden");
-    }
-
-    async function requestNotificationPermission() {
-
-        if (
-            !("Notification" in window) ||
-            !data.settings.notifications
-        ) {
-            return false;
-        }
-
-        if (
-            Notification.permission === "granted"
-        ) {
-            return true;
-        }
-
-        if (
-            Notification.permission === "denied"
-        ) {
-            showToast(
-                "التنبيهات محظورة",
-                "اسمح للتطبيق بالتنبيهات من إعدادات المتصفح.",
-                "🔕"
-            );
-
-            return false;
-        }
-
-        try {
-
-            const permission =
-                await Notification.requestPermission();
-
-            if (
-                permission === "granted"
-            ) {
-                return true;
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Notification permission:",
-                error
-            );
-        }
-
-        return false;
-    }
-
-    async function sendBrowserNotification(
-        title,
-        body
-    ) {
-
-        if (
-            !("Notification" in window) ||
-            Notification.permission !== "granted"
-        ) {
-            return;
-        }
-
-        const options = {
-            body,
-            icon: "./icons/icon-192.jpeg",
-            badge: "./icons/icon-192.jpeg",
-            tag: `injaz1-${Date.now()}`,
-            renotify: true,
-            data: {
-                url: "./index.html",
-                section: "tasks"
-            }
-        };
-
-        try {
-
-            if (
-                "serviceWorker" in navigator
-            ) {
-
-                const registration =
-                    await navigator.serviceWorker.ready;
-
-                if (
-                    registration.showNotification
-                ) {
-
-                    await registration.showNotification(
-                        title,
-                        options
-                    );
-
-                    return;
-                }
-            }
-
-            const notification =
-                new Notification(
-                    title,
-                    options
-                );
-
-            notification.onclick = () => {
-
-                window.focus();
-
-                navigateTo("tasks");
-
-                notification.close();
-            };
-
-        } catch (error) {
-
-            console.warn(
-                "Browser notification:",
-                error
-            );
-        }
-    }
-
-    /* =====================================================
-       SETTINGS
-    ===================================================== */
-
-    function setupSettings() {
-
-        const nameInput =
-            $("#userNameInput");
-
-        nameInput?.addEventListener(
-            "input",
-            event => {
-
-                const name =
-                    event.target.value.trim();
-
-                data.userName =
-                    name || "عمران";
-
-                saveData();
-
-                updateUserName();
-            }
-        );
-
-        const notificationToggle =
-            $("#notificationsToggle");
-
-        notificationToggle?.addEventListener(
-            "change",
-            async event => {
-
-                data.settings.notifications =
-                    event.target.checked;
-
-                saveData();
-
-                if (
-                    event.target.checked
-                ) {
-
-                    const granted =
-                        await requestNotificationPermission();
-
-                    if (!granted) {
-
-                        event.target.checked =
-                            false;
-
-                        data.settings.notifications =
-                            false;
-
-                        saveData();
-
-                        updateSettingsUI();
-
-                        return;
-                    }
-
-                    showToast(
-                        "تم تفعيل التنبيهات",
-                        "سيحاول Injaz1 تنبيهك عند حلول وقت المهمة.",
-                        "🔔"
-                    );
-
-                } else {
-
-                    showToast(
-                        "تم إيقاف التنبيهات",
-                        "لن يتم تشغيل تنبيهات المهام.",
-                        "🔕"
-                    );
-                }
-            }
-        );
-
-        const soundsToggle =
-            $("#soundsToggle");
-
-        soundsToggle?.addEventListener(
-            "change",
-            event => {
-
-                data.settings.sounds =
-                    event.target.checked;
-
-                saveData();
-
-                if (
-                    event.target.checked
-                ) {
-
-                    playSound("success");
-
-                    showToast(
-                        "تم تفعيل النغمات",
-                        "ستعمل أصوات Injaz1 عند الحاجة.",
-                        "🔊"
-                    );
-
-                } else {
-
-                    showToast(
-                        "تم إيقاف النغمات",
-                        "لن يتم تشغيل أصوات Injaz1.",
-                        "🔇"
-                    );
-                }
-            }
-        );
-
-        const motivationToggle =
-            $("#motivationToggle");
-
-        motivationToggle?.addEventListener(
-            "change",
-            event => {
-
-                data.settings.motivation =
-                    event.target.checked;
-
-                saveData();
-
-                const text =
-                    $("#motivationText");
-
-                if (text) {
-
-                    text.style.opacity =
-                        event.target.checked
-                            ? "1"
-                            : ".35";
-                }
-            }
-        );
-
-        updateSettingsUI();
-    }
-
-    function updateSettingsUI() {
-
-        const notificationToggle =
-            $("#notificationsToggle");
-
-        const soundsToggle =
-            $("#soundsToggle");
-
-        const motivationToggle =
-            $("#motivationToggle");
-
-        if (notificationToggle) {
-
-            notificationToggle.checked =
-                !!data.settings.notifications;
-        }
-
-        if (soundsToggle) {
-
-            soundsToggle.checked =
-                !!data.settings.sounds;
-        }
-
-        if (motivationToggle) {
-
-            motivationToggle.checked =
-                !!data.settings.motivation;
-        }
-    }
-
-    /* =====================================================
-       SOUNDS
-    ===================================================== */
-
-    function playSound(type) {
-
-        if (!data.settings.sounds) {
-            return;
-        }
-
-        const ids = {
-            reminder: "reminderSound",
-            important: "importantSound",
-            success: "successSound"
-        };
-
-        const audio =
-            document.getElementById(
-                ids[type]
-            );
-
-        if (!audio) return;
-
-        try {
-
-            audio.currentTime = 0;
-
-            const promise =
-                audio.play();
-
-            if (
-                promise &&
-                typeof promise.catch === "function"
-            ) {
-                promise.catch(() => {});
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Audio error:",
-                error
-            );
-        }
-    }
-
-    /* =====================================================
-       TOAST
-    ===================================================== */
-
-    function showToast(
-        title,
-        message,
-        icon = "✓"
-    ) {
-
-        const toast =
-            $("#toast");
-
-        if (!toast) return;
-
-        setText(
-            "#toastTitle",
-            title
-        );
-
-        setText(
-            "#toastMessage",
-            message
-        );
-
-        setText(
-            "#toastIcon",
-            icon
-        );
-
-        toast.classList.remove("active");
-
-        requestAnimationFrame(() => {
-            toast.classList.add("active");
-        });
-
-        clearTimeout(toastTimeout);
-
-        toastTimeout =
-            setTimeout(() => {
-
-                toast.classList.remove(
-                    "active"
-                );
-
-            }, 5000);
-    }
-
-    function setupButtons() {
-
-        $("#closeToast")?.addEventListener(
-            "click",
-            () => {
-
-                $("#toast")
-                    ?.classList.remove("active");
-
-                clearTimeout(toastTimeout);
-            }
-        );
-
-        $("#profileButton")?.addEventListener(
-            "click",
-            () => {
-                navigateTo("settings");
-            }
-        );
-    }
-
-    /* =====================================================
-       SERVER SYNC
-    ===================================================== */
-
-    async function syncTaskWithServer(
-        action,
-        task
-    ) {
-
-        if (!CONFIG.api) return;
-
-        try {
-
-            const response =
-                await fetch(
-                    CONFIG.api,
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-                        body: JSON.stringify({
-                            action,
-                            task
-                        })
-                    }
-                );
-
-            if (!response.ok) {
-
-                throw new Error(
-                    `HTTP ${response.status}`
-                );
-            }
-
-            const result =
-                await response.json();
-
-            if (
-                result &&
-                result.success === false
-            ) {
-
-                console.warn(
-                    "Injaz1 API:",
-                    result.message
-                );
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Server sync unavailable:",
-                error
-            );
-        }
-    }
-
-    /* =====================================================
-       SERVICE WORKER
-    ===================================================== */
-
-    async function registerServiceWorker() {
-
-        if (
-            !("serviceWorker" in navigator)
-        ) {
-            return;
-        }
-
-        if (
-            location.protocol !== "https:" &&
-            location.hostname !== "localhost" &&
-            location.hostname !== "127.0.0.1"
-        ) {
-            return;
-        }
-
-        try {
-
-            await navigator.serviceWorker.register(
-                "./sw.js",
-                {
-                    scope: "./"
-                }
-            );
-
-        } catch (error) {
-
-            console.warn(
-                "Service Worker registration failed:",
-                error
-            );
-        }
-    }
-
-    /* =====================================================
-       HELPERS
-    ===================================================== */
-
-    function createId() {
-
-        return (
-            Date.now().toString(36) +
-            Math.random()
-                .toString(36)
-                .slice(2, 8)
-        );
-    }
-
-    function getRandomMotivation() {
-
-        return motivationMessages[
-            Math.floor(
-                Math.random() *
-                motivationMessages.length
-            )
-        ];
-    }
-
-    function formatTaskDate(dateString) {
-
-        if (!dateString) {
-            return "";
-        }
-
-        if (
-            dateString === CONFIG.today
-        ) {
-            return "اليوم";
-        }
-
-        const date =
-            new Date(
-                `${dateString}T00:00:00`
-            );
-
-        if (
-            Number.isNaN(
-                date.getTime()
-            )
-        ) {
-            return dateString;
-        }
-
-        return new Intl.DateTimeFormat(
-            "ar-EG",
-            {
-                day: "numeric",
-                month: "short"
-            }
-        ).format(date);
-    }
-
-    function setText(
-        selector,
-        value
-    ) {
-
-        const element =
-            $(selector);
-
-        if (element) {
-            element.textContent =
-                String(value);
-        }
-    }
-
-    function escapeHTML(value) {
-
-        return String(value ?? "")
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-    }
-
 })();
-
 </script>
 
 </body>
-
 </html>
