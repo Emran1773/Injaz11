@@ -1,219 +1,428 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-          <link rel="icon" type="image/jpeg" sizes="192x192" href="icon-192.jpeg">
+                    <link rel="icon" type="image/jpeg" sizes="192x192" href="icon-192.jpeg">
 <link rel="icon" type="image/jpeg" sizes="512x512" href="icon-512.jpeg">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101310">
-<meta name="description" content="إنجاز — مساحة شخصية لإدارة يومك ومهامك وعاداتك وأهدافك.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d0f0e">
 <title>إنجاز | مساحة يومك</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
-:root{--bg:#101310;--panel:#171b17;--panel2:#1d221d;--line:#2b332b;--text:#f2f3ed;--muted:#9aa396;--gold:#d6b66d;--gold2:#f0d99c;--green:#a9c49c;--red:#e58b82;--blue:#91b9d9;--radius:20px;--shadow:0 18px 60px #0004}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% -10%,#263125 0,transparent 36%),var(--bg);color:var(--text);font-family:'Cairo','IBM Plex Sans Arabic',sans-serif;min-height:100vh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}.sidebar{border-left:1px solid var(--line);padding:26px 18px;position:sticky;top:0;height:100vh;background:#111511e8;backdrop-filter:blur(18px);display:flex;flex-direction:column;z-index:5}.brand{display:flex;align-items:center;gap:12px;padding:2px 8px 30px}.brand-mark{width:44px;height:44px;border-radius:15px;background:linear-gradient(145deg,#e8d39a,#b8944b);color:#1b2018;display:grid;place-items:center;font-size:23px;font-weight:800;box-shadow:0 8px 24px #d6b66d22}.brand strong{font-size:21px;letter-spacing:-.5px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:-3px}.nav-label{font-size:10px;color:#737e70;letter-spacing:1.5px;padding:0 13px 10px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#aeb6aa;text-align:right;border-radius:13px;padding:12px 13px;display:flex;align-items:center;gap:12px;font-size:13px;transition:.2s}.nav button:hover{background:#ffffff08;color:var(--text)}.nav button.active{background:linear-gradient(90deg,#d6b66d15,#d6b66d08);color:var(--gold2);box-shadow:inset -3px 0 var(--gold)}.nav .ico{font-size:17px;width:23px;text-align:center}.side-bottom{margin-top:auto}.quote{padding:16px;border:1px solid #343b2d;background:linear-gradient(140deg,#20281d,#161b15);border-radius:17px;color:#c7d0bd;font-size:12px;line-height:1.9}.quote b{display:block;color:var(--gold);font-size:11px;margin-bottom:6px}.main{min-width:0;padding:28px clamp(16px,3vw,42px) 100px;max-width:1600px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.eyebrow{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:1px}.topbar h1{font-size:clamp(22px,2.4vw,31px);margin:4px 0 0;letter-spacing:-.8px}.top-actions{display:flex;align-items:center;gap:10px}.date-chip,.icon-btn{border:1px solid var(--line);background:#171b17;color:var(--muted);border-radius:12px;padding:10px 13px;font-size:12px}.icon-btn{width:42px;height:42px;display:grid;place-items:center;font-size:17px}.btn{border:0;border-radius:12px;background:var(--gold);color:#202218;padding:11px 16px;font-weight:800;font-size:12px;box-shadow:0 7px 22px #d6b66d15;transition:.2s}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#252b23;color:#e5e9df;border:1px solid #343c31;box-shadow:none}.btn.danger{background:#3a2421;color:#ffb4aa;border:1px solid #633a34;box-shadow:none}.hero{position:relative;overflow:hidden;border:1px solid #3c4030;border-radius:25px;background:linear-gradient(115deg,#242b20 0%,#1a2019 58%,#282519 100%);padding:27px 30px;margin-bottom:20px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;min-height:180px}.hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #d6b66d17;border-radius:50%;left:8%;top:-130px;box-shadow:0 0 0 25px #d6b66d05,0 0 0 55px #d6b66d04}.hero-copy{position:relative;z-index:1}.hero h2{font-size:clamp(21px,2.4vw,30px);margin:8px 0 7px}.hero p{color:#b5bcae;font-size:13px;margin:0;line-height:1.9}.hero .btn{margin-top:18px}.hero-progress{position:relative;z-index:1;width:120px;height:120px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--gold) var(--progress,0%),#41483a 0);flex-shrink:0}.hero-progress:before{content:"";position:absolute;inset:8px;border-radius:50%;background:#1e241c}.hero-progress div{position:relative;text-align:center}.hero-progress strong{font-size:25px;display:block}.hero-progress small{font-size:10px;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:24px}.stat{border:1px solid var(--line);background:linear-gradient(145deg,#1b201b,#151915);border-radius:17px;padding:17px;min-width:0}.stat-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:11px;gap:5px}.stat-icon{width:32px;height:32px;display:grid;place-items:center;background:#ffffff08;border-radius:10px;font-size:15px}.stat strong{display:block;font-size:27px;margin:12px 0 1px;letter-spacing:-1px}.stat small{color:#7e897a;font-size:10px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 13px}.section-head h2{font-size:16px;margin:0}.section-head p{font-size:11px;color:var(--muted);margin:3px 0 0}.text-btn{border:0;background:transparent;color:var(--gold);font-size:11px;padding:6px}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:18px}.panel{background:#171b17;border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0}.task-list{display:grid;gap:8px}.task-row{display:flex;align-items:center;gap:12px;border:1px solid #292f28;background:#1b201b;border-radius:14px;padding:12px;min-width:0;transition:.18s}.task-row:hover{border-color:#424b3d}.task-check{width:20px;height:20px;appearance:none;border:1.5px solid #596453;border-radius:7px;flex-shrink:0;display:grid;place-items:center;background:transparent}.task-check:checked{background:var(--gold);border-color:var(--gold)}.task-check:checked:after{content:"✓";font-size:13px;color:#1b2118;font-weight:900}.task-main{min-width:0;flex:1}.task-title{font-size:12px;font-weight:700;overflow-wrap:anywhere}.task-title.done{text-decoration:line-through;color:#7d8878}.task-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:5px;color:var(--muted);font-size:10px}.tag{border-radius:7px;padding:3px 7px;background:#292f27;color:#c5cfbd;font-size:9px;white-space:nowrap}.tag.gold{background:#d6b66d18;color:var(--gold2)}.tag.red{background:#e58b8218;color:#f2a79f}.row-actions{display:flex;gap:4px}.mini-btn{border:0;background:transparent;color:#84907e;border-radius:8px;padding:6px;font-size:13px}.mini-btn:hover{background:#ffffff0a;color:var(--text)}.empty{padding:30px 15px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed #343c31;border-radius:14px}.empty span{display:block;font-size:25px;margin-bottom:8px}.habit-list{display:grid;gap:11px}.habit{border:1px solid #2c332b;background:#1b201b;border-radius:14px;padding:13px}.habit-head{display:flex;align-items:center;gap:10px}.habit-emoji{width:36px;height:36px;display:grid;place-items:center;background:#ffffff08;border-radius:11px;font-size:17px}.habit-name{flex:1;font-size:12px;font-weight:700}.habit-name small{display:block;font-size:10px;color:var(--muted);font-weight:400;margin-top:3px}.habit-days{display:flex;gap:5px;margin-top:12px;direction:ltr}.day-dot{flex:1;aspect-ratio:1;border-radius:7px;max-height:28px;border:1px solid #3a4237;background:#252b23;color:#84907e;font-size:9px}.day-dot.on{background:#b8cba7;color:#182016;border-color:#b8cba7}.habit-foot{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:8px}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0 25px}.quick{border:1px solid var(--line);border-radius:15px;padding:15px 10px;background:#171b17;color:var(--text);text-align:center;transition:.2s}.quick:hover{border-color:#77704c;transform:translateY(-2px)}.quick span{display:block;font-size:22px;margin-bottom:7px}.quick strong{display:block;font-size:11px}.quick small{color:var(--muted);font-size:9px}.page{display:none}.page.active{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}.toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:16px}.search{flex:1;min-width:160px}.field,.search input,.toolbar select{width:100%;background:#111511;border:1px solid #343c31;border-radius:11px;color:var(--text);padding:11px 12px;font-size:12px}.toolbar select{width:auto;min-width:110px}.search input::placeholder{color:#737e70}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}.goal-card{border:1px solid var(--line);background:#1b201b;border-radius:16px;padding:17px;margin-bottom:10px}.goal-top{display:flex;align-items:flex-start;gap:12px}.goal-emoji{font-size:22px}.goal-info{flex:1}.goal-info strong{font-size:13px}.goal-info p{color:var(--muted);font-size:11px;line-height:1.7;margin:5px 0}.progress-track{height:7px;border-radius:9px;background:#30372d;overflow:hidden;margin:13px 0 8px}.progress-track span{height:100%;display:block;background:linear-gradient(90deg,#9bb98d,var(--gold));border-radius:9px}.goal-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}.calendar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.calendar-head strong{font-size:14px}.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.cal-day-name{text-align:center;color:var(--muted);font-size:10px;padding:8px 0}.cal-day{min-height:75px;border:1px solid #2d342b;border-radius:11px;background:#1b201b;padding:7px;font-size:11px;color:#d4dacd;cursor:pointer}.cal-day:hover{border-color:var(--gold)}.cal-day.muted{opacity:.35}.cal-day.today{border-color:var(--gold);background:#d6b66d12}.cal-day.selected{background:#d6b66d24;border-color:var(--gold)}.cal-dots{display:flex;gap:3px;margin-top:8px;flex-wrap:wrap}.cal-dots i{width:5px;height:5px;border-radius:50%;background:var(--gold)}.focus-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.8fr);gap:18px}.focus-panel{text-align:center;padding:30px 20px}.focus-mode{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}.focus-mode button{background:#222820;border:1px solid #343c31;color:var(--muted);border-radius:10px;padding:8px 12px;font-size:11px}.focus-mode button.active{background:#d6b66d20;color:var(--gold2);border-color:#73643c}.timer{font-size:clamp(52px,8vw,88px);font-weight:700;letter-spacing:-3px;margin:24px 0 10px;font-variant-numeric:tabular-nums}.timer-label{color:var(--muted);font-size:12px}.timer-ring{width:min(300px,75vw);aspect-ratio:1;border-radius:50%;border:1px solid #3a4234;margin:25px auto 20px;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#1d241b 55%,transparent 56%)}.timer-ring:before{content:"";position:absolute;inset:0;border-radius:50%;border:5px solid #2c3429;border-top-color:var(--gold);transform:rotate(25deg)}.timer-ring .timer{margin:0}.focus-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.focus-note{color:var(--muted);font-size:11px;line-height:1.9}.chart{height:190px;display:flex;align-items:end;gap:10px;padding:20px 3px 0;border-bottom:1px solid #30372d}.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:end;height:100%;gap:8px;min-width:0}.bar{width:min(35px,80%);border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#dfc77e,#8c7744);min-height:3px;transition:height .3s}.bar-label{font-size:9px;color:var(--muted)}.bar-value{font-size:9px;color:#d3d9ca}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid #2b3229}.setting-row:last-child{border:0}.setting-row strong{font-size:12px}.setting-row p{font-size:10px;color:var(--muted);margin:4px 0 0}.switch{appearance:none;width:42px;height:24px;border-radius:30px;background:#3a4237;position:relative;flex-shrink:0;cursor:pointer}.switch:before{content:"";position:absolute;width:18px;height:18px;top:3px;right:3px;border-radius:50%;background:#aab3a2;transition:.2s}.switch:checked{background:#9eb78e}.switch:checked:before{right:21px;background:#172016}.mobile-nav{display:none}.overlay{position:fixed;inset:0;background:#0009;backdrop-filter:blur(5px);z-index:20;display:none;align-items:center;justify-content:center;padding:15px}.overlay.open{display:flex}.modal{width:min(520px,100%);max-height:90vh;overflow:auto;border:1px solid #41483a;background:#171c17;border-radius:22px;padding:23px;box-shadow:var(--shadow)}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.modal-head h2{font-size:18px;margin:0}.close{border:0;background:#252c24;color:#c5cdbf;border-radius:10px;width:35px;height:35px;font-size:18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-field{display:grid;gap:6px}.form-field.full{grid-column:1/-1}.form-field label{font-size:11px;color:#b6c0af}.form-field input,.form-field textarea,.form-field select{width:100%;border:1px solid #353e31;background:#111511;color:var(--text);border-radius:11px;padding:11px;font-size:12px}.form-field textarea{min-height:75px;resize:vertical}.modal-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:20px}.toast{position:fixed;bottom:25px;left:25px;z-index:50;background:#e4d39d;color:#20251d;border-radius:12px;padding:12px 17px;font-size:12px;font-weight:700;box-shadow:var(--shadow);transform:translateY(100px);opacity:0;transition:.25s;pointer-events:none}.toast.show{transform:translateY(0);opacity:1}.small-muted{font-size:11px;color:var(--muted)}.section-space{margin-top:25px}.mobile-title{display:none}
-@media(max-width:1050px){.app{grid-template-columns:210px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-grid{grid-template-columns:1fr}.hero{padding:24px}.focus-wrap{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:720px){.app{display:block}.sidebar{display:none}.main{padding:19px 14px 100px}.topbar{align-items:flex-start;margin-bottom:19px}.topbar h1{font-size:23px}.date-chip{display:none}.top-actions{gap:6px}.top-actions .btn{padding:10px 12px}.hero{padding:21px;border-radius:20px;grid-template-columns:1fr auto;gap:10px;min-height:160px}.hero h2{font-size:20px}.hero p{font-size:11px}.hero-progress{width:82px;height:82px}.hero-progress:before{inset:6px}.hero-progress strong{font-size:19px}.hero-progress small{font-size:8px}.stats{gap:9px;margin-bottom:20px}.stat{padding:13px;border-radius:14px}.stat strong{font-size:23px;margin-top:8px}.stat-top{font-size:10px}.stat-icon{width:27px;height:27px}.quick-grid{grid-template-columns:repeat(2,1fr);gap:8px}.quick{padding:12px 8px}.panel{padding:15px;border-radius:17px}.task-row{padding:10px;gap:9px}.row-actions .mini-btn{padding:4px}.two-col{grid-template-columns:1fr}.calendar-grid{gap:3px}.cal-day{min-height:54px;padding:5px;font-size:10px;border-radius:7px}.cal-day-name{font-size:9px}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;justify-content:space-around;gap:2px;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#111511ed;border-top:1px solid var(--line);backdrop-filter:blur(20px)}.mobile-nav button{flex:1;border:0;background:transparent;color:#879181;border-radius:11px;padding:7px 2px;font-size:9px;display:grid;justify-items:center;gap:3px}.mobile-nav button span{font-size:17px}.mobile-nav button.active{color:var(--gold2);background:#d6b66d12}.section-head h2{font-size:14px}.focus-panel{padding:20px 12px}.timer-ring{width:min(270px,75vw)}.toolbar select{flex:1}.toolbar .btn{white-space:nowrap}.overlay{align-items:flex-end;padding:0}.modal{border-radius:22px 22px 0 0;max-height:92vh;padding:21px 17px calc(20px + env(safe-area-inset-bottom))}.toast{left:12px;right:12px;bottom:85px;text-align:center}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+:root{--bg:#0d0f0e;--panel:#151815;--panel2:#1c201b;--line:#2c312a;--gold:#c9a96e;--gold-light:#ead6ad;--text:#f2f0e8;--muted:#999e94;--green:#9fbd91;--red:#d98679;--blue:#8bb9d0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 85% -15%,#30291c 0,transparent 38%),var(--bg);color:var(--text);font-family:Cairo,sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;transition:.2s}
+button:hover{filter:brightness(1.12);transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.app{max-width:1450px;margin:auto;padding:26px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:16px}
+.brand{display:flex;align-items:center;gap:13px}
+.logo{height:50px;width:50px;border:1px solid #786443;background:linear-gradient(145deg,#302718,#141510);border-radius:16px;display:grid;place-items:center;color:var(--gold-light);font-weight:900;font-size:25px}
+.brand h1{margin:0;font-size:24px;font-weight:900;letter-spacing:-1px}
+.brand p{margin:0;color:var(--muted);font-size:12px}
+.header-actions{display:flex;gap:9px;align-items:center}
+.date-chip,.secondary-btn,.icon-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:10px 13px}
+.icon-btn{width:43px;height:43px;padding:0}
+.primary-btn{background:var(--gold);color:#17150f;border:0;border-radius:13px;padding:11px 18px;font-weight:800}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:22px}
+.sidebar,.panel{background:linear-gradient(145deg,#171a16,#121512);border:1px solid var(--line);border-radius:22px}
+.sidebar{padding:18px;height:fit-content;position:sticky;top:20px}
+.profile{display:flex;align-items:center;gap:12px;padding:8px 4px 20px;border-bottom:1px solid var(--line)}
+.avatar{width:43px;height:43px;border-radius:14px;background:#322c20;color:var(--gold-light);display:grid;place-items:center;font-weight:900}
+.profile strong{display:block;font-size:14px}.profile small{color:var(--muted);font-size:11px}
+.nav{display:grid;gap:6px;margin-top:18px}
+.nav button{display:flex;align-items:center;gap:12px;width:100%;padding:12px 13px;background:transparent;border:1px solid transparent;color:#b7bbb1;border-radius:12px;text-align:right}
+.nav button.active{background:#29251b;border-color:#4c412b;color:var(--gold-light)}
+.nav .num{margin-right:auto;font-size:12px;color:var(--muted)}
+.side-bottom{margin-top:26px;padding:15px;background:#20231d;border:1px solid var(--line);border-radius:15px}
+.side-bottom strong{font-size:13px}.side-bottom p{font-size:11px;color:var(--muted);line-height:1.9;margin:5px 0 0}
+main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin:4px 0 22px}
+.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.3px}
+h2{font-size:27px;line-height:1.5;margin:3px 0;font-weight:900}
+.subtitle{font-size:13px;color:var(--muted);margin:0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:22px}
+.stat{padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:18px;min-width:0}
+.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;gap:5px}
+.stat-icon{width:32px;height:32px;border-radius:11px;background:#29251c;display:grid;place-items:center;color:var(--gold)}
+.stat strong{display:block;font-size:27px;margin-top:9px;font-weight:900}
+.stat small{font-size:11px;color:var(--muted)}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr);gap:18px;align-items:start}
+.panel{padding:20px;margin-bottom:18px}
+.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.panel-heading h3{font-size:16px;margin:0;font-weight:800}
+.panel-heading p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:5px 9px;color:var(--muted)}
+.ai-panel{border-color:#55472e;background:radial-gradient(ellipse at 100% 0,#332a1b 0,transparent 48%),#171915}
+.ai-title{display:flex;align-items:center;gap:10px}
+.ai-mark{width:37px;height:37px;border-radius:12px;background:#3b3020;color:var(--gold-light);display:grid;place-items:center;font-weight:900}
+.ai-title h3{margin:0;font-size:16px}.ai-title p{margin:2px 0;color:var(--muted);font-size:11px}
+.ai-label{display:block;font-size:12px;margin:17px 0 8px;color:#d8d5cb}
+textarea,input,select{background:#10120f;border:1px solid #34392f;color:var(--text);border-radius:12px;padding:12px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:115px;line-height:1.9}
+textarea::placeholder,input::placeholder{color:#70766c}
+.ai-examples{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+.example{background:#24251e;border:1px solid #403b2c;color:#c7b58f;padding:6px 10px;border-radius:9px;font-size:11px}
+.ai-actions{display:flex;gap:9px;flex-wrap:wrap}
+.ai-note{font-size:11px;color:var(--muted);line-height:1.8;margin:13px 0 0}
+.preview-list{display:grid;gap:8px;margin-top:15px}
+.preview-item{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#111410}
+.preview-item input{width:17px;height:17px;accent-color:var(--gold);margin-top:5px}
+.preview-item strong{font-size:13px;display:block}
+.preview-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;color:var(--muted);font-size:10px}
+.task-list{display:grid;gap:9px}
+.task{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:11px;align-items:start;padding:13px;border:1px solid var(--line);border-radius:14px;background:#141713}
+.task-check{width:19px;height:19px;accent-color:var(--gold);margin-top:5px}
+.task-title{font-size:13px;font-weight:700;overflow-wrap:anywhere}
+.task.done .task-title{text-decoration:line-through;color:#777d72}
+.task-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px;font-size:10px;color:var(--muted)}
+.tag{padding:3px 7px;border-radius:7px;background:#252920}
+.tag.high{color:#e5a59a;background:#382521}.tag.medium{color:#e3c78f;background:#332c1e}.tag.low{color:#a7c5a0;background:#202c20}
+.task-actions{display:flex;gap:5px}
+.mini-btn{border:1px solid var(--line);background:#20231e;color:var(--muted);border-radius:8px;width:30px;height:30px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.filter{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:10px;padding:7px 11px;font-size:11px}
+.filter.active{background:#2c281e;border-color:#685637;color:var(--gold-light)}
+.empty{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px;border:1px dashed #353a31;border-radius:13px;line-height:2}
+.progress-track{height:7px;background:#292d26;border-radius:9px;overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#a88950,#e4c88d);border-radius:9px;transition:width .3s}
+.category-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
+.category-row:last-child{border:0}
+.category-name{display:flex;align-items:center;gap:9px}.dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.category-count{color:var(--muted)}
+.toast{position:fixed;bottom:22px;left:22px;z-index:10;background:#262a23;border:1px solid #505746;color:var(--text);padding:13px 17px;border-radius:13px;box-shadow:0 15px 40px #0008;display:none;max-width:calc(100% - 44px);font-size:12px}
+.modal-backdrop{position:fixed;inset:0;background:#000a;z-index:20;display:none;place-items:center;padding:18px}
+.modal{width:min(510px,100%);background:#171a16;border:1px solid var(--line);border-radius:22px;padding:23px;max-height:90vh;overflow:auto}
+.modal h3{margin:0 0 18px}.field{margin-bottom:13px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:20px}
+.footer{color:#666d62;text-align:center;font-size:10px;padding:12px}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.sidebar{position:static;padding:12px}.profile,.side-bottom{display:none}.nav{display:flex;overflow:auto;margin:0}.nav button{white-space:nowrap;width:auto}.nav .num{margin-right:5px}.content-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.app{padding:14px}.topbar{align-items:flex-start}.brand h1{font-size:20px}.date-chip{display:none}.layout{gap:14px}.content-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:14px}.stat strong{font-size:24px}.welcome{align-items:flex-start;flex-direction:column}h2{font-size:23px}.panel{padding:15px}.header-actions .secondary-btn{display:none}}
+@media(max-width:390px){.brand p{font-size:10px}.logo{width:43px;height:43px}.stats{gap:7px}.stat-top{font-size:10px}.form-grid{grid-template-columns:1fr}.nav button{padding:9px;font-size:12px}}
 </style>
 </head>
 <body>
 <div class="app">
+<header>
+  <div class="brand">
+    <div class="logo">إ</div>
+    <div><h1>إنجاز<span style="color:var(--gold)">.</span></h1><p>مساحة هادئة ليوم أكثر وضوحًا</p></div>
+  </div>
+  <div class="header-actions">
+    <span class="date-chip" id="todayDate"></span>
+    <button class="secondary-btn" id="exportBtn">تصدير البيانات ↗</button>
+    <button class="icon-btn" id="settingsBtn" title="الإعدادات">⚙</button>
+  </div>
+</header>
+
+<div class="layout">
 <aside class="sidebar">
-  <div class="brand"><div class="brand-mark">إ</div><div><strong>إنجاز</strong><small>مساحة يومك بوعي</small></div></div>
-  <div class="nav-label">مساحة العمل</div>
-  <nav class="nav" id="sideNav">
-    <button class="active" data-page="home"><span class="ico">⌂</span>نظرة عامة</button>
-    <button data-page="tasks"><span class="ico">☷</span>المهام</button>
-    <button data-page="habits"><span class="ico">◉</span>العادات</button>
-    <button data-page="goals"><span class="ico">◎</span>الأهداف</button>
-    <button data-page="calendar"><span class="ico">▦</span>التقويم</button>
-    <button data-page="focus"><span class="ico">◷</span>جلسة تركيز</button>
-    <button data-page="insights"><span class="ico">⌁</span>إحصاءاتي</button>
+  <div class="profile"><div class="avatar" id="avatar">ع</div><div><strong id="profileName">مساحة عمران</strong><small>خطوة صغيرة كل يوم</small></div></div>
+  <nav class="nav" id="nav">
+    <button class="active" data-view="all">◫ نظرة عامة <span class="num" id="navAll">0</span></button>
+    <button data-view="today">◷ مهام اليوم <span class="num" id="navToday">0</span></button>
+    <button data-view="upcoming">▦ القادمة</button>
+    <button data-view="done">✓ المكتملة</button>
   </nav>
-  <div class="side-bottom"><div class="quote"><b>✦ تذكير اليوم</b>لا تحتاج إلى يوم مثالي؛ تحتاج إلى خطوة صادقة تتكرر.</div><button class="nav" style="margin-top:10px;width:100%" data-page="settings"><span class="ico">⚙</span>الإعدادات والبيانات</button></div>
+  <div class="side-bottom"><strong>تذكير اليوم</strong><p>ليس المطلوب أن تنجز كل شيء دفعة واحدة؛ المطلوب أن تعرف خطوتك التالية.</p></div>
 </aside>
-<main class="main">
-<header class="topbar"><div><div class="eyebrow" id="todayLong">مساحة يومك</div><h1 id="pageTitle">صباح الإنجاز، عمران</h1></div><div class="top-actions"><span class="date-chip" id="dateChip"></span><button class="icon-btn" id="exportQuick" title="تصدير نسخة احتياطية">⇩</button><button class="btn" id="addTop">＋ مهمة جديدة</button></div></header>
 
-<section class="page active" id="page-home">
-  <div class="hero"><div class="hero-copy"><div class="eyebrow">ابدأ بما تستطيع</div><h2 id="greeting">أهلًا عمران، يومك يبدأ بخطوة.</h2><p id="heroSub">رتّب أولوياتك، وامنح أهم أعمالك وقتًا يستحقه.</p><button class="btn" id="heroAdd">＋ أضف مهمة اليوم</button></div><div class="hero-progress" id="heroProgress" style="--progress:0%"><div><strong id="completionPct">0%</strong><small>إنجاز اليوم</small></div></div></div>
-  <div class="stats">
-    <div class="stat"><div class="stat-top"><span>مهام اليوم</span><span class="stat-icon">☷</span></div><strong id="statTasks">0/0</strong><small>مكتملة من إجمالي المهام</small></div>
-    <div class="stat"><div class="stat-top"><span>العادات المنجزة</span><span class="stat-icon">◉</span></div><strong id="statHabits">0/0</strong><small>عادة ملتزم بها اليوم</small></div>
-    <div class="stat"><div class="stat-top"><span>دقائق التركيز</span><span class="stat-icon">◷</span></div><strong id="statFocus">0</strong><small>إجمالي ما سجلته اليوم</small></div>
-    <div class="stat"><div class="stat-top"><span>سلسلة الأيام</span><span class="stat-icon">✦</span></div><strong id="statStreak">0</strong><small>أيام متتالية بها إنجاز</small></div>
+<main>
+  <section class="welcome">
+    <div><div class="eyebrow" id="greeting">مساحة يومك</div><h2 id="welcomeTitle">ابدأ يومك بوضوح.</h2><p class="subtitle">رتّب أولوياتك، واترك لإنجاز الباقي مساحة.</p></div>
+    <button class="primary-btn" id="addTaskBtn">＋ مهمة جديدة</button>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><div class="stat-top"><span>مهام اليوم</span><span class="stat-icon">◷</span></div><strong id="statToday">0</strong><small>المهام المحددة لليوم</small></div>
+    <div class="stat"><div class="stat-top"><span>أُنجزت</span><span class="stat-icon">✓</span></div><strong id="statDone">0</strong><small>مهام مكتملة اليوم</small></div>
+    <div class="stat"><div class="stat-top"><span>قيد التنفيذ</span><span class="stat-icon">↗</span></div><strong id="statPending">0</strong><small>بانتظار خطوتك التالية</small></div>
+    <div class="stat"><div class="stat-top"><span>نسبة الإنجاز</span><span class="stat-icon">◉</span></div><strong id="statPercent">0%</strong><div class="progress-track"><div class="progress-fill" id="mainProgress"></div></div></div>
+  </section>
+
+  <div class="content-grid">
+    <div>
+      <section class="panel ai-panel">
+        <div class="panel-heading">
+          <div class="ai-title"><div class="ai-mark">✳</div><div><h3>مساعد المهام الذكي</h3><p>اكتب يومك بطريقتك، وسأرتّب المهام لك</p></div></div>
+          <span class="pill">تحليل نصّي</span>
+        </div>
+        <label class="ai-label" for="aiInput">ما الذي تريد إنجازه؟</label>
+        <textarea id="aiInput" placeholder="مثال: غدًا الساعة ٧ أراجع القرآن لمدة نصف ساعة، وبعدها أذاكر الرياضيات ساعة. أريد إنهاء مشروع الموقع قبل الخميس، والأولوية للمذاكرة..."></textarea>
+        <div class="ai-examples">
+          <button class="example" data-example="اليوم الساعة ٤ أتمرن لمدة ساعة، وبعد المغرب أراجع القرآن نصف ساعة">مثال يوم تدريبي</button>
+          <button class="example" data-example="غدًا أذاكر الرياضيات ساعة وأحل واجب الإنجليزي نصف ساعة، والأولوية للرياضيات">مثال دراسي</button>
+          <button class="example" data-example="أريد إنهاء تصميم الموقع قبل الخميس، وأحتاج ساعة يوميًا للعمل عليه">مثال مشروع</button>
+        </div>
+        <div class="ai-actions"><button class="primary-btn" id="analyzeBtn">حلّل ورتّب المهام ✦</button><button class="secondary-btn" id="clearAiBtn">مسح النص</button></div>
+        <p class="ai-note">يحلّل النص داخل المتصفح دون إرسال بياناتك إلى خادم. راجع النتائج قبل إضافتها؛ فهم اللغة هنا محلي وأساسي وليس نموذج ذكاء اصطناعي سحابيًا.</p>
+        <div id="preview" hidden></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading"><div><h3 id="tasksHeading">مهامك</h3><p>كل مهمة منجزة تقرّبك من هدفك</p></div><span class="pill" id="taskCount">0 مهمة</span></div>
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all">الكل</button>
+          <button class="filter" data-filter="pending">غير المكتملة</button>
+          <button class="filter" data-filter="high">عالية الأولوية</button>
+          <button class="filter" data-filter="done">المكتملة</button>
+        </div>
+        <div class="task-list" id="taskList"></div>
+      </section>
+    </div>
+
+    <div>
+      <section class="panel">
+        <div class="panel-heading"><div><h3>تقدّمك اليوم</h3><p>نظرة سريعة على ما أنجزته</p></div><span style="color:var(--gold)">◉</span></div>
+        <div style="display:flex;align-items:baseline;gap:7px"><strong id="progressLabel" style="font-size:31px">0%</strong><span style="font-size:11px;color:var(--muted)">من مهام اليوم</span></div>
+        <div class="progress-track"><div class="progress-fill" id="detailProgress"></div></div>
+        <p id="progressMessage" style="font-size:12px;color:var(--muted);line-height:1.9;margin:13px 0 0">ابدأ بمهمة واحدة، وستتضح الخطوة التالية.</p>
+      </section>
+      <section class="panel">
+        <div class="panel-heading"><div><h3>توزيع المهام</h3><p>بحسب المجال</p></div></div>
+        <div id="categoryStats"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-heading"><div><h3>أقرب المواعيد</h3><p>المهام القادمة حسب الوقت</p></div></div>
+        <div id="upcomingList" class="task-list"></div>
+      </section>
+    </div>
   </div>
-  <div class="section-head"><div><h2>وصول سريع</h2><p>ابدأ من المكان الذي تحتاجه الآن.</p></div></div>
-  <div class="quick-grid">
-    <button class="quick" data-go="tasks"><span>☷</span><strong>قائمة المهام</strong><small>خطط ونفّذ</small></button>
-    <button class="quick" data-go="habits"><span>◉</span><strong>متابعة العادات</strong><small>ثبات يومي</small></button>
-    <button class="quick" data-go="focus"><span>◷</span><strong>ابدأ التركيز</strong><small>وقت بلا تشتيت</small></button>
-    <button class="quick" data-go="goals"><span>◎</span><strong>أهدافك</strong><small>تقدم واضح</small></button>
-  </div>
-  <div class="dashboard-grid">
-    <div class="panel"><div class="section-head"><div><h2>أهم مهام اليوم</h2><p>ما يستحق انتباهك الآن</p></div><button class="text-btn" data-go="tasks">كل المهام ←</button></div><div class="task-list" id="homeTasks"></div></div>
-    <div class="panel"><div class="section-head"><div><h2>عادات اليوم</h2><p>التكرار يصنع الفرق</p></div><button class="text-btn" data-go="habits">عرض العادات ←</button></div><div class="habit-list" id="homeHabits"></div></div>
-  </div>
-  <div class="panel section-space"><div class="section-head"><div><h2>تقدمك خلال الأسبوع</h2><p>عدد المهام التي أنجزتها كل يوم</p></div><button class="text-btn" data-go="insights">تفاصيل الإحصاءات ←</button></div><div class="chart" id="homeChart"></div></div>
-</section>
-
-<section class="page" id="page-tasks">
-  <div class="section-head"><div><h2>قائمة المهام</h2><p>حوّل ما يشغل بالك إلى خطوات واضحة.</p></div><button class="btn" id="addTaskPage">＋ إضافة مهمة</button></div>
-  <div class="toolbar"><div class="search"><input id="taskSearch" placeholder="ابحث عن مهمة..." aria-label="البحث عن مهمة"></div><select id="taskFilter" aria-label="تصفية المهام"><option value="all">كل المهام</option><option value="open">غير المكتملة</option><option value="done">المكتملة</option><option value="today">مهام اليوم</option><option value="overdue">المتأخرة</option></select><select id="taskSort" aria-label="ترتيب المهام"><option value="priority">الأولوية</option><option value="time">الوقت</option><option value="created">الأحدث إضافة</option></select></div>
-  <div class="panel"><div class="task-list" id="allTasks"></div></div>
-</section>
-
-<section class="page" id="page-habits">
-  <div class="section-head"><div><h2>العادات اليومية</h2><p>لا تبحث عن الكمال؛ ابنِ الاستمرار.</p></div><button class="btn" id="addHabit">＋ عادة جديدة</button></div>
-  <div class="stats"><div class="stat"><div class="stat-top">عاداتك</div><strong id="habitCount">0</strong><small>عادات مسجلة</small></div><div class="stat"><div class="stat-top">التزام اليوم</div><strong id="habitRate">0%</strong><small>من عاداتك اليومية</small></div></div>
-  <div class="two-col"><div class="panel"><div class="section-head"><div><h2>عاداتك</h2><p>اضغط على يوم لتسجيل الإنجاز</p></div></div><div class="habit-list" id="allHabits"></div></div><div class="panel"><div class="section-head"><div><h2>مبدأ صغير</h2></div></div><div class="quote" style="font-size:13px">اجعل العادة صغيرة بما يكفي لتبدأ، واضحة بما يكفي لتتذكرها، ومتصلة بسبب مهم بما يكفي لتستمر.</div><p class="small-muted" style="line-height:2;margin-top:16px">يمكنك تعديل العادة أو حذفها في أي وقت. يحتفظ التطبيق بسجل الأيام السابقة على هذا الجهاز.</p></div></div>
-</section>
-
-<section class="page" id="page-goals">
-  <div class="section-head"><div><h2>الأهداف</h2><p>قسّم الطموح الكبير إلى تقدم يمكن رؤيته.</p></div><button class="btn" id="addGoal">＋ هدف جديد</button></div>
-  <div class="toolbar"><select id="goalFilter"><option value="active">الأهداف النشطة</option><option value="all">كل الأهداف</option><option value="done">المكتملة</option></select></div>
-  <div class="two-col" id="goalList"></div>
-</section>
-
-<section class="page" id="page-calendar">
-  <div class="section-head"><div><h2>التقويم</h2><p>نظرة شهرية على مواعيد مهامك.</p></div><button class="btn" id="calendarAdd">＋ مهمة</button></div>
-  <div class="panel"><div class="calendar-head"><button class="icon-btn" id="prevMonth">→</button><strong id="monthLabel"></strong><button class="icon-btn" id="nextMonth">←</button></div><div class="calendar-grid" id="calendarGrid"></div></div>
-  <div class="panel section-space"><div class="section-head"><div><h2 id="selectedDateTitle">مهام اليوم المحدد</h2><p>اختر يومًا في التقويم لعرض مهامه.</p></div></div><div class="task-list" id="calendarTasks"></div></div>
-</section>
-
-<section class="page" id="page-focus">
-  <div class="section-head"><div><h2>جلسة تركيز</h2><p>وقت محدد لعمل واحد، بعيدًا عن التشتت.</p></div></div>
-  <div class="focus-wrap"><div class="panel focus-panel"><div class="focus-mode" id="focusModes"><button class="active" data-min="25" data-label="جلسة تركيز">تركيز 25 د</button><button data-min="5" data-label="استراحة قصيرة">استراحة 5 د</button><button data-min="15" data-label="استراحة طويلة">استراحة 15 د</button></div><div class="timer-ring"><div><div class="timer" id="timer">25:00</div><div class="timer-label" id="timerLabel">جاهز لجلسة تركيز</div></div></div><div class="focus-actions"><button class="btn" id="timerStart">ابدأ الجلسة</button><button class="btn secondary" id="timerReset">إعادة ضبط</button></div><p class="focus-note" id="timerNote">ابدأ عندما تكون مستعدًا. تُسجّل دقائق التركيز عند اكتمال الجلسة.</p></div><div class="panel"><div class="section-head"><div><h2>سجل التركيز</h2><p>جلساتك المسجلة اليوم</p></div></div><div class="stats" style="grid-template-columns:1fr 1fr"><div class="stat"><div class="stat-top">جلسات مكتملة</div><strong id="focusSessions">0</strong></div><div class="stat"><div class="stat-top">دقائق اليوم</div><strong id="focusToday">0</strong></div></div><div class="section-head section-space"><div><h2>نصيحة</h2></div></div><p class="focus-note">قبل بدء المؤقت، حدّد مهمة واحدة فقط. أبعد الهاتف عن يدك، واكتب أي فكرة مشتتة لتعود إليها بعد انتهاء الجلسة.</p></div></div>
-</section>
-
-<section class="page" id="page-insights">
-  <div class="section-head"><div><h2>إحصاءاتي</h2><p>راجع ما أنجزته، ثم عدّل خطتك بوعي.</p></div></div>
-  <div class="stats"><div class="stat"><div class="stat-top">إجمالي المهام المكتملة</div><strong id="allDone">0</strong></div><div class="stat"><div class="stat-top">معدل الإنجاز</div><strong id="allRate">0%</strong></div><div class="stat"><div class="stat-top">إجمالي دقائق التركيز</div><strong id="allFocus">0</strong></div><div class="stat"><div class="stat-top">أهداف مكتملة</div><strong id="allGoals">0</strong></div></div>
-  <div class="panel"><div class="section-head"><div><h2>إنجاز المهام — آخر 7 أيام</h2><p>يساعدك السجل على ملاحظة نمط عملك.</p></div></div><div class="chart" id="insightsChart"></div></div>
-  <div class="panel section-space"><div class="section-head"><div><h2>ملخص الأداء</h2></div></div><div class="setting-row"><div><strong>أكثر يوم إنجازًا</strong><p id="bestDay">لا توجد بيانات كافية بعد.</p></div></div><div class="setting-row"><div><strong>المهام غير المكتملة</strong><p id="pendingSummary">0 مهمة</p></div></div><div class="setting-row"><div><strong>نصيحة للتطوير</strong><p id="insightTip">ابدأ بإضافة مهمة صغيرة لتكوين سجلّك.</p></div></div></div>
-</section>
-
-<section class="page" id="page-settings">
-  <div class="section-head"><div><h2>الإعدادات والبيانات</h2><p>تحكّم في تجربتك واحتفظ بنسخة من بياناتك.</p></div></div>
-  <div class="two-col"><div class="panel"><div class="section-head"><div><h2>التفضيلات</h2></div></div>
-    <div class="setting-row"><div><strong>اسم المستخدم</strong><p>يظهر في التحية الشخصية.</p></div><input id="userName" class="field" style="width:130px" value="عمران"></div>
-    <div class="setting-row"><div><strong>صوت عند إتمام المهمة</strong><p>نغمة قصيرة عند تسجيل الإنجاز.</p></div><input type="checkbox" class="switch" id="soundSetting" checked></div>
-    <div class="setting-row"><div><strong>تذكيرات داخل التطبيق</strong><p>تظهر أثناء فتح التطبيق فقط.</p></div><input type="checkbox" class="switch" id="reminderSetting"></div>
-    <div class="setting-row"><div><strong>إشعارات المتصفح</strong><p>تحتاج إلى إذن المتصفح، وقد لا تعمل عند إغلاق الصفحة.</p></div><button class="btn secondary" id="enableNotifications">تفعيل الإشعارات</button></div>
-    <button class="btn" id="saveSettings" style="margin-top:15px">حفظ التفضيلات</button>
-  </div><div class="panel"><div class="section-head"><div><h2>إدارة بياناتك</h2></div></div>
-    <div class="setting-row"><div><strong>تصدير نسخة احتياطية</strong><p>يحفظ المهام والعادات والأهداف وسجل التركيز في ملف JSON.</p></div><button class="btn secondary" id="exportData">تصدير</button></div>
-    <div class="setting-row"><div><strong>استيراد نسخة احتياطية</strong><p>يستبدل البيانات الحالية ببيانات الملف المختار.</p></div><button class="btn secondary" id="importData">استيراد</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
-    <div class="setting-row"><div><strong>مسح بيانات التطبيق</strong><p>احذف بيانات إنجاز المحفوظة على هذا الجهاز.</p></div><button class="btn danger" id="clearData">مسح البيانات</button></div>
-    <p class="small-muted" style="line-height:2;margin-top:14px">تُحفظ البيانات محليًا في المتصفح. لا تُزامَن تلقائيًا بين الأجهزة، وقد يؤدي حذف بيانات المتصفح إلى فقدها؛ صدّر نسخة احتياطية دوريًا.</p>
-  </div></div>
-</section>
+  <div class="footer">إنجاز · بياناتك محفوظة محليًا على هذا الجهاز</div>
 </main>
 </div>
-<nav class="mobile-nav" id="mobileNav"><button class="active" data-page="home"><span>⌂</span>الرئيسية</button><button data-page="tasks"><span>☷</span>المهام</button><button data-page="habits"><span>◉</span>العادات</button><button data-page="focus"><span>◷</span>التركيز</button><button data-page="settings"><span>⚙</span>الإعدادات</button></nav>
-<div class="overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h2 id="modalTitle">إضافة</h2><button class="close" id="modalClose" aria-label="إغلاق">×</button></div><form id="entityForm"><div class="form-grid" id="formFields"></div><div class="modal-actions"><button class="btn" type="submit" id="formSubmit">حفظ</button><button class="btn secondary" type="button" id="formCancel">إلغاء</button></div></form></div></div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+<div class="modal">
+  <h3 id="modalTitle">إضافة مهمة جديدة</h3>
+  <form id="taskForm">
+    <input type="hidden" id="editId">
+    <div class="field"><label for="taskTitle">عنوان المهمة</label><input id="taskTitle" required maxlength="180" placeholder="ما الذي تريد إنجازه؟"></div>
+    <div class="form-grid">
+      <div class="field"><label for="taskDate">التاريخ</label><input type="date" id="taskDate" required></div>
+      <div class="field"><label for="taskTime">الوقت</label><input type="time" id="taskTime"></div>
+      <div class="field"><label for="taskCategory">المجال</label><select id="taskCategory"><option>دراسة</option><option>قرآن وعبادة</option><option>رياضة</option><option>عمل ومشاريع</option><option>شخصي</option><option>قراءة</option><option>أخرى</option></select></div>
+      <div class="field"><label for="taskPriority">الأولوية</label><select id="taskPriority"><option value="high">عالية</option><option value="medium" selected>متوسطة</option><option value="low">منخفضة</option></select></div>
+    </div>
+    <div class="field"><label for="taskDuration">المدة المتوقعة بالدقائق</label><input type="number" id="taskDuration" min="5" max="1440" step="5" placeholder="مثال: 30"></div>
+    <div class="modal-actions"><button class="primary-btn" type="submit">حفظ المهمة</button><button class="secondary-btn" type="button" id="cancelModal">إلغاء</button></div>
+  </form>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
 <script>
-(()=>{'use strict';
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const KEY='injaz_pro_v1', OLD_KEYS=['injaz_tasks_v3','injaz_settings_v3'];
-const today=()=>localDate(new Date());
-function localDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+"use strict";
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const STORAGE_KEY="injaz_luxe_tasks_v1";
+const SETTINGS_KEY="injaz_luxe_settings_v1";
+const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
+const plusDays=(n)=>{const d=new Date();d.setDate(d.getDate()+n);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
 const uid=()=>`${Date.now().toString(36)}${Math.random().toString(36).slice(2,8)}`;
-const safeArray=v=>Array.isArray(v)?v.filter(x=>x&&typeof x==='object'):[];
-function initial(){return {tasks:[],habits:[],goals:[],focusSessions:[],settings:{name:'عمران',sound:true,reminders:false},createdAt:new Date().toISOString()}}
-function load(){
- try{const raw=localStorage.getItem(KEY);if(raw){const x=JSON.parse(raw);return {...initial(),...x,tasks:safeArray(x.tasks),habits:safeArray(x.habits),goals:safeArray(x.goals),focusSessions:safeArray(x.focusSessions),settings:{...initial().settings,...(x.settings||{})}}}}
- catch(e){console.warn('تعذر قراءة بيانات إنجاز',e)}
- // محاولة استعادة مهام النسخة الأقدم دون العبث بالمفتاح القديم
- try{const old=JSON.parse(localStorage.getItem(OLD_KEYS[0])||'null');if(Array.isArray(old))return {...initial(),tasks:old.map(t=>({id:String(t.id||uid()),title:String(t.title||t.text||'مهمة'),date:t.date||today(),time:t.time||'',duration:Number(t.duration)||30,category:t.category||'شخصي',priority:t.priority||'medium',done:!!(t.done||t.completed),createdAt:t.createdAt||new Date().toISOString(),completedAt:t.completedAt||null,notes:t.notes||''}))}}catch(e){}
- return initial()
+const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let tasks=loadTasks(), currentView="all", currentFilter="all", previewTasks=[];
+let settings=loadSettings();
+
+function loadTasks(){
+ try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(x)?x.filter(t=>t&&typeof t.title==="string"&&t.id):[]}catch{return []}
 }
-let state=load(), currentPage='home', monthCursor=new Date(), selectedDate=today(), editing=null, formType=null, timerSeconds=1500,timerTotal=1500,timerInterval=null,timerRunning=false,timerMode='جلسة تركيز',toastTimer=null;
-const dayNames=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'], shortDays=['ح','ن','ث','ر','خ','ج','س'];
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));return true}catch(e){showToast('تعذر الحفظ؛ قد تكون مساحة التخزين ممتلئة.');return false}}
-function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function showToast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2600)}
-function fmtDate(s){if(!s)return 'بلا موعد';const d=new Date(s+'T12:00:00');return d.toLocaleDateString('ar-SA',{day:'numeric',month:'short'})}
-function fmtLong(d=new Date()){return d.toLocaleDateString('ar-SA',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}
-function taskPriority(t){return ({high:0,medium:1,low:2})[t.priority]??1}
-function isToday(t){return (t.date||today())===today()}
-function completedToday(t){return !!t.done&&((t.completedAt||'').slice(0,10)===today()||(!t.completedAt&&isToday(t)))}
-function tasksToday(){return state.tasks.filter(t=>isToday(t))}
-function habitsDoneToday(h){return !!h.logs?.includes(today())}
-function focusToday(){return state.focusSessions.filter(s=>s.date===today()).reduce((n,s)=>n+(Number(s.minutes)||0),0)}
-function renderTask(t,compact=false){const overdue=!t.done&&t.date&&t.date<today();return `<div class="task-row" data-task="${escapeHTML(t.id)}"><input class="task-check" type="checkbox" data-action="toggle" ${t.done?'checked':''} aria-label="إتمام ${escapeHTML(t.title)}"><div class="task-main"><div class="task-title ${t.done?'done':''}">${escapeHTML(t.title)}</div><div class="task-meta">${t.time?`<span>◷ ${escapeHTML(t.time)}</span>`:''}<span>${t.date?fmtDate(t.date):'بلا موعد'}</span><span class="tag ${t.priority==='high'?'red':t.priority==='medium'?'gold':''}">${({high:'أولوية عالية',medium:'متوسطة',low:'منخفضة'})[t.priority]||'متوسطة'}</span>${t.category?`<span class="tag">${escapeHTML(t.category)}</span>`:''}${overdue?'<span class="tag red">متأخرة</span>':''}</div></div><div class="row-actions"><button class="mini-btn" data-action="edit" title="تعديل">✎</button><button class="mini-btn" data-action="delete" title="حذف">×</button></div></div>`}
-function empty(msg,icon='✦'){return `<div class="empty"><span>${icon}</span>${msg}</div>`}
-function renderHabit(h,mini=false){const logs=Array.isArray(h.logs)?h.logs:[];const days=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));const key=localDate(d);return `<button class="day-dot ${logs.includes(key)?'on':''}" data-habit-day="${escapeHTML(h.id)}" data-date="${key}" title="${fmtDate(key)}">${shortDays[d.getDay()]}</button>`}).join('');return `<div class="habit" data-habit="${escapeHTML(h.id)}"><div class="habit-head"><div class="habit-emoji">${escapeHTML(h.emoji||'✦')}</div><div class="habit-name">${escapeHTML(h.name)}<small>${logs.length} يومًا مسجلًا</small></div><button class="mini-btn" data-habit-action="edit" title="تعديل">✎</button><button class="mini-btn" data-habit-action="delete" title="حذف">×</button></div><div class="habit-days">${days}</div><div class="habit-foot"><span>آخر 7 أيام</span><button class="text-btn" data-habit-day="${escapeHTML(h.id)}" data-date="${today()}">${habitsDoneToday(h)?'✓ تم اليوم':'＋ سجّل اليوم'}</button></div></div>`}
-function renderGoal(g){const pct=Math.max(0,Math.min(100,Math.round((Number(g.current)||0)/(Math.max(1,Number(g.target)||1))*100)));return `<div class="goal-card" data-goal="${escapeHTML(g.id)}"><div class="goal-top"><div class="goal-emoji">${escapeHTML(g.emoji||'◎')}</div><div class="goal-info"><strong>${escapeHTML(g.title)}</strong><p>${escapeHTML(g.description||'هدفك يبدأ بخطوة.')}</p><div class="goal-foot"><span>${Number(g.current)||0} من ${Number(g.target)||1} ${escapeHTML(g.unit||'خطوة')}</span><span>${pct}%</span></div></div><div class="row-actions"><button class="mini-btn" data-goal-action="edit" title="تعديل">✎</button><button class="mini-btn" data-goal-action="delete" title="حذف">×</button></div></div><div class="progress-track"><span style="width:${pct}%"></span></div><div class="goal-foot"><span>${g.deadline?'الموعد: '+fmtDate(g.deadline):'بلا موعد محدد'}</span><button class="text-btn" data-goal-action="step">＋ تقدّم</button></div></div>`}
-function renderChart(elId,values){const max=Math.max(1,...values.map(x=>x.value));$(elId).innerHTML=values.map(x=>`<div class="bar-col"><span class="bar-value">${x.value}</span><div class="bar" style="height:${Math.max(3,x.value/max*78)}%"></div><span class="bar-label">${x.label}</span></div>`).join('')}
-function last7(){return Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const key=localDate(d);return {key,label:d.toLocaleDateString('ar-SA',{weekday:'short'}),value:state.tasks.filter(t=>t.done&&(t.completedAt||t.date||'').slice(0,10)===key).length}})}
-function renderHome(){
- const all=tasksToday(),done=all.filter(t=>t.done).length,pct=all.length?Math.round(done/all.length*100):0;
- $('#statTasks').textContent=`${done}/${all.length}`;$('#statHabits').textContent=`${state.habits.filter(h=>habitsDoneToday(h)).length}/${state.habits.length}`;$('#statFocus').textContent=focusToday();$('#statStreak').textContent=streak();
- $('#completionPct').textContent=pct+'%';$('#heroProgress').style.setProperty('--progress',pct+'%');
- $('#greeting').textContent=`أهلًا ${state.settings.name||'بك'}، يومك يبدأ بخطوة.`;$('#heroSub').textContent=all.length?`أنجزت ${done} من ${all.length} مهام اليوم. أكمل خطوة أخرى.`:'ابدأ بمهمة واضحة، واجعل بقية اليوم أسهل.';
- const upcoming=state.tasks.filter(t=>!t.done&&(isToday(t)||!t.date||t.date>=today())).sort((a,b)=>taskPriority(a)-taskPriority(b)||(a.time||'').localeCompare(b.time||'')).slice(0,5);
- $('#homeTasks').innerHTML=upcoming.length?upcoming.map(t=>renderTask(t,true)).join(''):empty('لا توجد مهام مفتوحة. أضف مهمة وابدأ يومك.','✓');
- $('#homeHabits').innerHTML=state.habits.length?state.habits.slice(0,5).map(h=>renderHabit(h,true)).join(''):empty('أضف عادة صغيرة لتتابع ثباتك.','◉');
- renderChart('#homeChart',last7());
+function loadSettings(){try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{"name":"عمران"}')}catch{return {name:"عمران"}}}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));return true}catch{notify("تعذّر الحفظ؛ قد تكون مساحة التخزين ممتلئة.");return false}}
+function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings))}catch{}}
+function notify(msg){const t=$("#toast");t.textContent=msg;t.style.display="block";clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.style.display="none",3000)}
+function formatDate(date){if(!date)return "بلا تاريخ";if(date===todayISO())return "اليوم";if(date===plusDays(1))return "غدًا";return new Date(date+"T12:00:00").toLocaleDateString("ar-SA",{day:"numeric",month:"short"})}
+function priorityLabel(p){return p==="high"?"عالية":p==="low"?"منخفضة":"متوسطة"}
+function taskSort(a,b){return (a.done-b.done)||(a.date||"9999").localeCompare(b.date||"9999")||(a.time||"99:99").localeCompare(b.time||"99:99")||({high:0,medium:1,low:2}[a.priority]??1)-({high:0,medium:1,low:2}[b.priority]??1)}
+function dayTasks(){return tasks.filter(t=>t.date===todayISO())}
+function visibleTasks(){
+ let list=[...tasks];
+ if(currentView==="today")list=list.filter(t=>t.date===todayISO());
+ if(currentView==="upcoming")list=list.filter(t=>t.date>todayISO()&&!t.done);
+ if(currentView==="done")list=list.filter(t=>t.done);
+ if(currentFilter==="pending")list=list.filter(t=>!t.done);
+ if(currentFilter==="high")list=list.filter(t=>t.priority==="high"&&!t.done);
+ if(currentFilter==="done")list=list.filter(t=>t.done);
+ return list.sort(taskSort);
 }
-function renderTasks(){const q=$('#taskSearch').value.trim().toLowerCase(),filter=$('#taskFilter').value,sort=$('#taskSort').value;let arr=state.tasks.filter(t=>t.title.toLowerCase().includes(q)||(t.category||'').toLowerCase().includes(q));arr=arr.filter(t=>filter==='open'?!t.done:filter==='done'?t.done:filter==='today'?isToday(t):filter==='overdue'?!t.done&&t.date&&t.date<today():true);arr.sort((a,b)=>sort==='time'?(a.date||'9999').localeCompare(b.date||'9999')||(a.time||'').localeCompare(b.time||''):sort==='created'?(b.createdAt||'').localeCompare(a.createdAt||''):Number(a.done)-Number(b.done)||taskPriority(a)-taskPriority(b)||(a.date||'9999').localeCompare(b.date||'9999'));$('#allTasks').innerHTML=arr.length?arr.map(t=>renderTask(t)).join(''):empty('لا توجد مهام تطابق هذا العرض.','☷')}
-function renderHabits(){ $('#habitCount').textContent=state.habits.length;$('#habitRate').textContent=(state.habits.length?Math.round(state.habits.filter(h=>habitsDoneToday(h)).length/state.habits.length*100):0)+'%';$('#allHabits').innerHTML=state.habits.length?state.habits.map(h=>renderHabit(h)).join(''):empty('لم تضف عادات بعد. ابدأ بعادة واحدة سهلة.','◉');}
-function renderGoals(){const f=$('#goalFilter').value;let arr=state.goals.filter(g=>f==='active'?(Number(g.current)||0)<(Number(g.target)||1):f==='done'?(Number(g.current)||0)>=(Number(g.target)||1):true);$('#goalList').innerHTML=arr.length?arr.map(renderGoal).join(''):empty('لا توجد أهداف في هذا القسم.','◎')}
-function renderCalendar(){const y=monthCursor.getFullYear(),m=monthCursor.getMonth(),first=new Date(y,m,1),last=new Date(y,m+1,0);$('#monthLabel').textContent=first.toLocaleDateString('ar-SA',{month:'long',year:'numeric'});const offset=first.getDay(),prevLast=new Date(y,m,0).getDate();let html=dayNames.map(n=>`<div class="cal-day-name">${n.slice(0,1)}</div>`).join('');for(let i=0;i<42;i++){let num,date,muted=false;if(i<offset){num=prevLast-offset+i+1;date=localDate(new Date(y,m-1,num));muted=true}else if(i>=offset+last.getDate()){num=i-offset-last.getDate()+1;date=localDate(new Date(y,m+1,num));muted=true}else{num=i-offset+1;date=localDate(new Date(y,m,num))}const count=state.tasks.filter(t=>t.date===date).length;html+=`<button class="cal-day ${muted?'muted':''} ${date===today()?'today':''} ${date===selectedDate?'selected':''}" data-cal-date="${date}">${num}${count?`<div class="cal-dots">${Array.from({length:Math.min(count,4)},()=>'<i></i>').join('')}</div>`:''}</button>`}$('#calendarGrid').innerHTML=html;$('#selectedDateTitle').textContent='مهام '+fmtDate(selectedDate);const list=state.tasks.filter(t=>t.date===selectedDate);$('#calendarTasks').innerHTML=list.length?list.map(t=>renderTask(t)).join(''):empty('لا توجد مهام مسجلة لهذا اليوم.','▦')}
-function renderInsights(){const done=state.tasks.filter(t=>t.done).length;$('#allDone').textContent=done;$('#allRate').textContent=(state.tasks.length?Math.round(done/state.tasks.length*100):0)+'%';$('#allFocus').textContent=state.focusSessions.reduce((n,s)=>n+(Number(s.minutes)||0),0);$('#allGoals').textContent=state.goals.filter(g=>(Number(g.current)||0)>=(Number(g.target)||1)).length;const vals=last7();renderChart('#insightsChart',vals);const best=[...vals].sort((a,b)=>b.value-a.value)[0];$('#bestDay').textContent=best&&best.value?`${best.label} — ${best.value} مهمة`:'لا توجد بيانات كافية بعد.';const pending=state.tasks.filter(t=>!t.done).length;$('#pendingSummary').textContent=`${pending} مهمة غير مكتملة`;$('#insightTip').textContent=pending>5?'اختر أهم ثلاث مهام فقط وابدأ بالأكثر أثرًا.':state.tasks.length?'حافظ على إيقاعك، وراجع أولويات الغد قبل نهاية اليوم.':'ابدأ بإضافة مهمة صغيرة لتكوين سجلّك.'}
-function streak(){let n=0,d=new Date();for(let i=0;i<365;i++){const key=localDate(d);const any=state.tasks.some(t=>t.done&&(t.completedAt||t.date||'').slice(0,10)===key)||state.habits.some(h=>h.logs?.includes(key));if(any)n++;else if(i>0)break;d.setDate(d.getDate()-1)}return n}
-function renderAll(){renderHome();renderTasks();renderHabits();renderGoals();renderCalendar();renderInsights();$('#dateChip').textContent=fmtLong();$('#todayLong').textContent=fmtLong();$('#userName').value=state.settings.name||'';$('#soundSetting').checked=state.settings.sound!==false;$('#reminderSetting').checked=!!state.settings.reminders;$('#focusSessions').textContent=state.focusSessions.filter(s=>s.date===today()).length;$('#focusToday').textContent=focusToday()}
-function go(page){currentPage=page;$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const titles={home:'نظرة عامة',tasks:'المهام',habits:'العادات',goals:'الأهداف',calendar:'التقويم',focus:'جلسة تركيز',insights:'إحصاءاتي',settings:'الإعدادات'};$('#pageTitle').textContent=titles[page]||'إنجاز';window.scrollTo({top:0,behavior:'smooth'});if(page==='calendar')renderCalendar()}
-function field(name,label,type='text',value='',extra=''){return `<div class="form-field ${extra}"><label for="f_${name}">${label}</label><input id="f_${name}" name="${name}" type="${type}" value="${escapeHTML(value)}"></div>`}
-function selectField(name,label,options,value,extra=''){return `<div class="form-field ${extra}"><label for="f_${name}">${label}</label><select id="f_${name}" name="${name}">${options.map(o=>`<option value="${o[0]}" ${o[0]===value?'selected':''}>${o[1]}</option>`).join('')}</select></div>`}
-function textareaField(name,label,value='',extra=''){return `<div class="form-field ${extra}"><label for="f_${name}">${label}</label><textarea id="f_${name}" name="${name}">${escapeHTML(value)}</textarea></div>`}
-function openModal(type,item=null){formType=type;editing=item?.id||null;const f=$('#formFields');let title='',html='';
- if(type==='task'){title=item?'تعديل المهمة':'مهمة جديدة';html=field('title','عنوان المهمة','text',item?.title||'','full')+field('date','التاريخ','date',item?.date||today())+field('time','الوقت','time',item?.time||'')+field('duration','المدة بالدقائق','number',item?.duration??30)+selectField('priority','الأولوية',[['low','منخفضة'],['medium','متوسطة'],['high','عالية']],item?.priority||'medium')+selectField('category','التصنيف',[['شخصي','شخصي'],['دراسة','دراسة'],['عبادة','عبادة'],['صحة','صحة'],['عمل','عمل'],['أخرى','أخرى']],item?.category||'شخصي')+textareaField('notes','ملاحظات (اختياري)',item?.notes||'','full')}
- else if(type==='habit'){title=item?'تعديل العادة':'عادة جديدة';html=field('name','اسم العادة','text',item?.name||'','full')+field('emoji','رمز تعبيري','text',item?.emoji||'✦')+field('target','الهدف الأسبوعي','number',item?.target??7)}
- else if(type==='goal'){title=item?'تعديل الهدف':'هدف جديد';html=field('title','اسم الهدف','text',item?.title||'','full')+textareaField('description','وصف مختصر',item?.description||'','full')+field('emoji','رمز تعبيري','text',item?.emoji||'◎')+field('target','القيمة المستهدفة','number',item?.target??10)+field('current','التقدم الحالي','number',item?.current??0)+field('unit','وحدة القياس','text',item?.unit||'خطوة')+field('deadline','الموعد النهائي','date',item?.deadline||'')}
- $('#modalTitle').textContent=title;f.innerHTML=html;$('#formSubmit').textContent=item?'حفظ التعديلات':'حفظ';$('#modalOverlay').classList.add('open');setTimeout(()=>f.querySelector('input')?.focus(),50)}
-function closeModal(){$('#modalOverlay').classList.remove('open');editing=null;formType=null}
-function formData(){return Object.fromEntries(new FormData($('#entityForm')).entries())}
-function submitForm(e){e.preventDefault();const d=formData();if(formType==='task'){if(!d.title.trim()){showToast('اكتب عنوان المهمة أولًا.');return}const old=state.tasks.find(t=>t.id===editing);const task={id:editing||uid(),title:d.title.trim(),date:d.date||'',time:d.time||'',duration:Math.max(0,Math.min(1440,Number(d.duration)||30)),priority:['low','medium','high'].includes(d.priority)?d.priority:'medium',category:d.category||'شخصي',notes:d.notes||'',done:old?.done||false,completedAt:old?.completedAt||null,createdAt:old?.createdAt||new Date().toISOString()};if(old)state.tasks=state.tasks.map(t=>t.id===editing?task:t);else state.tasks.push(task);showToast(old?'تم تحديث المهمة.':'أُضيفت المهمة بنجاح.')}
- else if(formType==='habit'){if(!d.name.trim()){showToast('اكتب اسم العادة.');return}const old=state.habits.find(h=>h.id===editing);const h={id:editing||uid(),name:d.name.trim(),emoji:(d.emoji||'✦').slice(0,4),target:Math.max(1,Math.min(7,Number(d.target)||7)),logs:Array.isArray(old?.logs)?old.logs:[],createdAt:old?.createdAt||new Date().toISOString()};if(old)state.habits=state.habits.map(x=>x.id===editing?h:x);else state.habits.push(h);showToast(old?'تم تحديث العادة.':'أُضيفت العادة.')}
- else if(formType==='goal'){if(!d.title.trim()){showToast('اكتب اسم الهدف.');return}const old=state.goals.find(g=>g.id===editing);const g={id:editing||uid(),title:d.title.trim(),description:d.description||'',emoji:(d.emoji||'◎').slice(0,4),target:Math.max(1,Number(d.target)||1),current:Math.max(0,Number(d.current)||0),unit:d.unit||'خطوة',deadline:d.deadline||'',createdAt:old?.createdAt||new Date().toISOString()};if(old)state.goals=state.goals.map(x=>x.id===editing?g:x);else state.goals.push(g);showToast(old?'تم تحديث الهدف.':'أُضيف الهدف.')}
- save();closeModal();renderAll()}
-function sound(){if(!state.settings.sound)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=740;g.gain.value=.055;o.start();o.stop(c.currentTime+.12);o.onended=()=>c.close()}catch(e){}}
-function toggleTask(id,done){const t=state.tasks.find(x=>x.id===id);if(!t)return;t.done=done;t.completedAt=done?new Date().toISOString():null;save();if(done){sound();showToast('أحسنت! سُجّل إنجاز المهمة.')}renderAll()}
-function deleteItem(kind,id){const labels={task:'المهمة',habit:'العادة',goal:'الهدف'};if(!confirm(`هل تريد حذف ${labels[kind]}؟`))return;if(kind==='task')state.tasks=state.tasks.filter(x=>x.id!==id);if(kind==='habit')state.habits=state.habits.filter(x=>x.id!==id);if(kind==='goal')state.goals=state.goals.filter(x=>x.id!==id);save();renderAll();showToast('تم الحذف.')}
-function toggleHabitDay(id,date){const h=state.habits.find(x=>x.id===id);if(!h)return;h.logs=Array.isArray(h.logs)?h.logs:[];h.logs=h.logs.includes(date)?h.logs.filter(x=>x!==date):[...h.logs,date];save();renderAll();showToast(date===today()?(h.logs.includes(date)?'سُجّل إنجاز العادة اليوم.':'أُلغي تسجيل اليوم.'):'تم تحديث سجل العادة.')}
-function exportData(){const payload={app:'إنجاز',version:1,exportedAt:new Date().toISOString(),data:state};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`injaz-backup-${today()}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('جهّزنا النسخة الاحتياطية.')}
-function importData(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const raw=JSON.parse(reader.result),x=raw.data||raw;if(!x||!Array.isArray(x.tasks)||!Array.isArray(x.habits)||!Array.isArray(x.goals))throw new Error('structure');if(!confirm('سيؤدي الاستيراد إلى استبدال البيانات الحالية. هل أنشأت نسخة احتياطية وتريد المتابعة؟'))return;const cleanTask=t=>({id:String(t.id||uid()),title:String(t.title||'مهمة').slice(0,300),date:/^\d{4}-\d{2}-\d{2}$/.test(t.date||'')?t.date:'',time:/^\d{2}:\d{2}$/.test(t.time||'')?t.time:'',duration:Math.max(0,Math.min(1440,Number(t.duration)||30)),priority:['low','medium','high'].includes(t.priority)?t.priority:'medium',category:String(t.category||'شخصي').slice(0,50),notes:String(t.notes||'').slice(0,2000),done:!!t.done,completedAt:typeof t.completedAt==='string'?t.completedAt:null,createdAt:typeof t.createdAt==='string'?t.createdAt:new Date().toISOString()});state={...initial(),tasks:x.tasks.filter(t=>t&&typeof t==='object').map(cleanTask),habits:x.habits.filter(h=>h&&typeof h==='object').map(h=>({id:String(h.id||uid()),name:String(h.name||'عادة').slice(0,150),emoji:String(h.emoji||'✦').slice(0,4),target:Math.max(1,Math.min(7,Number(h.target)||7)),logs:Array.isArray(h.logs)?h.logs.filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)).slice(-500):[]})),goals:x.goals.filter(g=>g&&typeof g==='object').map(g=>({id:String(g.id||uid()),title:String(g.title||'هدف').slice(0,200),description:String(g.description||'').slice(0,1000),emoji:String(g.emoji||'◎').slice(0,4),target:Math.max(1,Number(g.target)||1),current:Math.max(0,Number(g.current)||0),unit:String(g.unit||'خطوة').slice(0,30),deadline:g.deadline||''})),focusSessions:safeArray(x.focusSessions).filter(s=>typeof s.date==='string').map(s=>({date:s.date,minutes:Math.max(0,Math.min(600,Number(s.minutes)||0)),label:String(s.label||'تركيز')})),settings:{...initial().settings,...(x.settings||{}),name:String(x.settings?.name||'عمران').slice(0,50)}};if(!save())throw new Error('save');renderAll();showToast('تم استيراد النسخة الاحتياطية بنجاح.')}catch(e){showToast('الملف غير صالح أو تعذّر حفظه.');console.error(e)}};reader.readAsText(file)}
-function setTimerMode(min,label){clearInterval(timerInterval);timerRunning=false;timerMode=label;timerTotal=min*60;timerSeconds=timerTotal;$('#timerStart').textContent='ابدأ الجلسة';$('#timerLabel').textContent='جاهز — '+label;$('#timerNote').textContent='اختر وقتًا هادئًا وابدأ عندما تكون مستعدًا.';updateTimer();$('#focusModes').querySelectorAll('button').forEach(b=>b.classList.toggle('active',Number(b.dataset.min)===min))}
-function updateTimer(){$('#timer').textContent=`${String(Math.floor(timerSeconds/60)).padStart(2,'0')}:${String(timerSeconds%60).padStart(2,'0')}`}
-function timerTick(){timerSeconds--;updateTimer();if(timerSeconds<=0){clearInterval(timerInterval);timerRunning=false;$('#timerStart').textContent='ابدأ الجلسة';if(timerMode==='جلسة تركيز'){state.focusSessions.push({date:today(),minutes:Math.round(timerTotal/60),label:timerMode,completedAt:new Date().toISOString()});save();renderAll();sound();showToast('انتهت جلسة التركيز؛ أحسنت!')}else{sound();showToast('انتهت الاستراحة.')}$('#timerLabel').textContent='اكتملت الجلسة';$('#timerNote').textContent='خذ لحظة لتقييم الجلسة قبل الانتقال لما بعدها.'}}
-function bindEvents(){
- $$('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
- ['#addTop','#heroAdd','#addTaskPage','#calendarAdd'].forEach(s=>$(s).addEventListener('click',()=>openModal('task')));
- $('#addHabit').addEventListener('click',()=>openModal('habit'));$('#addGoal').addEventListener('click',()=>openModal('goal'));
- $('#modalClose').addEventListener('click',closeModal);$('#formCancel').addEventListener('click',closeModal);$('#modalOverlay').addEventListener('click',e=>{if(e.target===$('#modalOverlay'))closeModal()});$('#entityForm').addEventListener('submit',submitForm);
- $('#taskSearch').addEventListener('input',renderTasks);$('#taskFilter').addEventListener('change',renderTasks);$('#taskSort').addEventListener('change',renderTasks);$('#goalFilter').addEventListener('change',renderGoals);
- document.addEventListener('click',e=>{
-  const row=e.target.closest('[data-task]');if(row){const id=row.dataset.task,act=e.target.dataset.action;if(act==='toggle')toggleTask(id,e.target.checked);else if(act==='edit'){const t=state.tasks.find(x=>x.id===id);if(t)openModal('task',t)}else if(act==='delete')deleteItem('task',id);return}
-  const hb=e.target.closest('[data-habit]');if(hb&&e.target.dataset.habitAction){const id=hb.dataset.habit,h=state.habits.find(x=>x.id===id);if(e.target.dataset.habitAction==='edit'&&h)openModal('habit',h);if(e.target.dataset.habitAction==='delete')deleteItem('habit',id);return}
-  if(e.target.dataset.habitDay){toggleHabitDay(e.target.dataset.habitDay,e.target.dataset.date);return}
-  const goal=e.target.closest('[data-goal]');if(goal&&e.target.dataset.goalAction){const id=goal.dataset.goal,g=state.goals.find(x=>x.id===id),act=e.target.dataset.goalAction;if(act==='edit'&&g)openModal('goal',g);if(act==='delete')deleteItem('goal',id);if(act==='step'&&g){g.current=Math.min(Number(g.target)||1,(Number(g.current)||0)+1);save();renderAll();showToast('تقدم جديد نحو هدفك!')}return}
-  if(e.target.dataset.calDate){selectedDate=e.target.dataset.calDate;renderCalendar()}
- });
- $('#prevMonth').addEventListener('click',()=>{monthCursor.setMonth(monthCursor.getMonth()-1);renderCalendar()});$('#nextMonth').addEventListener('click',()=>{monthCursor.setMonth(monthCursor.getMonth()+1);renderCalendar()});
- $('#exportQuick').addEventListener('click',exportData);$('#exportData').addEventListener('click',exportData);$('#importData').addEventListener('click',()=>$('#importFile').click());$('#importFile').addEventListener('change',e=>{importData(e.target.files[0]);e.target.value=''});
- $('#saveSettings').addEventListener('click',()=>{state.settings.name=$('#userName').value.trim().slice(0,50)||'عمران';state.settings.sound=$('#soundSetting').checked;state.settings.reminders=$('#reminderSetting').checked;save();renderAll();showToast('حُفظت التفضيلات.')});
- $('#enableNotifications').addEventListener('click',async()=>{if(!('Notification'in window)){showToast('هذا المتصفح لا يدعم إشعارات الويب.');return}try{const p=await Notification.requestPermission();showToast(p==='granted'?'تم السماح بالإشعارات؛ التذكيرات تحتاج بقاء التطبيق مفتوحًا.':'لم يتم منح إذن الإشعارات.')}catch(e){showToast('تعذر تفعيل الإشعارات.') }});
- $('#clearData').addEventListener('click',()=>{if(!confirm('تحذير: سيُحذف كل ما سجلته في إنجاز من هذا المتصفح. هل أنت متأكد؟'))return;if(!confirm('تأكيد أخير: هل صدّرت نسخة احتياطية وتريد حذف البيانات نهائيًا؟'))return;state=initial();save();renderAll();showToast('تم مسح بيانات إنجاز.')});
- $('#focusModes').addEventListener('click',e=>{const b=e.target.closest('[data-min]');if(b)setTimerMode(Number(b.dataset.min),b.dataset.label)});$('#timerStart').addEventListener('click',()=>{if(timerRunning){clearInterval(timerInterval);timerRunning=false;$('#timerStart').textContent='استئناف';$('#timerLabel').textContent='الجلسة متوقفة مؤقتًا'}else{timerRunning=true;$('#timerStart').textContent='إيقاف مؤقت';$('#timerLabel').textContent=timerMode+' جارية';timerInterval=setInterval(timerTick,1000)}});$('#timerReset').addEventListener('click',()=>{setTimerMode(Math.round(timerTotal/60),timerMode);showToast('أُعيد ضبط المؤقت.')});
- document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();go('tasks');$('#taskSearch').focus()}});
+function render(){
+ const today=dayTasks(),doneToday=today.filter(t=>t.done).length;
+ const pct=today.length?Math.round(doneToday/today.length*100):0;
+ $("#todayDate").textContent=new Date().toLocaleDateString("ar-SA",{weekday:"long",day:"numeric",month:"long"});
+ $("#profileName").textContent="مساحة "+(settings.name||"يومك");
+ $("#avatar").textContent=(settings.name||"ع").trim().charAt(0)||"ع";
+ $("#greeting").textContent=new Date().getHours()<12?"صباح الإنجاز":new Date().getHours()<17?"نهارك واضح": "مساء الإنجاز";
+ $("#welcomeTitle").textContent=`${settings.name||"صاحب الإنجاز"}، ابدأ بخطوة.`;
+ $("#statToday").textContent=today.length;
+ $("#statDone").textContent=doneToday;
+ $("#statPending").textContent=today.filter(t=>!t.done).length;
+ $("#statPercent").textContent=pct+"%";
+ $("#mainProgress").style.width=pct+"%";
+ $("#detailProgress").style.width=pct+"%";
+ $("#progressLabel").textContent=pct+"%";
+ $("#progressMessage").textContent=!today.length?"لم تضف مهامًا لهذا اليوم بعد. ضع أولوياتك وابدأ.":pct===100?"أحسنت! أتممت جميع مهام اليوم.":`أنجزت ${doneToday} من ${today.length} مهام اليوم. أكمل المهمة التالية بهدوء.`;
+ $("#navAll").textContent=tasks.filter(t=>!t.done).length;
+ $("#navToday").textContent=today.filter(t=>!t.done).length;
+ $("#taskCount").textContent=visibleTasks().length+" مهمة";
+ const viewNames={all:"مهامك",today:"مهام اليوم",upcoming:"المهام القادمة",done:"المهام المكتملة"};
+ $("#tasksHeading").textContent=viewNames[currentView]||"مهامك";
+ $$("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===currentView));
+ $$("#filters button").forEach(b=>b.classList.toggle("active",b.dataset.filter===currentFilter));
+ const list=visibleTasks();
+ $("#taskList").innerHTML=list.length?list.map(t=>`
+ <article class="task ${t.done?"done":""}">
+  <input class="task-check" type="checkbox" aria-label="إكمال المهمة" data-complete="${escapeHTML(t.id)}" ${t.done?"checked":""}>
+  <div><div class="task-title">${escapeHTML(t.title)}</div>
+   <div class="task-meta"><span class="tag">${escapeHTML(t.category||"أخرى")}</span><span class="tag ${escapeHTML(t.priority||"medium")}">${priorityLabel(t.priority)}</span><span>${formatDate(t.date)}${t.time?" · "+escapeHTML(t.time):""}</span>${t.duration?`<span>${t.duration} دقيقة</span>`:""}</div>
+  </div>
+  <div class="task-actions"><button class="mini-btn" title="تعديل" data-edit="${escapeHTML(t.id)}">✎</button><button class="mini-btn" title="حذف" data-delete="${escapeHTML(t.id)}">×</button></div>
+ </article>`).join(""):`<div class="empty">لا توجد مهام هنا الآن.<br>أضف مهمة جديدة أو استخدم المساعد لترتيب يومك.</div>`;
+ const categories={};tasks.filter(t=>!t.done).forEach(t=>categories[t.category||"أخرى"]=(categories[t.category||"أخرى"]||0)+1);
+ const entries=Object.entries(categories).sort((a,b)=>b[1]-a[1]);
+ $("#categoryStats").innerHTML=entries.length?entries.map(([name,count])=>`<div class="category-row"><span class="category-name"><span class="dot"></span>${escapeHTML(name)}</span><span class="category-count">${count} مهام</span></div>`).join(""):`<div class="empty">سيظهر توزيع المهام هنا.</div>`;
+ const upcoming=tasks.filter(t=>!t.done&&t.date>=todayISO()).sort(taskSort).slice(0,4);
+ $("#upcomingList").innerHTML=upcoming.length?upcoming.map(t=>`<div class="task" style="grid-template-columns:1fr"><div><div class="task-title">${escapeHTML(t.title)}</div><div class="task-meta"><span>${formatDate(t.date)}${t.time?" · "+escapeHTML(t.time):""}</span><span class="tag ${escapeHTML(t.priority)}">${priorityLabel(t.priority)}</span></div></div></div>`).join(""):`<div class="empty">لا توجد مواعيد قادمة.</div>`;
 }
-function init(){if(!state.tasks.length&&!state.habits.length&&!state.goals.length){/* empty state by design */}bindEvents();renderAll();go('home');setTimerMode(25,'جلسة تركيز');}
-init();
-})();
+function openModal(task=null){
+ $("#taskForm").reset();$("#editId").value=task?.id||"";
+ $("#modalTitle").textContent=task?"تعديل المهمة":"إضافة مهمة جديدة";
+ $("#taskTitle").value=task?.title||"";
+ $("#taskDate").value=task?.date||todayISO();
+ $("#taskTime").value=task?.time||"";
+ $("#taskCategory").value=task?.category||"دراسة";
+ $("#taskPriority").value=task?.priority||"medium";
+ $("#taskDuration").value=task?.duration||"";
+ $("#modalBackdrop").style.display="grid";setTimeout(()=>$("#taskTitle").focus(),40);
+}
+function closeModal(){$("#modalBackdrop").style.display="none"}
+$("#addTaskBtn").onclick=()=>openModal();
+$("#cancelModal").onclick=closeModal;
+$("#modalBackdrop").addEventListener("click",e=>{if(e.target===$("#modalBackdrop"))closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+$("#taskForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const title=$("#taskTitle").value.trim();if(!title)return;
+ const id=$("#editId").value;
+ const old=tasks.find(t=>t.id===id);
+ const task={id:id||uid(),title,date:$("#taskDate").value||todayISO(),time:$("#taskTime").value,category:$("#taskCategory").value,priority:$("#taskPriority").value,duration:Math.max(0,Number($("#taskDuration").value)||0),done:old?.done||false,createdAt:old?.createdAt||Date.now()};
+ if(id)tasks=tasks.map(t=>t.id===id?task:t);else tasks.push(task);
+ save();closeModal();render();notify(id?"تم تحديث المهمة":"أُضيفت المهمة بنجاح");
+});
+$("#taskList").addEventListener("click",e=>{
+ const complete=e.target.closest("[data-complete]");const edit=e.target.closest("[data-edit]");const del=e.target.closest("[data-delete]");
+ if(complete){const t=tasks.find(x=>x.id===complete.dataset.complete);if(t){t.done=complete.checked;t.completedAt=t.done?Date.now():null;save();render();notify(t.done?"أحسنت! أُنجزت المهمة":"أُعيد فتح المهمة")}return}
+ if(edit){const t=tasks.find(x=>x.id===edit.dataset.edit);if(t)openModal(t);return}
+ if(del){const t=tasks.find(x=>x.id===del.dataset.delete);if(t&&confirm(`هل تريد حذف «${t.title}»؟`)){tasks=tasks.filter(x=>x.id!==t.id);save();render();notify("حُذفت المهمة")}}
+});
+$("#nav").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(!b)return;currentView=b.dataset.view;currentFilter="all";render()});
+$("#filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;currentFilter=b.dataset.filter;render()});
+$$(".example").forEach(b=>b.onclick=()=>{$("#aiInput").value=b.dataset.example;$("#aiInput").focus()});
+$("#clearAiBtn").onclick=()=>{$("#aiInput").value="";$("#preview").hidden=true;previewTasks=[]};
+
+const categoryRules=[
+ {name:"قرآن وعبادة",words:["قرآن","حفظ","مراجعة السرد","تجويد","ورد","أذكار","صلاة","متون","حديث"]},
+ {name:"رياضة",words:["تمرين","تدريب","جيم","جري","سباحة","سهام","قوس","فتنس","إحماء"]},
+ {name:"دراسة",words:["مذاكرة","أذاكر","دراسة","واجب","اختبار","امتحان","رياضيات","إنجليزي","الإنجليزية","علوم","فيزياء","مدرسة","حل أسئلة","أحل"]},
+ {name:"عمل ومشاريع",words:["مشروع","موقع","تصميم","برمجة","تطبيق","كود","عميل","عمل","منصة"]},
+ {name:"قراءة",words:["قراءة","أقرأ","كتاب","مطالعة"]},
+ {name:"شخصي",words:["غرفة","ترتيب","نوم","استحمام","شراء","موعد"]}
+];
+function detectCategory(text){
+ const lower=text.toLowerCase();
+ for(const c of categoryRules)if(c.words.some(w=>lower.includes(w)))return c.name;
+ return "أخرى";
+}
+function detectPriority(text){
+ if(/عاجل|مهم جدًا|مهم جدا|ضروري|أولوية قصوى|الأولوية|أولويتي|قبل كل شيء|لازم اليوم/.test(text))return "high";
+ if(/ليس مهمًا|مو مستعجل|غير عاجل|بسيط|إذا بقي وقت/.test(text))return "low";
+ return "medium";
+}
+function detectDate(text){
+ if(/بعد غد|بعد بكرة/.test(text))return plusDays(2);
+ if(/غدًا|غدا|بكرة|بكره/.test(text))return plusDays(1);
+ if(/اليوم|الليلة|هذا الصباح|هذا المساء/.test(text))return todayISO();
+ const days={"الأحد":0,"الاحد":0,"الإثنين":1,"الاثنين":1,"الثلاثاء":2,"الأربعاء":3,"الاربعاء":3,"الخميس":4,"الجمعة":5,"السبت":6};
+ const match=text.match(/الأحد|الاحد|الإثنين|الاثنين|الثلاثاء|الأربعاء|الاربعاء|الخميس|الجمعة|السبت/);
+ if(match){const now=new Date(),target=days[match[0]],delta=(target-now.getDay()+7)%7||7;return plusDays(delta)}
+ return todayISO();
+}
+function detectTime(text){
+ let m=text.match(/(?:الساعة\s*)?(\d{1,2})(?::(\d{2}))?\s*(صباحًا|صباحا|مساءً|مساء|ص|م)\b/);
+ if(m){let h=Number(m[1]),min=Number(m[2]||0),suffix=m[3];if(h>23||min>59)return "";if(/مساء|م$/.test(suffix)&&h<12)h+=12;if(/صباح|ص$/.test(suffix)&&h===12)h=0;return `${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}`}
+ m=text.match(/الساعة\s*(\d{1,2})(?::(\d{2}))?/);
+ if(m){let h=Number(m[1]),min=Number(m[2]||0);if(h>=0&&h<=23&&min<=59){if(h>=1&&h<=7)h+=12;return `${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}`}}
+ return "";
+}
+function detectDuration(text){
+ let m=text.match(/(?:لمدة|مدتها|يستغرق|تستغرق|حوالي)\s*(ساعة ونصف|ساعة ونص|نصف ساعة|نص ساعة|ساعة|ساعتين|ثلاث ساعات|أربع ساعات|ربع ساعة|(\d+)\s*(?:دقيقة|دقائق|دقايق|د)|(\d+)\s*(?:ساعة|ساعات))/);
+ if(!m)return 0;
+ if(m[1]==="ساعة ونصف"||m[1]==="ساعة ونص")return 90;
+ if(m[1]==="نصف ساعة"||m[1]==="نص ساعة")return 30;
+ if(m[1]==="ساعة")return 60;
+ if(m[1]==="ساعتين")return 120;
+ if(m[1]==="ثلاث ساعات")return 180;
+ if(m[1]==="أربع ساعات")return 240;
+ if(m[1]==="ربع ساعة")return 15;
+ if(m[2])return Number(m[2]);
+ if(m[3])return Number(m[3])*60;
+ return 0;
+}
+function cleanTitle(text){
+ return text.replace(/(?:اليوم|غدًا|غدا|بكرة|بكره|بعد غد|بعد بكرة|هذا الصباح|هذا المساء)/g,"")
+ .replace(/(?:الساعة\s*)?\d{1,2}(?::\d{2})?\s*(?:صباحًا|صباحا|مساءً|مساء|ص|م)\b/g,"")
+ .replace(/الساعة\s*\d{1,2}(?::\d{2})?/g,"")
+ .replace(/(?:لمدة|مدتها|يستغرق|تستغرق|حوالي)\s*(?:ساعة ونصف|ساعة ونص|نصف ساعة|نص ساعة|ساعة|ساعتين|ثلاث ساعات|أربع ساعات|ربع ساعة|\d+\s*(?:دقيقة|دقائق|دقايق|د|ساعة|ساعات))/g,"")
+ .replace(/(?:وأريد|واريد|أريد|اريد|من فضلك|لو سمحت|الأولوية|أولويتي|مهم جدًا|مهم جدا|ضروري|عاجل)/g,"")
+ .replace(/\s+/g," ").replace(/^[\s،,.:؛\-]+|[\s،,.:؛\-]+$/g,"").trim();
+}
+function splitTasks(text){
+ // يفصل الجمل والفواصل، وكذلك أدوات الربط التي غالبًا تبدأ مهمة جديدة.
+ return text.split(/\n+|[.!؟؛]+|،\s*(?=(?:وبعد|ثم|بعدها|وأراجع|وأذاكر|وأحل|وأتمرن|أراجع|أذاكر|أحل|أتمرن|أقرأ|أكتب|أعمل|أبدأ|أنهي|أكمل|أرتب|أحفظ|أذهب|أصلي|أجهز|أجهّز|أراجع|أدرس))/)
+ .flatMap(part=>part.split(/\s+(?:ثم|وبعدها|بعدها)\s+/)).map(s=>s.trim()).filter(s=>s.length>=3);
+}
+function analyzeText(raw){
+ const parts=splitTasks(raw),out=[];
+ for(const part of parts){
+   const date=detectDate(part),time=detectTime(part),duration=detectDuration(part),priority=detectPriority(part),category=detectCategory(part);
+   let title=cleanTitle(part);
+   title=title.replace(/^(?:و)?(?:بعد ذلك|بعدها|ثم|كذلك|أيضًا|ايضا)\s*/,"").trim();
+   if(!title||/^(اليوم|غدا|غدًا|بكرة)$/.test(title))continue;
+   out.push({id:uid(),title:title.charAt(0).toLocaleUpperCase("ar")+title.slice(1),date,time,duration,priority,category,done:false,createdAt:Date.now()});
+ }
+ // إزالة التكرار النصي.
+ return out.filter((t,i,a)=>a.findIndex(x=>x.title===t.title&&x.date===t.date&&x.time===t.time)===i);
+}
+$("#analyzeBtn").onclick=()=>{
+ const raw=$("#aiInput").value.trim();
+ if(!raw){notify("اكتب المهام أولًا.");$("#aiInput").focus();return}
+ previewTasks=analyzeText(raw);
+ if(!previewTasks.length){notify("لم أستطع استخراج مهمة واضحة. جرّب كتابة كل مهمة في سطر.");return}
+ const box=$("#preview");box.hidden=false;
+ box.innerHTML=`<div class="panel-heading" style="margin-top:17px;margin-bottom:8px"><div><h3>راجع المهام المستخرجة</h3><p>يمكنك تحديد ما تريد إضافته</p></div><span class="pill">${previewTasks.length} مهام</span></div>
+ <div class="preview-list">${previewTasks.map((t,i)=>`<label class="preview-item"><input type="checkbox" data-preview="${i}" checked><span><strong>${escapeHTML(t.title)}</strong><span class="preview-meta"><span>${escapeHTML(t.category)}</span><span>${formatDate(t.date)}</span>${t.time?`<span>${escapeHTML(t.time)}</span>`:""}${t.duration?`<span>${t.duration} دقيقة</span>`:""}<span class="tag ${t.priority}">${priorityLabel(t.priority)}</span></span></span></label>`).join("")}</div>
+ <div class="ai-actions" style="margin-top:13px"><button class="primary-btn" id="commitPreview">＋ أضف المهام المحددة</button><button class="secondary-btn" id="selectAllPreview">تحديد الكل</button></div>`;
+ $("#commitPreview").onclick=()=>{
+   const selected=$$("[data-preview]:checked").map(el=>previewTasks[Number(el.dataset.preview)]).filter(Boolean);
+   if(!selected.length){notify("حدّد مهمة واحدة على الأقل.");return}
+   tasks.push(...selected);save();currentView="all";currentFilter="all";render();box.hidden=true;notify(`أُضيفت ${selected.length} مهام إلى قائمتك.`);
+ };
+ $("#selectAllPreview").onclick=()=>{$$("[data-preview]").forEach(el=>el.checked=true)};
+ box.scrollIntoView({behavior:"smooth",block:"nearest"});
+};
+$("#exportBtn").onclick=()=>{
+ const payload={app:"إنجاز",version:1,exportedAt:new Date().toISOString(),settings,tasks};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=`injaz-backup-${todayISO()}.json`;a.click();URL.revokeObjectURL(url);notify("تم تصدير نسخة احتياطية.");
+};
+$("#settingsBtn").onclick=()=>{
+ const name=prompt("ما الاسم الذي تريد ظهوره في التطبيق؟",settings.name||"عمران");
+ if(name===null)return;settings.name=name.trim().slice(0,40)||"صاحب الإنجاز";saveSettings();render();notify("تم تحديث الاسم.");
+};
+render();
 </script>
 </body>
 </html>
