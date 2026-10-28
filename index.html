@@ -1,106 +1,301 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
-                    <link rel="icon" type="image/jpeg" sizes="192x192" href="icon-192.jpeg">
-<link rel="icon" type="image/jpeg" sizes="512x512" href="icon-512.jpeg">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0d0f0e">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b09">
+<meta name="description" content="إنجاز — مساحة ذكية لإدارة مهامك ومواعيدك وأهدافك اليومية">
+<link rel="icon" type="image/jpeg" sizes="192x192" href="icon-192.jpeg">
+<link rel="icon" type="image/jpeg" sizes="512x512" href="icon-512.jpeg">
 <title>إنجاز | مساحة يومك</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
-:root{--bg:#0d0f0e;--panel:#151815;--panel2:#1c201b;--line:#2c312a;--gold:#c9a96e;--gold-light:#ead6ad;--text:#f2f0e8;--muted:#999e94;--green:#9fbd91;--red:#d98679;--blue:#8bb9d0}
+
+:root{
+  color-scheme:dark;
+  --bg:#0b0b09;
+  --bg2:#10100d;
+  --panel:#151510;
+  --panel2:#1c1b15;
+  --panel3:#222117;
+  --line:#302e22;
+  --gold:#d4ad68;
+  --gold2:#f0d9a7;
+  --gold-soft:#392f1c;
+  --text:#f5f1e7;
+  --muted:#a09b8b;
+  --green:#a6c69a;
+  --red:#e39a8e;
+  --blue:#92bdd8;
+  --shadow:0 18px 55px #0003;
+  --radius:20px;
+}
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f3f0e8;
+  --bg2:#ebe6da;
+  --panel:#fffdf8;
+  --panel2:#f5f0e5;
+  --panel3:#ece4d3;
+  --line:#ded4bf;
+  --gold:#9a702b;
+  --gold2:#73521f;
+  --gold-soft:#f0e4ca;
+  --text:#29271f;
+  --muted:#777263;
+  --green:#427a48;
+  --red:#a94f43;
+  --blue:#356d91;
+  --shadow:0 16px 45px #4d3d1710;
+}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 85% -15%,#30291c 0,transparent 38%),var(--bg);color:var(--text);font-family:Cairo,sans-serif;min-height:100vh}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;
+  background:
+    radial-gradient(ellipse at 90% -15%,#392d193b,transparent 38%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Cairo",sans-serif;
+  transition:background .25s,color .25s;
+}
 button,input,textarea,select{font:inherit}
-button{cursor:pointer;transition:.2s}
-button:hover{filter:brightness(1.12);transform:translateY(-1px)}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.app{max-width:1450px;margin:auto;padding:26px}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:16px}
-.brand{display:flex;align-items:center;gap:13px}
-.logo{height:50px;width:50px;border:1px solid #786443;background:linear-gradient(145deg,#302718,#141510);border-radius:16px;display:grid;place-items:center;color:var(--gold-light);font-weight:900;font-size:25px}
-.brand h1{margin:0;font-size:24px;font-weight:900;letter-spacing:-1px}
-.brand p{margin:0;color:var(--muted);font-size:12px}
-.header-actions{display:flex;gap:9px;align-items:center}
-.date-chip,.secondary-btn,.icon-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:13px;padding:10px 13px}
-.icon-btn{width:43px;height:43px;padding:0}
-.primary-btn{background:var(--gold);color:#17150f;border:0;border-radius:13px;padding:11px 18px;font-weight:800}
-.layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:22px}
-.sidebar,.panel{background:linear-gradient(145deg,#171a16,#121512);border:1px solid var(--line);border-radius:22px}
-.sidebar{padding:18px;height:fit-content;position:sticky;top:20px}
-.profile{display:flex;align-items:center;gap:12px;padding:8px 4px 20px;border-bottom:1px solid var(--line)}
-.avatar{width:43px;height:43px;border-radius:14px;background:#322c20;color:var(--gold-light);display:grid;place-items:center;font-weight:900}
-.profile strong{display:block;font-size:14px}.profile small{color:var(--muted);font-size:11px}
-.nav{display:grid;gap:6px;margin-top:18px}
-.nav button{display:flex;align-items:center;gap:12px;width:100%;padding:12px 13px;background:transparent;border:1px solid transparent;color:#b7bbb1;border-radius:12px;text-align:right}
-.nav button.active{background:#29251b;border-color:#4c412b;color:var(--gold-light)}
-.nav .num{margin-right:auto;font-size:12px;color:var(--muted)}
-.side-bottom{margin-top:26px;padding:15px;background:#20231d;border:1px solid var(--line);border-radius:15px}
-.side-bottom strong{font-size:13px}.side-bottom p{font-size:11px;color:var(--muted);line-height:1.9;margin:5px 0 0}
-main{min-width:0}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin:4px 0 22px}
-.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.3px}
-h2{font-size:27px;line-height:1.5;margin:3px 0;font-weight:900}
-.subtitle{font-size:13px;color:var(--muted);margin:0}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:22px}
-.stat{padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:18px;min-width:0}
-.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;gap:5px}
-.stat-icon{width:32px;height:32px;border-radius:11px;background:#29251c;display:grid;place-items:center;color:var(--gold)}
-.stat strong{display:block;font-size:27px;margin-top:9px;font-weight:900}
-.stat small{font-size:11px;color:var(--muted)}
-.content-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.85fr);gap:18px;align-items:start}
-.panel{padding:20px;margin-bottom:18px}
-.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-.panel-heading h3{font-size:16px;margin:0;font-weight:800}
-.panel-heading p{font-size:11px;color:var(--muted);margin:3px 0 0}
-.pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:5px 9px;color:var(--muted)}
-.ai-panel{border-color:#55472e;background:radial-gradient(ellipse at 100% 0,#332a1b 0,transparent 48%),#171915}
+button{cursor:pointer;transition:transform .18s,filter .18s,background .18s}
+button:hover{filter:brightness(1.08)}
+button:active{transform:scale(.98)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--gold);outline-offset:3px
+}
+button:disabled{opacity:.45;cursor:not-allowed}
+input,textarea,select{
+  width:100%;min-width:0;
+  color:var(--text);background:var(--bg2);
+  border:1px solid var(--line);border-radius:12px;padding:12px;
+}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.7}
+textarea{resize:vertical;min-height:120px;line-height:1.9}
+a{color:inherit}
+.app{max-width:1500px;margin:auto;padding:26px}
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;margin-bottom:28px
+}
+.brand{display:flex;align-items:center;gap:13px;min-width:0}
+.logo{
+  width:52px;height:52px;flex-shrink:0;
+  display:grid;place-items:center;
+  border:1px solid #8e7141;border-radius:17px;
+  background:linear-gradient(145deg,#382c18,#15130e);
+  color:var(--gold2);font-size:27px;font-weight:900;
+  box-shadow:0 5px 25px #0002
+}
+.brand h1{margin:0;font-size:25px;font-weight:900;letter-spacing:-1px}
+.brand p{margin:1px 0 0;color:var(--muted);font-size:11px}
+.header-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.date-chip,.secondary-btn,.icon-btn{
+  border:1px solid var(--line);background:var(--panel);
+  color:var(--text);border-radius:12px;padding:10px 13px
+}
+.date-chip{font-size:12px}
+.icon-btn{width:43px;height:43px;padding:0;font-size:18px}
+.primary-btn{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#17130b;border:1px solid #b18b4d;
+  border-radius:12px;padding:11px 17px;font-weight:900
+}
+.secondary-btn{font-size:12px}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:22px}
+.sidebar,.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius)
+}
+.sidebar{padding:17px;height:fit-content;position:sticky;top:16px}
+.profile{display:flex;align-items:center;gap:11px;padding:7px 3px 19px;border-bottom:1px solid var(--line)}
+.avatar{
+  width:44px;height:44px;flex-shrink:0;border-radius:14px;
+  display:grid;place-items:center;background:var(--gold-soft);
+  color:var(--gold2);font-weight:900;font-size:18px
+}
+.profile strong{display:block;font-size:13px}
+.profile small{color:var(--muted);font-size:10px}
+.nav{display:grid;gap:6px;margin-top:17px}
+.nav button{
+  display:flex;align-items:center;gap:11px;width:100%;
+  background:transparent;border:1px solid transparent;
+  color:var(--muted);border-radius:12px;padding:12px;
+  text-align:right;font-size:12px
+}
+.nav button.active{
+  background:var(--gold-soft);border-color:#80653a;
+  color:var(--gold2)
+}
+.nav .num{margin-right:auto;font-size:11px;color:var(--muted)}
+.side-bottom{
+  margin-top:23px;padding:14px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:14px
+}
+.side-bottom strong{font-size:12px}
+.side-bottom p{font-size:11px;color:var(--muted);line-height:1.9;margin:5px 0 0}
+main{min-width:0}
+.welcome{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:18px;margin:3px 0 23px
+}
+.eyebrow{color:var(--gold);font-size:11px;font-weight:800}
+h2{font-size:27px;line-height:1.5;margin:4px 0;font-weight:900}
+.subtitle{font-size:12px;color:var(--muted);margin:0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
+.stat{
+  padding:17px;min-width:0;background:var(--panel);
+  border:1px solid var(--line);border-radius:17px
+}
+.stat-top{display:flex;justify-content:space-between;align-items:center;gap:5px;color:var(--muted);font-size:11px}
+.stat-icon{
+  width:32px;height:32px;border-radius:10px;
+  display:grid;place-items:center;background:var(--gold-soft);color:var(--gold)
+}
+.stat strong{display:block;font-size:28px;margin-top:8px;font-weight:900}
+.stat small{font-size:10px;color:var(--muted)}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.85fr);gap:17px;align-items:start}
+.panel{padding:19px;margin-bottom:17px;min-width:0}
+.panel-heading{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:15px
+}
+.panel-heading h3{font-size:15px;margin:0;font-weight:900}
+.panel-heading p{font-size:10px;color:var(--muted);margin:3px 0 0}
+.pill{font-size:10px;border:1px solid var(--line);border-radius:20px;padding:5px 9px;color:var(--muted);white-space:nowrap}
+.ai-panel{
+  border-color:#65502c;
+  background:radial-gradient(ellipse at 100% 0,#41321b45,transparent 48%),var(--panel)
+}
 .ai-title{display:flex;align-items:center;gap:10px}
-.ai-mark{width:37px;height:37px;border-radius:12px;background:#3b3020;color:var(--gold-light);display:grid;place-items:center;font-weight:900}
-.ai-title h3{margin:0;font-size:16px}.ai-title p{margin:2px 0;color:var(--muted);font-size:11px}
-.ai-label{display:block;font-size:12px;margin:17px 0 8px;color:#d8d5cb}
-textarea,input,select{background:#10120f;border:1px solid #34392f;color:var(--text);border-radius:12px;padding:12px;width:100%;min-width:0}
-textarea{resize:vertical;min-height:115px;line-height:1.9}
-textarea::placeholder,input::placeholder{color:#70766c}
+.ai-mark{
+  width:39px;height:39px;border-radius:12px;flex-shrink:0;
+  background:var(--gold-soft);color:var(--gold2);
+  display:grid;place-items:center;font-weight:900;font-size:18px
+}
+.ai-title h3{margin:0;font-size:15px}
+.ai-title p{margin:2px 0;color:var(--muted);font-size:10px}
+.ai-label{display:block;font-size:11px;margin:17px 0 8px;color:var(--text)}
 .ai-examples{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
-.example{background:#24251e;border:1px solid #403b2c;color:#c7b58f;padding:6px 10px;border-radius:9px;font-size:11px}
-.ai-actions{display:flex;gap:9px;flex-wrap:wrap}
-.ai-note{font-size:11px;color:var(--muted);line-height:1.8;margin:13px 0 0}
-.preview-list{display:grid;gap:8px;margin-top:15px}
-.preview-item{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding:12px;border:1px solid var(--line);border-radius:12px;background:#111410}
+.example{
+  background:var(--panel2);border:1px solid var(--line);
+  color:var(--gold2);padding:7px 10px;border-radius:9px;font-size:10px
+}
+.ai-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ai-note{font-size:10px;color:var(--muted);line-height:1.9;margin:12px 0 0}
+.preview-list,.task-list{display:grid;gap:9px}
+.preview-item{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;
+  align-items:start;padding:12px;border:1px solid var(--line);
+  border-radius:12px;background:var(--bg2)
+}
 .preview-item input{width:17px;height:17px;accent-color:var(--gold);margin-top:5px}
-.preview-item strong{font-size:13px;display:block}
-.preview-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;color:var(--muted);font-size:10px}
-.task-list{display:grid;gap:9px}
-.task{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:11px;align-items:start;padding:13px;border:1px solid var(--line);border-radius:14px;background:#141713}
-.task-check{width:19px;height:19px;accent-color:var(--gold);margin-top:5px}
-.task-title{font-size:13px;font-weight:700;overflow-wrap:anywhere}
-.task.done .task-title{text-decoration:line-through;color:#777d72}
-.task-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px;font-size:10px;color:var(--muted)}
-.tag{padding:3px 7px;border-radius:7px;background:#252920}
-.tag.high{color:#e5a59a;background:#382521}.tag.medium{color:#e3c78f;background:#332c1e}.tag.low{color:#a7c5a0;background:#202c20}
+.preview-item strong{font-size:12px;display:block}
+.preview-meta,.task-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;color:var(--muted);font-size:10px}
+.task{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  gap:10px;align-items:start;padding:13px;
+  border:1px solid var(--line);border-radius:13px;background:var(--bg2)
+}
+.task-check{width:18px;height:18px;accent-color:var(--gold);margin-top:5px}
+.task-title{font-size:12px;font-weight:800;overflow-wrap:anywhere;line-height:1.8}
+.task.done .task-title{text-decoration:line-through;color:var(--muted)}
 .task-actions{display:flex;gap:5px}
-.mini-btn{border:1px solid var(--line);background:#20231e;color:var(--muted);border-radius:8px;width:30px;height:30px}
+.mini-btn{
+  width:30px;height:30px;border:1px solid var(--line);
+  background:var(--panel2);color:var(--muted);border-radius:8px
+}
+.tag{padding:3px 7px;border-radius:7px;background:var(--panel3)}
+.tag.high{color:var(--red);background:color-mix(in srgb,var(--red) 12%,var(--panel))}
+.tag.medium{color:var(--gold2);background:var(--gold-soft)}
+.tag.low{color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--panel))}
 .filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.filter{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:10px;padding:7px 11px;font-size:11px}
-.filter.active{background:#2c281e;border-color:#685637;color:var(--gold-light)}
-.empty{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px;border:1px dashed #353a31;border-radius:13px;line-height:2}
-.progress-track{height:7px;background:#292d26;border-radius:9px;overflow:hidden;margin-top:12px}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#a88950,#e4c88d);border-radius:9px;transition:width .3s}
-.category-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
+.filter{
+  border:1px solid var(--line);background:transparent;color:var(--muted);
+  border-radius:9px;padding:7px 11px;font-size:10px
+}
+.filter.active{background:var(--gold-soft);border-color:#80653a;color:var(--gold2)}
+.empty{
+  text-align:center;padding:28px 14px;color:var(--muted);
+  font-size:11px;border:1px dashed var(--line);border-radius:12px;line-height:2
+}
+.progress-track{height:7px;background:var(--panel3);border-radius:9px;overflow:hidden;margin-top:12px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#9b753b,var(--gold2));border-radius:9px;transition:width .3s}
+.category-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 0;border-bottom:1px solid var(--line);font-size:11px
+}
 .category-row:last-child{border:0}
-.category-name{display:flex;align-items:center;gap:9px}.dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.category-name{display:flex;align-items:center;gap:9px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
 .category-count{color:var(--muted)}
-.toast{position:fixed;bottom:22px;left:22px;z-index:10;background:#262a23;border:1px solid #505746;color:var(--text);padding:13px 17px;border-radius:13px;box-shadow:0 15px 40px #0008;display:none;max-width:calc(100% - 44px);font-size:12px}
-.modal-backdrop{position:fixed;inset:0;background:#000a;z-index:20;display:none;place-items:center;padding:18px}
-.modal{width:min(510px,100%);background:#171a16;border:1px solid var(--line);border-radius:22px;padding:23px;max-height:90vh;overflow:auto}
-.modal h3{margin:0 0 18px}.field{margin-bottom:13px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.modal-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:20px}
-.footer{color:#666d62;text-align:center;font-size:10px;padding:12px}
-@media(max-width:1050px){.layout{grid-template-columns:1fr}.sidebar{position:static;padding:12px}.profile,.side-bottom{display:none}.nav{display:flex;overflow:auto;margin:0}.nav button{white-space:nowrap;width:auto}.nav .num{margin-right:5px}.content-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.app{padding:14px}.topbar{align-items:flex-start}.brand h1{font-size:20px}.date-chip{display:none}.layout{gap:14px}.content-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:14px}.stat strong{font-size:24px}.welcome{align-items:flex-start;flex-direction:column}h2{font-size:23px}.panel{padding:15px}.header-actions .secondary-btn{display:none}}
-@media(max-width:390px){.brand p{font-size:10px}.logo{width:43px;height:43px}.stats{gap:7px}.stat-top{font-size:10px}.form-grid{grid-template-columns:1fr}.nav button{padding:9px;font-size:12px}}
+.toast{
+  position:fixed;bottom:22px;left:22px;z-index:100;
+  background:var(--panel);border:1px solid var(--gold);
+  color:var(--text);padding:12px 16px;border-radius:12px;
+  box-shadow:var(--shadow);display:none;max-width:calc(100% - 44px);
+  font-size:12px
+}
+.modal-backdrop{
+  position:fixed;inset:0;background:#000a;z-index:50;
+  display:none;place-items:center;padding:15px
+}
+.modal{
+  width:min(530px,100%);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;padding:22px;
+  max-height:90vh;overflow:auto;box-shadow:var(--shadow)
+}
+.modal h3{margin:0 0 18px;font-size:17px}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:7px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.modal-actions{display:flex;justify-content:flex-start;gap:8px;flex-wrap:wrap;margin-top:18px}
+.setting-row{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:12px
+}
+.setting-row:last-child{border-bottom:0}
+.setting-row select{max-width:190px}
+.setting-switch{width:20px;height:20px;accent-color:var(--gold)}
+.footer{text-align:center;color:var(--muted);font-size:10px;padding:12px}
+@media(max-width:1080px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:static;padding:11px}
+  .profile,.side-bottom{display:none}
+  .nav{display:flex;overflow-x:auto;margin:0}
+  .nav button{white-space:nowrap;width:auto;flex-shrink:0}
+  .content-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .app{padding:13px}
+  header{align-items:flex-start;gap:10px}
+  .brand h1{font-size:21px}
+  .brand p{font-size:10px}
+  .logo{width:45px;height:45px}
+  .header-actions{gap:6px}
+  .date-chip,.header-actions #exportBtn{display:none}
+  .layout{gap:12px}
+  .content-grid{grid-template-columns:1fr;gap:0}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .stat{padding:13px}
+  .stat strong{font-size:24px}
+  .welcome{align-items:flex-start;flex-direction:column}
+  h2{font-size:23px}
+  .panel{padding:14px;margin-bottom:13px}
+  .form-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:390px){
+  .form-grid{grid-template-columns:1fr}
+  .task{gap:7px;padding:10px}
+  .task-actions{gap:3px}
+  .mini-btn{width:27px;height:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}
 </style>
 </head>
 <body>
@@ -113,13 +308,17 @@ textarea::placeholder,input::placeholder{color:#70766c}
   <div class="header-actions">
     <span class="date-chip" id="todayDate"></span>
     <button class="secondary-btn" id="exportBtn">تصدير البيانات ↗</button>
-    <button class="icon-btn" id="settingsBtn" title="الإعدادات">⚙</button>
+    <button class="icon-btn" id="themeBtn" title="تغيير المظهر" aria-label="تغيير المظهر">☀</button>
+    <button class="icon-btn" id="settingsBtn" title="الإعدادات" aria-label="الإعدادات">⚙</button>
   </div>
 </header>
 
 <div class="layout">
 <aside class="sidebar">
-  <div class="profile"><div class="avatar" id="avatar">ع</div><div><strong id="profileName">مساحة عمران</strong><small>خطوة صغيرة كل يوم</small></div></div>
+  <div class="profile">
+    <div class="avatar" id="avatar">ع</div>
+    <div><strong id="profileName">مساحة عمران</strong><small>خطوة صغيرة كل يوم</small></div>
+  </div>
   <nav class="nav" id="nav">
     <button class="active" data-view="all">◫ نظرة عامة <span class="num" id="navAll">0</span></button>
     <button data-view="today">◷ مهام اليوم <span class="num" id="navToday">0</span></button>
@@ -131,7 +330,11 @@ textarea::placeholder,input::placeholder{color:#70766c}
 
 <main>
   <section class="welcome">
-    <div><div class="eyebrow" id="greeting">مساحة يومك</div><h2 id="welcomeTitle">ابدأ يومك بوضوح.</h2><p class="subtitle">رتّب أولوياتك، واترك لإنجاز الباقي مساحة.</p></div>
+    <div>
+      <div class="eyebrow" id="greeting">مساحة يومك</div>
+      <h2 id="welcomeTitle">ابدأ يومك بوضوح.</h2>
+      <p class="subtitle">رتّب أولوياتك، واترك لإنجاز الباقي مساحة.</p>
+    </div>
     <button class="primary-btn" id="addTaskBtn">＋ مهمة جديدة</button>
   </section>
 
@@ -150,14 +353,14 @@ textarea::placeholder,input::placeholder{color:#70766c}
           <span class="pill">تحليل نصّي</span>
         </div>
         <label class="ai-label" for="aiInput">ما الذي تريد إنجازه؟</label>
-        <textarea id="aiInput" placeholder="مثال: غدًا الساعة ٧ أراجع القرآن لمدة نصف ساعة، وبعدها أذاكر الرياضيات ساعة. أريد إنهاء مشروع الموقع قبل الخميس، والأولوية للمذاكرة..."></textarea>
+        <textarea id="aiInput" placeholder="مثال: غدًا الساعة ٧ مساءً أراجع القرآن لمدة نصف ساعة، وبعدها أذاكر الرياضيات ساعة."></textarea>
         <div class="ai-examples">
-          <button class="example" data-example="اليوم الساعة ٤ أتمرن لمدة ساعة، وبعد المغرب أراجع القرآن نصف ساعة">مثال يوم تدريبي</button>
-          <button class="example" data-example="غدًا أذاكر الرياضيات ساعة وأحل واجب الإنجليزي نصف ساعة، والأولوية للرياضيات">مثال دراسي</button>
+          <button class="example" data-example="اليوم الساعة ٤ مساءً أتمرن لمدة ساعة، وبعد المغرب أراجع القرآن نصف ساعة">مثال يوم تدريبي</button>
+          <button class="example" data-example="غدًا أذاكر الرياضيات لمدة ساعة وأحل واجب الإنجليزي نصف ساعة، والأولوية للرياضيات">مثال دراسي</button>
           <button class="example" data-example="أريد إنهاء تصميم الموقع قبل الخميس، وأحتاج ساعة يوميًا للعمل عليه">مثال مشروع</button>
         </div>
         <div class="ai-actions"><button class="primary-btn" id="analyzeBtn">حلّل ورتّب المهام ✦</button><button class="secondary-btn" id="clearAiBtn">مسح النص</button></div>
-        <p class="ai-note">يحلّل النص داخل المتصفح دون إرسال بياناتك إلى خادم. راجع النتائج قبل إضافتها؛ فهم اللغة هنا محلي وأساسي وليس نموذج ذكاء اصطناعي سحابيًا.</p>
+        <p class="ai-note">يحلّل النص داخل المتصفح. راجع النتائج قبل إضافتها؛ التحليل محلي وأساسي وليس نموذج ذكاء اصطناعي سحابيًا.</p>
         <div id="preview" hidden></div>
       </section>
 
@@ -196,359 +399,617 @@ textarea::placeholder,input::placeholder{color:#70766c}
 </div>
 
 <div class="modal-backdrop" id="modalBackdrop">
-<div class="modal">
-  <h3 id="modalTitle">إضافة مهمة جديدة</h3>
-  <form id="taskForm">
-    <input type="hidden" id="editId">
-    <div class="field"><label for="taskTitle">عنوان المهمة</label><input id="taskTitle" required maxlength="180" placeholder="ما الذي تريد إنجازه؟"></div>
-    <div class="form-grid">
-      <div class="field"><label for="taskDate">التاريخ</label><input type="date" id="taskDate" required></div>
-      <div class="field"><label for="taskTime">الوقت</label><input type="time" id="taskTime"></div>
-      <div class="field"><label for="taskCategory">المجال</label><select id="taskCategory"><option>دراسة</option><option>قرآن وعبادة</option><option>رياضة</option><option>عمل ومشاريع</option><option>شخصي</option><option>قراءة</option><option>أخرى</option></select></div>
-      <div class="field"><label for="taskPriority">الأولوية</label><select id="taskPriority"><option value="high">عالية</option><option value="medium" selected>متوسطة</option><option value="low">منخفضة</option></select></div>
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">إضافة مهمة جديدة</h3>
+    <form id="taskForm">
+      <input type="hidden" id="editId">
+      <div class="field"><label for="taskTitle">عنوان المهمة</label><input id="taskTitle" required maxlength="180" placeholder="ما الذي تريد إنجازه؟"></div>
+      <div class="form-grid">
+        <div class="field"><label for="taskDate">التاريخ</label><input type="date" id="taskDate" required></div>
+        <div class="field"><label for="taskTime">الوقت</label><input type="time" id="taskTime"></div>
+        <div class="field"><label for="taskCategory">المجال</label><select id="taskCategory"><option>دراسة</option><option>قرآن وعبادة</option><option>رياضة</option><option>عمل ومشاريع</option><option>شخصي</option><option>قراءة</option><option>أخرى</option></select></div>
+        <div class="field"><label for="taskPriority">الأولوية</label><select id="taskPriority"><option value="high">عالية</option><option value="medium" selected>متوسطة</option><option value="low">منخفضة</option></select></div>
+      </div>
+      <div class="field"><label for="taskDuration">المدة المتوقعة بالدقائق</label><input type="number" id="taskDuration" min="5" max="1440" step="5" placeholder="مثال: 30"></div>
+      <div class="modal-actions"><button class="primary-btn" type="submit">حفظ المهمة</button><button class="secondary-btn" type="button" id="cancelModal">إلغاء</button></div>
+    </form>
+  </section>
+</div>
+
+<div class="modal-backdrop" id="settingsBackdrop">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <h3 id="settingsTitle">⚙ إعدادات إنجاز</h3>
+    <div class="field"><label for="settingName">الاسم الظاهر</label><input id="settingName" maxlength="40" placeholder="اسمك"></div>
+    <div class="setting-row"><label for="settingTheme">المظهر</label><select id="settingTheme"><option value="dark">داكن — أسود وذهبي</option><option value="light">فاتح</option></select></div>
+    <div class="setting-row"><label for="settingReminders">تفعيل تذكيرات المواعيد</label><input class="setting-switch" type="checkbox" id="settingReminders"></div>
+    <div class="setting-row"><label for="settingLead">التنبيه قبل الموعد</label><select id="settingLead"><option value="0">وقت الموعد</option><option value="5">5 دقائق</option><option value="10">10 دقائق</option><option value="15">15 دقيقة</option><option value="30">30 دقيقة</option></select></div>
+    <div class="setting-row"><label for="settingSound">صوت التنبيه</label><input class="setting-switch" type="checkbox" id="settingSound"></div>
+    <p style="font-size:11px;color:var(--muted);line-height:1.9">الإشعارات تعتمد على دعم المتصفح وإذنك. قد لا تعمل عند إغلاق الصفحة أو تعليقها.</p>
+    <div class="modal-actions">
+      <button class="primary-btn" id="saveSettings">حفظ الإعدادات</button>
+      <button class="secondary-btn" id="testSound">تجربة الصوت</button>
+      <button class="secondary-btn" id="enableNotifications">السماح بالإشعارات</button>
+      <button class="secondary-btn" id="closeSettings">إغلاق</button>
     </div>
-    <div class="field"><label for="taskDuration">المدة المتوقعة بالدقائق</label><input type="number" id="taskDuration" min="5" max="1440" step="5" placeholder="مثال: 30"></div>
-    <div class="modal-actions"><button class="primary-btn" type="submit">حفظ المهمة</button><button class="secondary-btn" type="button" id="cancelModal">إلغاء</button></div>
-  </form>
+  </section>
 </div>
-</div>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-(() => {
-  "use strict";
+"use strict";
 
-  const STYLE = document.createElement("style");
-  STYLE.textContent = `
-    body[data-theme="light"] {
-      --bg:#f4f1e9; --panel:#fffdf8; --panel2:#eee9dc;
-      --line:#ded6c4; --gold:#a77b32; --gold-light:#79551d;
-      --text:#26251f; --muted:#777366;
-      background:radial-gradient(ellipse at 85% -15%,#e9dcc0 0,transparent 38%),var(--bg);
-      color:var(--text);
-    }
-    body[data-theme="light"] .sidebar,
-    body[data-theme="light"] .panel,
-    body[data-theme="light"] .modal {
-      background:var(--panel); border-color:var(--line);
-    }
-    body[data-theme="light"] .ai-panel {
-      background:radial-gradient(ellipse at 100% 0,#f1e5cd 0,transparent 48%),var(--panel);
-    }
-    body[data-theme="light"] textarea,
-    body[data-theme="light"] input,
-    body[data-theme="light"] select {
-      background:#fffefa; color:var(--text); border-color:var(--line);
-    }
-    body[data-theme="light"] .task,
-    body[data-theme="light"] .preview-item {
-      background:#faf7ef; border-color:var(--line);
-    }
-    body[data-theme="light"] .tag { background:#eee8d9; }
-    body[data-theme="light"] .mini-btn,
-    body[data-theme="light"] .secondary-btn,
-    body[data-theme="light"] .icon-btn {
-      background:#f5f0e5; color:var(--text); border-color:var(--line);
-    }
-    body[data-theme="light"] .nav button.active,
-    body[data-theme="light"] .filter.active {
-      background:#eee3cc; color:#79551d; border-color:#cbb17e;
-    }
-    body[data-theme="light"] .side-bottom { background:#f0eadc; }
-    body[data-theme="light"] .logo { background:#f0e4ca; }
-    body[data-theme="light"] .avatar,
-    body[data-theme="light"] .stat-icon,
-    body[data-theme="light"] .ai-mark {
-      background:#eee3cc; color:#79551d;
-    }
-    body[data-theme="light"] .example {
-      background:#f1eadb; color:#79551d; border-color:#d8c7a5;
-    }
-    body[data-theme="light"] .progress-track { background:#e5dfd1; }
-    body[data-theme="light"] .toast {
-      background:#fffdf8; color:#26251f; border-color:#d8c7a5;
-    }
-    .settings-modal { max-width:440px; }
-    .setting-row {
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:13px 0; border-bottom:1px solid var(--line);
-      font-size:13px;
-    }
-    .setting-row:last-child { border-bottom:0; }
-    .setting-row select { max-width:155px; }
-    .setting-switch { width:21px; height:21px; accent-color:var(--gold); }
-    .theme-toggle { min-width:43px; }
-  `;
-  document.head.appendChild(STYLE);
+/* أدوات عامة */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const STORAGE_KEY = "injaz_luxe_tasks_v1";
+const SETTINGS_KEY = "injaz_luxe_settings_v1";
 
-  const saved = (() => {
-    try {
-      return JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
-    } catch {
-      return {};
-    }
-  })();
+const todayISO = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+};
+const plusDays = n => {
+  const d = new Date();
+  d.setDate(d.getDate()+n);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+};
+const uid = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2,8)}`;
+const escapeHTML = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-  const config = {
-    theme: saved.theme || localStorage.getItem("injaz_theme") || "dark",
-    reminders: saved.reminders !== false,
-    lead: Number(saved.reminderLead ?? 5)
+function loadTasks(){
+  try{
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(data) ? data.filter(t=>t && typeof t.title==="string" && t.id) : [];
+  }catch{return []}
+}
+function loadSettings(){
+  try{
+    return {
+      name:"عمران",theme:"dark",reminders:false,lead:5,sound:true,
+      ...JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}")
+    };
+  }catch{
+    return {name:"عمران",theme:"dark",reminders:false,lead:5,sound:true};
+  }
+}
+
+let tasks = loadTasks();
+let settings = loadSettings();
+let currentView = "all";
+let currentFilter = "all";
+let previewTasks = [];
+let audioContext = null;
+let toastTimer = null;
+
+function save(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
+    return true;
+  }catch{
+    notify("تعذّر الحفظ؛ مساحة التخزين قد تكون ممتلئة.");
+    return false;
+  }
+}
+function saveSettings(){
+  try{
+    localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));
+    return true;
+  }catch{
+    notify("تعذّر حفظ الإعدادات.");
+    return false;
+  }
+}
+function notify(message){
+  const toast=$("#toast");
+  toast.textContent=message;
+  toast.style.display="block";
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.style.display="none",3200);
+}
+function formatDate(date){
+  if(!date)return "بلا تاريخ";
+  if(date===todayISO())return "اليوم";
+  if(date===plusDays(1))return "غدًا";
+  return new Date(date+"T12:00:00").toLocaleDateString("ar-SA",{day:"numeric",month:"short"});
+}
+function priorityLabel(p){
+  return p==="high"?"عالية":p==="low"?"منخفضة":"متوسطة";
+}
+function taskSort(a,b){
+  return Number(a.done)-Number(b.done) ||
+    (a.date||"9999").localeCompare(b.date||"9999") ||
+    (a.time||"99:99").localeCompare(b.time||"99:99") ||
+    ({high:0,medium:1,low:2}[a.priority]??1)-({high:0,medium:1,low:2}[b.priority]??1);
+}
+function dayTasks(){return tasks.filter(t=>t.date===todayISO())}
+function visibleTasks(){
+  let list=[...tasks];
+  if(currentView==="today")list=list.filter(t=>t.date===todayISO());
+  if(currentView==="upcoming")list=list.filter(t=>t.date>todayISO()&&!t.done);
+  if(currentView==="done")list=list.filter(t=>t.done);
+  if(currentFilter==="pending")list=list.filter(t=>!t.done);
+  if(currentFilter==="high")list=list.filter(t=>t.priority==="high"&&!t.done);
+  if(currentFilter==="done")list=list.filter(t=>t.done);
+  return list.sort(taskSort);
+}
+
+/* الرسم */
+function render(){
+  const today=dayTasks();
+  const doneToday=today.filter(t=>t.done).length;
+  const pct=today.length?Math.round(doneToday/today.length*100):0;
+
+  $("#todayDate").textContent=new Date().toLocaleDateString("ar-SA",{weekday:"long",day:"numeric",month:"long"});
+  $("#profileName").textContent="مساحة "+(settings.name||"يومك");
+  $("#avatar").textContent=(settings.name||"ع").trim().charAt(0)||"ع";
+  const hour=new Date().getHours();
+  $("#greeting").textContent=hour<12?"صباح الإنجاز":hour<17?"نهارك واضح":"مساء الإنجاز";
+  $("#welcomeTitle").textContent=`${settings.name||"صاحب الإنجاز"}، ابدأ بخطوة.`;
+
+  $("#statToday").textContent=today.length;
+  $("#statDone").textContent=doneToday;
+  $("#statPending").textContent=today.filter(t=>!t.done).length;
+  $("#statPercent").textContent=pct+"%";
+  $("#mainProgress").style.width=pct+"%";
+  $("#detailProgress").style.width=pct+"%";
+  $("#progressLabel").textContent=pct+"%";
+
+  $("#progressMessage").textContent=!today.length
+    ?"لم تضف مهامًا لهذا اليوم بعد. ضع أولوياتك وابدأ."
+    :pct===100?"أحسنت! أتممت جميع مهام اليوم."
+    :`أنجزت ${doneToday} من ${today.length} مهام اليوم. أكمل المهمة التالية بهدوء.`;
+
+  $("#navAll").textContent=tasks.filter(t=>!t.done).length;
+  $("#navToday").textContent=today.filter(t=>!t.done).length;
+  $("#taskCount").textContent=visibleTasks().length+" مهمة";
+
+  const viewNames={all:"مهامك",today:"مهام اليوم",upcoming:"المهام القادمة",done:"المهام المكتملة"};
+  $("#tasksHeading").textContent=viewNames[currentView]||"مهامك";
+
+  $$("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===currentView));
+  $$("#filters button").forEach(b=>b.classList.toggle("active",b.dataset.filter===currentFilter));
+
+  const list=visibleTasks();
+  $("#taskList").innerHTML=list.length?list.map(t=>`
+    <article class="task ${t.done?"done":""}">
+      <input class="task-check" type="checkbox" aria-label="إكمال المهمة" data-complete="${escapeHTML(t.id)}" ${t.done?"checked":""}>
+      <div>
+        <div class="task-title">${escapeHTML(t.title)}</div>
+        <div class="task-meta">
+          <span class="tag">${escapeHTML(t.category||"أخرى")}</span>
+          <span class="tag ${escapeHTML(t.priority||"medium")}">${priorityLabel(t.priority)}</span>
+          <span>${formatDate(t.date)}${t.time?" · "+escapeHTML(t.time):""}</span>
+          ${t.duration?`<span>${t.duration} دقيقة</span>`:""}
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="mini-btn" title="تعديل" aria-label="تعديل المهمة" data-edit="${escapeHTML(t.id)}">✎</button>
+        <button class="mini-btn" title="حذف" aria-label="حذف المهمة" data-delete="${escapeHTML(t.id)}">×</button>
+      </div>
+    </article>`).join("")
+    :`<div class="empty">لا توجد مهام هنا الآن.<br>أضف مهمة جديدة أو استخدم المساعد لترتيب يومك.</div>`;
+
+  const categories={};
+  tasks.filter(t=>!t.done).forEach(t=>categories[t.category||"أخرى"]=(categories[t.category||"أخرى"]||0)+1);
+  const entries=Object.entries(categories).sort((a,b)=>b[1]-a[1]);
+
+  $("#categoryStats").innerHTML=entries.length?entries.map(([name,count])=>`
+    <div class="category-row">
+      <span class="category-name"><span class="dot"></span>${escapeHTML(name)}</span>
+      <span class="category-count">${count} مهام</span>
+    </div>`).join(""):`<div class="empty">سيظهر توزيع المهام هنا.</div>`;
+
+  const upcoming=tasks.filter(t=>!t.done&&t.date>=todayISO()).sort(taskSort).slice(0,4);
+  $("#upcomingList").innerHTML=upcoming.length?upcoming.map(t=>`
+    <div class="task" style="grid-template-columns:minmax(0,1fr)">
+      <div>
+        <div class="task-title">${escapeHTML(t.title)}</div>
+        <div class="task-meta">
+          <span>${formatDate(t.date)}${t.time?" · "+escapeHTML(t.time):""}</span>
+          <span class="tag ${escapeHTML(t.priority||"medium")}">${priorityLabel(t.priority)}</span>
+        </div>
+      </div>
+    </div>`).join(""):`<div class="empty">لا توجد مواعيد قادمة.</div>`;
+}
+
+/* إدارة المهام */
+function openModal(task=null){
+  $("#taskForm").reset();
+  $("#editId").value=task?.id||"";
+  $("#modalTitle").textContent=task?"تعديل المهمة":"إضافة مهمة جديدة";
+  $("#taskTitle").value=task?.title||"";
+  $("#taskDate").value=task?.date||todayISO();
+  $("#taskTime").value=task?.time||"";
+  $("#taskCategory").value=task?.category||"دراسة";
+  $("#taskPriority").value=task?.priority||"medium";
+  $("#taskDuration").value=task?.duration||"";
+  $("#modalBackdrop").style.display="grid";
+  setTimeout(()=>$("#taskTitle").focus(),40);
+}
+function closeModal(){$("#modalBackdrop").style.display="none"}
+
+$("#addTaskBtn").onclick=()=>openModal();
+$("#cancelModal").onclick=closeModal;
+$("#modalBackdrop").addEventListener("click",e=>{
+  if(e.target===$("#modalBackdrop"))closeModal();
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    closeModal();
+    $("#settingsBackdrop").style.display="none";
+  }
+});
+
+$("#taskForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const title=$("#taskTitle").value.trim();
+  if(!title)return;
+
+  const id=$("#editId").value;
+  const old=tasks.find(t=>t.id===id);
+  const task={
+    id:id||uid(),
+    title,
+    date:$("#taskDate").value||todayISO(),
+    time:$("#taskTime").value,
+    category:$("#taskCategory").value,
+    priority:$("#taskPriority").value,
+    duration:Math.max(0,Number($("#taskDuration").value)||0),
+    done:old?.done||false,
+    createdAt:old?.createdAt||Date.now()
   };
 
-  function saveConfig() {
-    try {
-      const old = JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
-      localStorage.setItem("injaz_luxe_settings_v1", JSON.stringify({
-        ...old, ...config
-      }));
-    } catch {}
-  }
+  if(id)tasks=tasks.map(t=>t.id===id?task:t);
+  else tasks.push(task);
 
-  function applyTheme() {
-    document.body.dataset.theme = config.theme;
-    localStorage.setItem("injaz_theme", config.theme);
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = config.theme === "light" ? "#f4f1e9" : "#0d0f0e";
-    const btn = document.getElementById("injazThemeBtn");
-    if (btn) {
-      btn.textContent = config.theme === "dark" ? "☀" : "☾";
-      btn.title = config.theme === "dark" ? "تفعيل الوضع الفاتح" : "تفعيل الوضع الداكن";
-      btn.setAttribute("aria-label", btn.title);
+  save();
+  closeModal();
+  render();
+  notify(id?"تم تحديث المهمة":"أُضيفت المهمة بنجاح");
+});
+
+$("#taskList").addEventListener("change",e=>{
+  const complete=e.target.closest("[data-complete]");
+  if(!complete)return;
+  const t=tasks.find(x=>x.id===complete.dataset.complete);
+  if(!t)return;
+
+  t.done=complete.checked;
+  t.completedAt=t.done?Date.now():null;
+  save();render();
+  notify(t.done?"أحسنت! أُنجزت المهمة":"أُعيد فتح المهمة");
+});
+
+$("#taskList").addEventListener("click",e=>{
+  const edit=e.target.closest("[data-edit]");
+  const del=e.target.closest("[data-delete]");
+
+  if(edit){
+    const t=tasks.find(x=>x.id===edit.dataset.edit);
+    if(t)openModal(t);
+    return;
+  }
+  if(del){
+    const t=tasks.find(x=>x.id===del.dataset.delete);
+    if(t&&confirm(`هل تريد حذف «${t.title}»؟`)){
+      tasks=tasks.filter(x=>x.id!==t.id);
+      save();render();notify("حُذفت المهمة");
     }
   }
+});
 
-  // زر تغيير المظهر
-  const headerActions = document.querySelector(".header-actions");
-  if (headerActions && !document.getElementById("injazThemeBtn")) {
-    const themeBtn = document.createElement("button");
-    themeBtn.id = "injazThemeBtn";
-    themeBtn.className = "icon-btn theme-toggle";
-    themeBtn.type = "button";
-    themeBtn.onclick = () => {
-      config.theme = config.theme === "dark" ? "light" : "dark";
-      saveConfig();
-      applyTheme();
-      showToast(config.theme === "light" ? "تم تفعيل الوضع الفاتح" : "تم تفعيل الوضع الداكن");
-    };
-    headerActions.insertBefore(themeBtn, headerActions.firstChild);
+$("#nav").addEventListener("click",e=>{
+  const b=e.target.closest("[data-view]");
+  if(!b)return;
+  currentView=b.dataset.view;currentFilter="all";render();
+});
+$("#filters").addEventListener("click",e=>{
+  const b=e.target.closest("[data-filter]");
+  if(!b)return;
+  currentFilter=b.dataset.filter;render();
+});
+
+/* المساعد النصي */
+$$(".example").forEach(b=>b.onclick=()=>{
+  $("#aiInput").value=b.dataset.example;
+  $("#aiInput").focus();
+});
+$("#clearAiBtn").onclick=()=>{
+  $("#aiInput").value="";
+  $("#preview").hidden=true;
+  previewTasks=[];
+};
+
+const categoryRules=[
+  {name:"قرآن وعبادة",words:["قرآن","حفظ","مراجعة السرد","تجويد","ورد","أذكار","صلاة","متون","حديث"]},
+  {name:"رياضة",words:["تمرين","تدريب","جيم","جري","سباحة","سهام","قوس","فتنس","إحماء"]},
+  {name:"دراسة",words:["مذاكرة","أذاكر","دراسة","واجب","اختبار","امتحان","رياضيات","إنجليزي","الإنجليزية","علوم","فيزياء","مدرسة","حل أسئلة","أحل"]},
+  {name:"عمل ومشاريع",words:["مشروع","موقع","تصميم","برمجة","تطبيق","كود","عميل","عمل","منصة"]},
+  {name:"قراءة",words:["قراءة","أقرأ","كتاب","مطالعة"]},
+  {name:"شخصي",words:["غرفة","ترتيب","نوم","استحمام","شراء","موعد"]}
+];
+
+function detectCategory(text){
+  const lower=text.toLowerCase();
+  for(const c of categoryRules){
+    if(c.words.some(w=>lower.includes(w)))return c.name;
   }
+  return "أخرى";
+}
+function detectPriority(text){
+  if(/عاجل|مهم جدًا|مهم جدا|ضروري|أولوية قصوى|الأولوية|أولويتي|قبل كل شيء|لازم اليوم/.test(text))return "high";
+  if(/ليس مهمًا|مو مستعجل|غير عاجل|بسيط|إذا بقي وقت/.test(text))return "low";
+  return "medium";
+}
+function detectDate(text){
+  if(/بعد غد|بعد بكرة/.test(text))return plusDays(2);
+  if(/غدًا|غدا|بكرة|بكره/.test(text))return plusDays(1);
+  if(/اليوم|الليلة|هذا الصباح|هذا المساء/.test(text))return todayISO();
 
-  function showToast(message) {
-    const toast = document.getElementById("toast");
-    if (!toast) return;
-    toast.textContent = message;
-    toast.style.display = "block";
-    clearTimeout(showToast.timer);
-    showToast.timer = setTimeout(() => toast.style.display = "none", 3500);
+  const days={"الأحد":0,"الاحد":0,"الإثنين":1,"الاثنين":1,"الثلاثاء":2,"الأربعاء":3,"الاربعاء":3,"الخميس":4,"الجمعة":5,"السبت":6};
+  const match=text.match(/الأحد|الاحد|الإثنين|الاثنين|الثلاثاء|الأربعاء|الاربعاء|الخميس|الجمعة|السبت/);
+  if(match){
+    const now=new Date(),target=days[match[0]];
+    const delta=(target-now.getDay()+7)%7||7;
+    return plusDays(delta);
   }
-
-  // نغمة تنبيه مولدة داخل المتصفح، لا تحتاج ملفًا خارجيًا
-  let audioContext;
-  function playReminderSound() {
-    try {
-      audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
-      if (audioContext.state === "suspended") audioContext.resume();
-
-      [880, 1174, 880].forEach((frequency, index) => {
-        const start = audioContext.currentTime + index * 0.22;
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-
-        oscillator.type = "sine";
-        oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(0.0001, start);
-        gain.gain.exponentialRampToValueAtTime(0.16, start + 0.025);
-        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.18);
-
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
-        oscillator.start(start);
-        oscillator.stop(start + 0.2);
-      });
-    } catch {}
+  return todayISO();
+}
+function detectTime(text){
+  let m=text.match(/(?:الساعة\s*)?(\d{1,2})(?::(\d{2}))?\s*(صباحًا|صباحا|مساءً|مساء|ص|م)\b/);
+  if(m){
+    let h=Number(m[1]),min=Number(m[2]||0),suffix=m[3];
+    if(h>23||min>59)return "";
+    if(/مساء|م$/.test(suffix)&&h<12)h+=12;
+    if(/صباح|ص$/.test(suffix)&&h===12)h=0;
+    return `${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}`;
   }
+  m=text.match(/الساعة\s*(\d{1,2})(?::(\d{2}))?/);
+  if(m){
+    let h=Number(m[1]),min=Number(m[2]||0);
+    if(h>=0&&h<=23&&min<=59){
+      if(h>=1&&h<=7)h+=12;
+      return `${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}`;
+    }
+  }
+  return "";
+}
+function detectDuration(text){
+  const m=text.match(/(?:لمدة|مدتها|يستغرق|تستغرق|حوالي)\s*(ساعة ونصف|ساعة ونص|نصف ساعة|نص ساعة|ساعة|ساعتين|ثلاث ساعات|أربع ساعات|ربع ساعة|(\d+)\s*(?:دقيقة|دقائق|دقايق|د)|(\d+)\s*(?:ساعة|ساعات))/);
+  if(!m)return 0;
+  const word=m[1];
+  if(word==="ساعة ونصف"||word==="ساعة ونص")return 90;
+  if(word==="نصف ساعة"||word==="نص ساعة")return 30;
+  if(word==="ساعة")return 60;
+  if(word==="ساعتين")return 120;
+  if(word==="ثلاث ساعات")return 180;
+  if(word==="أربع ساعات")return 240;
+  if(word==="ربع ساعة")return 15;
+  if(m[2])return Number(m[2]);
+  if(m[3])return Number(m[3])*60;
+  return 0;
+}
+function cleanTitle(text){
+  return text
+    .replace(/(?:اليوم|غدًا|غدا|بكرة|بكره|بعد غد|بعد بكرة|هذا الصباح|هذا المساء)/g,"")
+    .replace(/(?:الساعة\s*)?\d{1,2}(?::\d{2})?\s*(?:صباحًا|صباحا|مساءً|مساء|ص|م)\b/g,"")
+    .replace(/الساعة\s*\d{1,2}(?::\d{2})?/g,"")
+    .replace(/(?:لمدة|مدتها|يستغرق|تستغرق|حوالي)\s*(?:ساعة ونصف|ساعة ونص|نصف ساعة|نص ساعة|ساعة|ساعتين|ثلاث ساعات|أربع ساعات|ربع ساعة|\d+\s*(?:دقيقة|دقائق|دقايق|د|ساعة|ساعات))/g,"")
+    .replace(/(?:وأريد|واريد|أريد|اريد|من فضلك|لو سمحت|الأولوية|أولويتي|مهم جدًا|مهم جدا|ضروري|عاجل)/g,"")
+    .replace(/\s+/g," ").replace(/^[\s،,.:؛\-]+|[\s،,.:؛\-]+$/g,"").trim();
+}
+function splitTasks(text){
+  return text.split(/\n+|[.!؟؛]+|،\s*(?=(?:وبعد|ثم|بعدها|وأراجع|وأذاكر|وأحل|وأتمرن|أراجع|أذاكر|أحل|أتمرن|أقرأ|أكتب|أعمل|أبدأ|أنهي|أكمل|أرتب|أحفظ|أذهب|أصلي|أجهز|أجهّز|أدرس))/)
+    .flatMap(part=>part.split(/\s+(?:ثم|وبعدها|بعدها)\s+/))
+    .map(s=>s.trim()).filter(s=>s.length>=3);
+}
+function analyzeText(raw){
+  const parts=splitTasks(raw),out=[];
+  for(const part of parts){
+    const date=detectDate(part),time=detectTime(part),duration=detectDuration(part);
+    const priority=detectPriority(part),category=detectCategory(part);
+    let title=cleanTitle(part);
+    title=title.replace(/^(?:و)?(?:بعد ذلك|بعدها|ثم|كذلك|أيضًا|ايضا)\s*/,"").trim();
+    if(!title||/^(اليوم|غدا|غدًا|بكرة)$/.test(title))continue;
+    out.push({id:uid(),title,date,time,duration,priority,category,done:false,createdAt:Date.now()});
+  }
+  return out.filter((t,i,a)=>a.findIndex(x=>x.title===t.title&&x.date===t.date&&x.time===t.time)===i);
+}
 
-  function openSettings() {
-    let backdrop = document.getElementById("injazSettingsBackdrop");
+$("#analyzeBtn").onclick=()=>{
+  const raw=$("#aiInput").value.trim();
+  if(!raw){notify("اكتب المهام أولًا.");$("#aiInput").focus();return}
+  previewTasks=analyzeText(raw);
+  if(!previewTasks.length){notify("اكتب كل مهمة في سطر مستقل وجرّب مجددًا.");return}
 
-    if (!backdrop) {
-      backdrop = document.createElement("div");
-      backdrop.id = "injazSettingsBackdrop";
-      backdrop.className = "modal-backdrop";
-      backdrop.innerHTML = `
-        <section class="modal settings-modal" role="dialog" aria-modal="true"
-          aria-labelledby="injazSettingsTitle">
-          <h3 id="injazSettingsTitle">⚙ إعدادات إنجاز</h3>
+  const box=$("#preview");
+  box.hidden=false;
+  box.innerHTML=`
+    <div class="panel-heading" style="margin-top:17px;margin-bottom:8px">
+      <div><h3>راجع المهام المستخرجة</h3><p>حدّد ما تريد إضافته</p></div>
+      <span class="pill">${previewTasks.length} مهام</span>
+    </div>
+    <div class="preview-list">${previewTasks.map((t,i)=>`
+      <label class="preview-item">
+        <input type="checkbox" data-preview="${i}" checked>
+        <span>
+          <strong>${escapeHTML(t.title)}</strong>
+          <span class="preview-meta">
+            <span>${escapeHTML(t.category)}</span>
+            <span>${formatDate(t.date)}</span>
+            ${t.time?`<span>${escapeHTML(t.time)}</span>`:""}
+            ${t.duration?`<span>${t.duration} دقيقة</span>`:""}
+            <span class="tag ${t.priority}">${priorityLabel(t.priority)}</span>
+          </span>
+        </span>
+      </label>`).join("")}
+    </div>
+    <div class="ai-actions" style="margin-top:13px">
+      <button class="primary-btn" id="commitPreview">＋ أضف المهام المحددة</button>
+      <button class="secondary-btn" id="selectAllPreview">تحديد الكل</button>
+    </div>`;
 
-          <div class="field">
-            <label for="injazUserName">الاسم الظاهر</label>
-            <input id="injazUserName" maxlength="40" placeholder="اسمك">
-          </div>
+  $("#commitPreview").onclick=()=>{
+    const selected=$$("[data-preview]:checked").map(el=>previewTasks[Number(el.dataset.preview)]).filter(Boolean);
+    if(!selected.length){notify("حدّد مهمة واحدة على الأقل.");return}
+    tasks.push(...selected);
+    save();currentView="all";currentFilter="all";render();
+    box.hidden=true;notify(`أُضيفت ${selected.length} مهام.`);
+  };
+  $("#selectAllPreview").onclick=()=>$$("[data-preview]").forEach(el=>el.checked=true);
+  box.scrollIntoView({behavior:"smooth",block:"nearest"});
+};
 
-          <div class="setting-row">
-            <label for="injazThemeSelect">المظهر</label>
-            <select id="injazThemeSelect">
-              <option value="dark">داكن — أسود وذهبي</option>
-              <option value="light">فاتح</option>
-            </select>
-          </div>
+/* تصدير نسخة احتياطية */
+$("#exportBtn").onclick=()=>{
+  const payload={app:"إنجاز",version:2,exportedAt:new Date().toISOString(),settings,tasks};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=`injaz-backup-${todayISO()}.json`;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  notify("تم تصدير النسخة الاحتياطية.");
+};
 
-          <div class="setting-row">
-            <label for="injazReminders">تفعيل تذكيرات المواعيد</label>
-            <input class="setting-switch" id="injazReminders" type="checkbox">
-          </div>
+/* المظهر والإعدادات */
+function applyTheme(){
+  document.documentElement.dataset.theme=settings.theme==="light"?"light":"dark";
+  $("#themeBtn").textContent=settings.theme==="light"?"☾":"☀";
+  $("#themeBtn").title=settings.theme==="light"?"تفعيل الوضع الداكن":"تفعيل الوضع الفاتح";
+  document.querySelector('meta[name="theme-color"]').content=settings.theme==="light"?"#f3f0e8":"#0b0b09";
+}
+$("#themeBtn").onclick=()=>{
+  settings.theme=settings.theme==="dark"?"light":"dark";
+  saveSettings();applyTheme();
+  notify(settings.theme==="light"?"تم تفعيل الوضع الفاتح":"تم تفعيل الوضع الداكن");
+};
 
-          <div class="field" style="margin-top:15px">
-            <label for="injazReminderLead">التنبيه قبل الموعد</label>
-            <select id="injazReminderLead">
-              <option value="0">في وقت الموعد</option>
-              <option value="5">قبل 5 دقائق</option>
-              <option value="10">قبل 10 دقائق</option>
-              <option value="15">قبل 15 دقيقة</option>
-              <option value="30">قبل 30 دقيقة</option>
-            </select>
-          </div>
+function openSettings(){
+  $("#settingName").value=settings.name||"عمران";
+  $("#settingTheme").value=settings.theme||"dark";
+  $("#settingReminders").checked=!!settings.reminders;
+  $("#settingLead").value=String(settings.lead??5);
+  $("#settingSound").checked=settings.sound!==false;
+  $("#settingsBackdrop").style.display="grid";
+}
+$("#settingsBtn").onclick=openSettings;
+$("#closeSettings").onclick=()=>$("#settingsBackdrop").style.display="none";
+$("#settingsBackdrop").addEventListener("click",e=>{
+  if(e.target===$("#settingsBackdrop"))$("#settingsBackdrop").style.display="none";
+});
 
-          <p style="font-size:11px;color:var(--muted);line-height:1.9">
-            يجب السماح بالإشعارات من المتصفح. تعمل التذكيرات أثناء بقاء التطبيق مفتوحًا،
-            وقد لا تصل عند إغلاق الصفحة أو تعليق المتصفح.
-          </p>
+$("#saveSettings").onclick=async()=>{
+  settings.name=$("#settingName").value.trim().slice(0,40)||"عمران";
+  settings.theme=$("#settingTheme").value;
+  settings.reminders=$("#settingReminders").checked;
+  settings.lead=Number($("#settingLead").value)||0;
+  settings.sound=$("#settingSound").checked;
 
-          <div class="modal-actions">
-            <button class="primary-btn" id="injazSaveSettings">حفظ الإعدادات</button>
-            <button class="secondary-btn" id="injazTestSound">تجربة الصوت</button>
-            <button class="secondary-btn" id="injazCloseSettings">إغلاق</button>
-          </div>
-        </section>`;
-      document.body.appendChild(backdrop);
+  if(settings.reminders)await requestNotificationPermission();
+  saveSettings();applyTheme();render();
+  $("#settingsBackdrop").style.display="none";
+  notify("تم حفظ الإعدادات.");
+};
 
-      backdrop.addEventListener("click", e => {
-        if (e.target === backdrop) backdrop.style.display = "none";
-      });
+/* صوت التنبيه عبر Web Audio API */
+async function playReminderSound(){
+  if(settings.sound===false)return;
+  try{
+    audioContext ||= new (window.AudioContext||window.webkitAudioContext)();
+    if(audioContext.state==="suspended")await audioContext.resume();
 
-      document.getElementById("injazCloseSettings").onclick =
-        () => backdrop.style.display = "none";
+    [784,988,1175].forEach((frequency,index)=>{
+      const start=audioContext.currentTime+index*.19;
+      const oscillator=audioContext.createOscillator();
+      const gain=audioContext.createGain();
+      oscillator.type="sine";
+      oscillator.frequency.value=frequency;
+      gain.gain.setValueAtTime(.0001,start);
+      gain.gain.exponentialRampToValueAtTime(.13,start+.025);
+      gain.gain.exponentialRampToValueAtTime(.0001,start+.17);
+      oscillator.connect(gain);gain.connect(audioContext.destination);
+      oscillator.start(start);oscillator.stop(start+.18);
+    });
+  }catch{}
+}
+$("#testSound").onclick=async()=>{
+  await playReminderSound();
+  notify("تم تشغيل نغمة الاختبار.");
+};
 
-      document.getElementById("injazTestSound").onclick = () => {
+/* إشعارات المواعيد */
+async function requestNotificationPermission(){
+  if(!("Notification" in window)){
+    notify("المتصفح لا يدعم إشعارات النظام.");
+    return false;
+  }
+  if(Notification.permission==="granted")return true;
+  if(Notification.permission==="denied"){
+    notify("الإشعارات محظورة؛ فعّلها من إعدادات المتصفح.");
+    return false;
+  }
+  try{
+    const permission=await Notification.requestPermission();
+    if(permission!=="granted")notify("لم يتم السماح بالإشعارات.");
+    return permission==="granted";
+  }catch{
+    notify("تعذّر طلب إذن الإشعارات.");
+    return false;
+  }
+}
+$("#enableNotifications").onclick=async()=>{
+  const allowed=await requestNotificationPermission();
+  if(allowed){
+    settings.reminders=true;
+    $("#settingReminders").checked=true;
+    saveSettings();
+    notify("تم السماح بالإشعارات.");
+  }
+};
+
+const notifiedReminders=new Set();
+
+function checkReminders(){
+  if(!settings.reminders||!("Notification" in window)||Notification.permission!=="granted")return;
+
+  const now=Date.now();
+  for(const task of tasks){
+    if(!task||task.done||!task.id||!task.date||!task.time)continue;
+
+    const due=new Date(`${task.date}T${task.time}:00`).getTime();
+    if(!Number.isFinite(due))continue;
+
+    const leadMs=(Number(settings.lead)||0)*60000;
+    const reminderAt=due-leadMs;
+    const key=`${task.id}_${task.date}_${task.time}`;
+
+    // السماح بنافذة دقيقة، ومنع تكرار التنبيه نفسه
+    if(now>=reminderAt&&now<reminderAt+60000&&!notifiedReminders.has(key)){
+      notifiedReminders.add(key);
+      try{
+        const n=new Notification("إنجاز — تذكير بموعد",{
+          body:`${task.title} · ${task.time}`,
+          tag:key,
+          icon:"icon-192.jpeg"
+        });
+        n.onclick=()=>{
+          window.focus();
+          n.close();
+        };
         playReminderSound();
-        showToast("جرّبنا نغمة التنبيه");
-      };
-
-      document.getElementById("injazSaveSettings").onclick = async () => {
-        const name = document.getElementById("injazUserName").value.trim();
-        const oldSettings = (() => {
-          try {
-            return JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
-          } catch { return {}; }
-        })();
-
-        config.theme = document.getElementById("injazThemeSelect").value;
-        config.reminders = document.getElementById("injazReminders").checked;
-        config.lead = Number(document.getElementById("injazReminderLead").value);
-
-        if (name) oldSettings.name = name;
-        saveConfig();
-
-        try {
-          if (config.reminders && "Notification" in window &&
-              Notification.permission === "default") {
-            await Notification.requestPermission();
-          }
-        } catch {}
-
-        applyTheme();
-
-        if (typeof render === "function") render();
-        backdrop.style.display = "none";
-        showToast("تم حفظ الإعدادات");
-      };
-    }
-
-    let currentSettings = {};
-    try {
-      currentSettings = JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
-    } catch {}
-
-    document.getElementById("injazUserName").value = currentSettings.name || "عمران";
-    document.getElementById("injazThemeSelect").value = config.theme;
-    document.getElementById("injazReminders").checked = config.reminders;
-    document.getElementById("injazReminderLead").value = String(config.lead);
-    backdrop.style.display = "grid";
-  }
-
-  // استبدال نافذة الاسم البسيطة بنافذة الإعدادات الجديدة
-  const settingsButton = document.getElementById("settingsBtn");
-  if (settingsButton) settingsButton.onclick = openSettings;
-
-  const notified = new Set();
-
-  async function requestNotificationPermission() {
-    if (!("Notification" in window)) {
-      showToast("هذا المتصفح لا يدعم إشعارات النظام");
-      return false;
-    }
-
-    if (Notification.permission === "granted") return true;
-    if (Notification.permission === "denied") {
-      showToast("الإشعارات محظورة من إعدادات المتصفح");
-      return false;
-    }
-
-    const permission = await Notification.requestPermission();
-    if (permission !== "granted") showToast("لم يتم السماح بالإشعارات");
-    return permission === "granted";
-  }
-
-  function reminderDate(task) {
-    if (!task.date || !task.time) return null;
-    const date = new Date(`${task.date}T${task.time}:00`);
-    return Number.isNaN(date.getTime()) ? null : date;
-  }
-
-  async function checkReminders() {
-    if (!config.reminders || !Array.isArray(window.tasks)) return;
-    if (!("Notification" in window) || Notification.permission !== "granted") return;
-
-    const now = Date.now();
-    const leadMs = config.lead * 60 * 1000;
-
-    for (const task of window.tasks) {
-      if (!task || task.done || !task.id) continue;
-
-      const due = reminderDate(task);
-      if (!due) continue;
-
-      const key = `${task.id}_${task.date}_${task.time}`;
-      const diff = due.getTime() - now;
-
-      // مرة واحدة لكل موعد، خلال دقيقة من وقت التنبيه المحدد
-      if (diff <= leadMs && diff >= leadMs - 60000 && !notified.has(key)) {
-        notified.add(key);
-        try {
-          const notification = new Notification("إنجاز — تذكير بموعد", {
-            body: `${task.title}${task.time ? " · الساعة " + task.time : ""}`,
-            tag: key,
-            icon: "icon-192.jpeg"
-          });
-          notification.onclick = () => {
-            window.focus();
-            notification.close();
-          };
-          playReminderSound();
-        } catch {}
-      }
+      }catch{}
     }
   }
 
-  applyTheme();
+  // تنظيف المفاتيح القديمة لتجنب تضخم الذاكرة
+  if(notifiedReminders.size>500)notifiedReminders.clear();
+}
 
-  // يتيح زر الإعدادات طلب الإذن عند تفعيل التذكيرات.
-  // لا يمكن ضمان إشعارات الخلفية بعد إغلاق الصفحة.
-  setInterval(checkReminders, 5000);
-
-  // لا نطلب الإذن تلقائيًا عند تحميل الصفحة؛ يجب أن يكون بطلب المستخدم.
-  window.injazRequestNotificationPermission = requestNotificationPermission;
-})();
+/* بدء التطبيق */
+applyTheme();
+render();
+setInterval(checkReminders,5000);
 </script>
 </body>
 </html>
