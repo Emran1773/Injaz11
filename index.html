@@ -215,214 +215,340 @@ textarea::placeholder,input::placeholder{color:#70766c}
 <div class="toast" id="toast"></div>
 
 <script>
-"use strict";
-const $=s=>document.querySelector(s);
-const $$=s=>[...document.querySelectorAll(s)];
-const STORAGE_KEY="injaz_luxe_tasks_v1";
-const SETTINGS_KEY="injaz_luxe_settings_v1";
-const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
-const plusDays=(n)=>{const d=new Date();d.setDate(d.getDate()+n);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`};
-const uid=()=>`${Date.now().toString(36)}${Math.random().toString(36).slice(2,8)}`;
-const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let tasks=loadTasks(), currentView="all", currentFilter="all", previewTasks=[];
-let settings=loadSettings();
+(() => {
+  "use strict";
 
-function loadTasks(){
- try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");return Array.isArray(x)?x.filter(t=>t&&typeof t.title==="string"&&t.id):[]}catch{return []}
-}
-function loadSettings(){try{return JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{"name":"عمران"}')}catch{return {name:"عمران"}}}
-function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));return true}catch{notify("تعذّر الحفظ؛ قد تكون مساحة التخزين ممتلئة.");return false}}
-function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings))}catch{}}
-function notify(msg){const t=$("#toast");t.textContent=msg;t.style.display="block";clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.style.display="none",3000)}
-function formatDate(date){if(!date)return "بلا تاريخ";if(date===todayISO())return "اليوم";if(date===plusDays(1))return "غدًا";return new Date(date+"T12:00:00").toLocaleDateString("ar-SA",{day:"numeric",month:"short"})}
-function priorityLabel(p){return p==="high"?"عالية":p==="low"?"منخفضة":"متوسطة"}
-function taskSort(a,b){return (a.done-b.done)||(a.date||"9999").localeCompare(b.date||"9999")||(a.time||"99:99").localeCompare(b.time||"99:99")||({high:0,medium:1,low:2}[a.priority]??1)-({high:0,medium:1,low:2}[b.priority]??1)}
-function dayTasks(){return tasks.filter(t=>t.date===todayISO())}
-function visibleTasks(){
- let list=[...tasks];
- if(currentView==="today")list=list.filter(t=>t.date===todayISO());
- if(currentView==="upcoming")list=list.filter(t=>t.date>todayISO()&&!t.done);
- if(currentView==="done")list=list.filter(t=>t.done);
- if(currentFilter==="pending")list=list.filter(t=>!t.done);
- if(currentFilter==="high")list=list.filter(t=>t.priority==="high"&&!t.done);
- if(currentFilter==="done")list=list.filter(t=>t.done);
- return list.sort(taskSort);
-}
-function render(){
- const today=dayTasks(),doneToday=today.filter(t=>t.done).length;
- const pct=today.length?Math.round(doneToday/today.length*100):0;
- $("#todayDate").textContent=new Date().toLocaleDateString("ar-SA",{weekday:"long",day:"numeric",month:"long"});
- $("#profileName").textContent="مساحة "+(settings.name||"يومك");
- $("#avatar").textContent=(settings.name||"ع").trim().charAt(0)||"ع";
- $("#greeting").textContent=new Date().getHours()<12?"صباح الإنجاز":new Date().getHours()<17?"نهارك واضح": "مساء الإنجاز";
- $("#welcomeTitle").textContent=`${settings.name||"صاحب الإنجاز"}، ابدأ بخطوة.`;
- $("#statToday").textContent=today.length;
- $("#statDone").textContent=doneToday;
- $("#statPending").textContent=today.filter(t=>!t.done).length;
- $("#statPercent").textContent=pct+"%";
- $("#mainProgress").style.width=pct+"%";
- $("#detailProgress").style.width=pct+"%";
- $("#progressLabel").textContent=pct+"%";
- $("#progressMessage").textContent=!today.length?"لم تضف مهامًا لهذا اليوم بعد. ضع أولوياتك وابدأ.":pct===100?"أحسنت! أتممت جميع مهام اليوم.":`أنجزت ${doneToday} من ${today.length} مهام اليوم. أكمل المهمة التالية بهدوء.`;
- $("#navAll").textContent=tasks.filter(t=>!t.done).length;
- $("#navToday").textContent=today.filter(t=>!t.done).length;
- $("#taskCount").textContent=visibleTasks().length+" مهمة";
- const viewNames={all:"مهامك",today:"مهام اليوم",upcoming:"المهام القادمة",done:"المهام المكتملة"};
- $("#tasksHeading").textContent=viewNames[currentView]||"مهامك";
- $$("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.view===currentView));
- $$("#filters button").forEach(b=>b.classList.toggle("active",b.dataset.filter===currentFilter));
- const list=visibleTasks();
- $("#taskList").innerHTML=list.length?list.map(t=>`
- <article class="task ${t.done?"done":""}">
-  <input class="task-check" type="checkbox" aria-label="إكمال المهمة" data-complete="${escapeHTML(t.id)}" ${t.done?"checked":""}>
-  <div><div class="task-title">${escapeHTML(t.title)}</div>
-   <div class="task-meta"><span class="tag">${escapeHTML(t.category||"أخرى")}</span><span class="tag ${escapeHTML(t.priority||"medium")}">${priorityLabel(t.priority)}</span><span>${formatDate(t.date)}${t.time?" · "+escapeHTML(t.time):""}</span>${t.duration?`<span>${t.duration} دقيقة</span>`:""}</div>
-  </div>
-  <div class="task-actions"><button class="mini-btn" title="تعديل" data-edit="${escapeHTML(t.id)}">✎</button><button class="mini-btn" title="حذف" data-delete="${escapeHTML(t.id)}">×</button></div>
- </article>`).join(""):`<div class="empty">لا توجد مهام هنا الآن.<br>أضف مهمة جديدة أو استخدم المساعد لترتيب يومك.</div>`;
- const categories={};tasks.filter(t=>!t.done).forEach(t=>categories[t.category||"أخرى"]=(categories[t.category||"أخرى"]||0)+1);
- const entries=Object.entries(categories).sort((a,b)=>b[1]-a[1]);
- $("#categoryStats").innerHTML=entries.length?entries.map(([name,count])=>`<div class="category-row"><span class="category-name"><span class="dot"></span>${escapeHTML(name)}</span><span class="category-count">${count} مهام</span></div>`).join(""):`<div class="empty">سيظهر توزيع المهام هنا.</div>`;
- const upcoming=tasks.filter(t=>!t.done&&t.date>=todayISO()).sort(taskSort).slice(0,4);
- $("#upcomingList").innerHTML=upcoming.length?upcoming.map(t=>`<div class="task" style="grid-template-columns:1fr"><div><div class="task-title">${escapeHTML(t.title)}</div><div class="task-meta"><span>${formatDate(t.date)}${t.time?" · "+escapeHTML(t.time):""}</span><span class="tag ${escapeHTML(t.priority)}">${priorityLabel(t.priority)}</span></div></div></div>`).join(""):`<div class="empty">لا توجد مواعيد قادمة.</div>`;
-}
-function openModal(task=null){
- $("#taskForm").reset();$("#editId").value=task?.id||"";
- $("#modalTitle").textContent=task?"تعديل المهمة":"إضافة مهمة جديدة";
- $("#taskTitle").value=task?.title||"";
- $("#taskDate").value=task?.date||todayISO();
- $("#taskTime").value=task?.time||"";
- $("#taskCategory").value=task?.category||"دراسة";
- $("#taskPriority").value=task?.priority||"medium";
- $("#taskDuration").value=task?.duration||"";
- $("#modalBackdrop").style.display="grid";setTimeout(()=>$("#taskTitle").focus(),40);
-}
-function closeModal(){$("#modalBackdrop").style.display="none"}
-$("#addTaskBtn").onclick=()=>openModal();
-$("#cancelModal").onclick=closeModal;
-$("#modalBackdrop").addEventListener("click",e=>{if(e.target===$("#modalBackdrop"))closeModal()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
-$("#taskForm").addEventListener("submit",e=>{
- e.preventDefault();
- const title=$("#taskTitle").value.trim();if(!title)return;
- const id=$("#editId").value;
- const old=tasks.find(t=>t.id===id);
- const task={id:id||uid(),title,date:$("#taskDate").value||todayISO(),time:$("#taskTime").value,category:$("#taskCategory").value,priority:$("#taskPriority").value,duration:Math.max(0,Number($("#taskDuration").value)||0),done:old?.done||false,createdAt:old?.createdAt||Date.now()};
- if(id)tasks=tasks.map(t=>t.id===id?task:t);else tasks.push(task);
- save();closeModal();render();notify(id?"تم تحديث المهمة":"أُضيفت المهمة بنجاح");
-});
-$("#taskList").addEventListener("click",e=>{
- const complete=e.target.closest("[data-complete]");const edit=e.target.closest("[data-edit]");const del=e.target.closest("[data-delete]");
- if(complete){const t=tasks.find(x=>x.id===complete.dataset.complete);if(t){t.done=complete.checked;t.completedAt=t.done?Date.now():null;save();render();notify(t.done?"أحسنت! أُنجزت المهمة":"أُعيد فتح المهمة")}return}
- if(edit){const t=tasks.find(x=>x.id===edit.dataset.edit);if(t)openModal(t);return}
- if(del){const t=tasks.find(x=>x.id===del.dataset.delete);if(t&&confirm(`هل تريد حذف «${t.title}»؟`)){tasks=tasks.filter(x=>x.id!==t.id);save();render();notify("حُذفت المهمة")}}
-});
-$("#nav").addEventListener("click",e=>{const b=e.target.closest("[data-view]");if(!b)return;currentView=b.dataset.view;currentFilter="all";render()});
-$("#filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;currentFilter=b.dataset.filter;render()});
-$$(".example").forEach(b=>b.onclick=()=>{$("#aiInput").value=b.dataset.example;$("#aiInput").focus()});
-$("#clearAiBtn").onclick=()=>{$("#aiInput").value="";$("#preview").hidden=true;previewTasks=[]};
+  const STYLE = document.createElement("style");
+  STYLE.textContent = `
+    body[data-theme="light"] {
+      --bg:#f4f1e9; --panel:#fffdf8; --panel2:#eee9dc;
+      --line:#ded6c4; --gold:#a77b32; --gold-light:#79551d;
+      --text:#26251f; --muted:#777366;
+      background:radial-gradient(ellipse at 85% -15%,#e9dcc0 0,transparent 38%),var(--bg);
+      color:var(--text);
+    }
+    body[data-theme="light"] .sidebar,
+    body[data-theme="light"] .panel,
+    body[data-theme="light"] .modal {
+      background:var(--panel); border-color:var(--line);
+    }
+    body[data-theme="light"] .ai-panel {
+      background:radial-gradient(ellipse at 100% 0,#f1e5cd 0,transparent 48%),var(--panel);
+    }
+    body[data-theme="light"] textarea,
+    body[data-theme="light"] input,
+    body[data-theme="light"] select {
+      background:#fffefa; color:var(--text); border-color:var(--line);
+    }
+    body[data-theme="light"] .task,
+    body[data-theme="light"] .preview-item {
+      background:#faf7ef; border-color:var(--line);
+    }
+    body[data-theme="light"] .tag { background:#eee8d9; }
+    body[data-theme="light"] .mini-btn,
+    body[data-theme="light"] .secondary-btn,
+    body[data-theme="light"] .icon-btn {
+      background:#f5f0e5; color:var(--text); border-color:var(--line);
+    }
+    body[data-theme="light"] .nav button.active,
+    body[data-theme="light"] .filter.active {
+      background:#eee3cc; color:#79551d; border-color:#cbb17e;
+    }
+    body[data-theme="light"] .side-bottom { background:#f0eadc; }
+    body[data-theme="light"] .logo { background:#f0e4ca; }
+    body[data-theme="light"] .avatar,
+    body[data-theme="light"] .stat-icon,
+    body[data-theme="light"] .ai-mark {
+      background:#eee3cc; color:#79551d;
+    }
+    body[data-theme="light"] .example {
+      background:#f1eadb; color:#79551d; border-color:#d8c7a5;
+    }
+    body[data-theme="light"] .progress-track { background:#e5dfd1; }
+    body[data-theme="light"] .toast {
+      background:#fffdf8; color:#26251f; border-color:#d8c7a5;
+    }
+    .settings-modal { max-width:440px; }
+    .setting-row {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:13px 0; border-bottom:1px solid var(--line);
+      font-size:13px;
+    }
+    .setting-row:last-child { border-bottom:0; }
+    .setting-row select { max-width:155px; }
+    .setting-switch { width:21px; height:21px; accent-color:var(--gold); }
+    .theme-toggle { min-width:43px; }
+  `;
+  document.head.appendChild(STYLE);
 
-const categoryRules=[
- {name:"قرآن وعبادة",words:["قرآن","حفظ","مراجعة السرد","تجويد","ورد","أذكار","صلاة","متون","حديث"]},
- {name:"رياضة",words:["تمرين","تدريب","جيم","جري","سباحة","سهام","قوس","فتنس","إحماء"]},
- {name:"دراسة",words:["مذاكرة","أذاكر","دراسة","واجب","اختبار","امتحان","رياضيات","إنجليزي","الإنجليزية","علوم","فيزياء","مدرسة","حل أسئلة","أحل"]},
- {name:"عمل ومشاريع",words:["مشروع","موقع","تصميم","برمجة","تطبيق","كود","عميل","عمل","منصة"]},
- {name:"قراءة",words:["قراءة","أقرأ","كتاب","مطالعة"]},
- {name:"شخصي",words:["غرفة","ترتيب","نوم","استحمام","شراء","موعد"]}
-];
-function detectCategory(text){
- const lower=text.toLowerCase();
- for(const c of categoryRules)if(c.words.some(w=>lower.includes(w)))return c.name;
- return "أخرى";
-}
-function detectPriority(text){
- if(/عاجل|مهم جدًا|مهم جدا|ضروري|أولوية قصوى|الأولوية|أولويتي|قبل كل شيء|لازم اليوم/.test(text))return "high";
- if(/ليس مهمًا|مو مستعجل|غير عاجل|بسيط|إذا بقي وقت/.test(text))return "low";
- return "medium";
-}
-function detectDate(text){
- if(/بعد غد|بعد بكرة/.test(text))return plusDays(2);
- if(/غدًا|غدا|بكرة|بكره/.test(text))return plusDays(1);
- if(/اليوم|الليلة|هذا الصباح|هذا المساء/.test(text))return todayISO();
- const days={"الأحد":0,"الاحد":0,"الإثنين":1,"الاثنين":1,"الثلاثاء":2,"الأربعاء":3,"الاربعاء":3,"الخميس":4,"الجمعة":5,"السبت":6};
- const match=text.match(/الأحد|الاحد|الإثنين|الاثنين|الثلاثاء|الأربعاء|الاربعاء|الخميس|الجمعة|السبت/);
- if(match){const now=new Date(),target=days[match[0]],delta=(target-now.getDay()+7)%7||7;return plusDays(delta)}
- return todayISO();
-}
-function detectTime(text){
- let m=text.match(/(?:الساعة\s*)?(\d{1,2})(?::(\d{2}))?\s*(صباحًا|صباحا|مساءً|مساء|ص|م)\b/);
- if(m){let h=Number(m[1]),min=Number(m[2]||0),suffix=m[3];if(h>23||min>59)return "";if(/مساء|م$/.test(suffix)&&h<12)h+=12;if(/صباح|ص$/.test(suffix)&&h===12)h=0;return `${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}`}
- m=text.match(/الساعة\s*(\d{1,2})(?::(\d{2}))?/);
- if(m){let h=Number(m[1]),min=Number(m[2]||0);if(h>=0&&h<=23&&min<=59){if(h>=1&&h<=7)h+=12;return `${String(h).padStart(2,"0")}:${String(min).padStart(2,"0")}`}}
- return "";
-}
-function detectDuration(text){
- let m=text.match(/(?:لمدة|مدتها|يستغرق|تستغرق|حوالي)\s*(ساعة ونصف|ساعة ونص|نصف ساعة|نص ساعة|ساعة|ساعتين|ثلاث ساعات|أربع ساعات|ربع ساعة|(\d+)\s*(?:دقيقة|دقائق|دقايق|د)|(\d+)\s*(?:ساعة|ساعات))/);
- if(!m)return 0;
- if(m[1]==="ساعة ونصف"||m[1]==="ساعة ونص")return 90;
- if(m[1]==="نصف ساعة"||m[1]==="نص ساعة")return 30;
- if(m[1]==="ساعة")return 60;
- if(m[1]==="ساعتين")return 120;
- if(m[1]==="ثلاث ساعات")return 180;
- if(m[1]==="أربع ساعات")return 240;
- if(m[1]==="ربع ساعة")return 15;
- if(m[2])return Number(m[2]);
- if(m[3])return Number(m[3])*60;
- return 0;
-}
-function cleanTitle(text){
- return text.replace(/(?:اليوم|غدًا|غدا|بكرة|بكره|بعد غد|بعد بكرة|هذا الصباح|هذا المساء)/g,"")
- .replace(/(?:الساعة\s*)?\d{1,2}(?::\d{2})?\s*(?:صباحًا|صباحا|مساءً|مساء|ص|م)\b/g,"")
- .replace(/الساعة\s*\d{1,2}(?::\d{2})?/g,"")
- .replace(/(?:لمدة|مدتها|يستغرق|تستغرق|حوالي)\s*(?:ساعة ونصف|ساعة ونص|نصف ساعة|نص ساعة|ساعة|ساعتين|ثلاث ساعات|أربع ساعات|ربع ساعة|\d+\s*(?:دقيقة|دقائق|دقايق|د|ساعة|ساعات))/g,"")
- .replace(/(?:وأريد|واريد|أريد|اريد|من فضلك|لو سمحت|الأولوية|أولويتي|مهم جدًا|مهم جدا|ضروري|عاجل)/g,"")
- .replace(/\s+/g," ").replace(/^[\s،,.:؛\-]+|[\s،,.:؛\-]+$/g,"").trim();
-}
-function splitTasks(text){
- // يفصل الجمل والفواصل، وكذلك أدوات الربط التي غالبًا تبدأ مهمة جديدة.
- return text.split(/\n+|[.!؟؛]+|،\s*(?=(?:وبعد|ثم|بعدها|وأراجع|وأذاكر|وأحل|وأتمرن|أراجع|أذاكر|أحل|أتمرن|أقرأ|أكتب|أعمل|أبدأ|أنهي|أكمل|أرتب|أحفظ|أذهب|أصلي|أجهز|أجهّز|أراجع|أدرس))/)
- .flatMap(part=>part.split(/\s+(?:ثم|وبعدها|بعدها)\s+/)).map(s=>s.trim()).filter(s=>s.length>=3);
-}
-function analyzeText(raw){
- const parts=splitTasks(raw),out=[];
- for(const part of parts){
-   const date=detectDate(part),time=detectTime(part),duration=detectDuration(part),priority=detectPriority(part),category=detectCategory(part);
-   let title=cleanTitle(part);
-   title=title.replace(/^(?:و)?(?:بعد ذلك|بعدها|ثم|كذلك|أيضًا|ايضا)\s*/,"").trim();
-   if(!title||/^(اليوم|غدا|غدًا|بكرة)$/.test(title))continue;
-   out.push({id:uid(),title:title.charAt(0).toLocaleUpperCase("ar")+title.slice(1),date,time,duration,priority,category,done:false,createdAt:Date.now()});
- }
- // إزالة التكرار النصي.
- return out.filter((t,i,a)=>a.findIndex(x=>x.title===t.title&&x.date===t.date&&x.time===t.time)===i);
-}
-$("#analyzeBtn").onclick=()=>{
- const raw=$("#aiInput").value.trim();
- if(!raw){notify("اكتب المهام أولًا.");$("#aiInput").focus();return}
- previewTasks=analyzeText(raw);
- if(!previewTasks.length){notify("لم أستطع استخراج مهمة واضحة. جرّب كتابة كل مهمة في سطر.");return}
- const box=$("#preview");box.hidden=false;
- box.innerHTML=`<div class="panel-heading" style="margin-top:17px;margin-bottom:8px"><div><h3>راجع المهام المستخرجة</h3><p>يمكنك تحديد ما تريد إضافته</p></div><span class="pill">${previewTasks.length} مهام</span></div>
- <div class="preview-list">${previewTasks.map((t,i)=>`<label class="preview-item"><input type="checkbox" data-preview="${i}" checked><span><strong>${escapeHTML(t.title)}</strong><span class="preview-meta"><span>${escapeHTML(t.category)}</span><span>${formatDate(t.date)}</span>${t.time?`<span>${escapeHTML(t.time)}</span>`:""}${t.duration?`<span>${t.duration} دقيقة</span>`:""}<span class="tag ${t.priority}">${priorityLabel(t.priority)}</span></span></span></label>`).join("")}</div>
- <div class="ai-actions" style="margin-top:13px"><button class="primary-btn" id="commitPreview">＋ أضف المهام المحددة</button><button class="secondary-btn" id="selectAllPreview">تحديد الكل</button></div>`;
- $("#commitPreview").onclick=()=>{
-   const selected=$$("[data-preview]:checked").map(el=>previewTasks[Number(el.dataset.preview)]).filter(Boolean);
-   if(!selected.length){notify("حدّد مهمة واحدة على الأقل.");return}
-   tasks.push(...selected);save();currentView="all";currentFilter="all";render();box.hidden=true;notify(`أُضيفت ${selected.length} مهام إلى قائمتك.`);
- };
- $("#selectAllPreview").onclick=()=>{$$("[data-preview]").forEach(el=>el.checked=true)};
- box.scrollIntoView({behavior:"smooth",block:"nearest"});
-};
-$("#exportBtn").onclick=()=>{
- const payload={app:"إنجاز",version:1,exportedAt:new Date().toISOString(),settings,tasks};
- const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob),a=document.createElement("a");
- a.href=url;a.download=`injaz-backup-${todayISO()}.json`;a.click();URL.revokeObjectURL(url);notify("تم تصدير نسخة احتياطية.");
-};
-$("#settingsBtn").onclick=()=>{
- const name=prompt("ما الاسم الذي تريد ظهوره في التطبيق؟",settings.name||"عمران");
- if(name===null)return;settings.name=name.trim().slice(0,40)||"صاحب الإنجاز";saveSettings();render();notify("تم تحديث الاسم.");
-};
-render();
+  const saved = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
+    } catch {
+      return {};
+    }
+  })();
+
+  const config = {
+    theme: saved.theme || localStorage.getItem("injaz_theme") || "dark",
+    reminders: saved.reminders !== false,
+    lead: Number(saved.reminderLead ?? 5)
+  };
+
+  function saveConfig() {
+    try {
+      const old = JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
+      localStorage.setItem("injaz_luxe_settings_v1", JSON.stringify({
+        ...old, ...config
+      }));
+    } catch {}
+  }
+
+  function applyTheme() {
+    document.body.dataset.theme = config.theme;
+    localStorage.setItem("injaz_theme", config.theme);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = config.theme === "light" ? "#f4f1e9" : "#0d0f0e";
+    const btn = document.getElementById("injazThemeBtn");
+    if (btn) {
+      btn.textContent = config.theme === "dark" ? "☀" : "☾";
+      btn.title = config.theme === "dark" ? "تفعيل الوضع الفاتح" : "تفعيل الوضع الداكن";
+      btn.setAttribute("aria-label", btn.title);
+    }
+  }
+
+  // زر تغيير المظهر
+  const headerActions = document.querySelector(".header-actions");
+  if (headerActions && !document.getElementById("injazThemeBtn")) {
+    const themeBtn = document.createElement("button");
+    themeBtn.id = "injazThemeBtn";
+    themeBtn.className = "icon-btn theme-toggle";
+    themeBtn.type = "button";
+    themeBtn.onclick = () => {
+      config.theme = config.theme === "dark" ? "light" : "dark";
+      saveConfig();
+      applyTheme();
+      showToast(config.theme === "light" ? "تم تفعيل الوضع الفاتح" : "تم تفعيل الوضع الداكن");
+    };
+    headerActions.insertBefore(themeBtn, headerActions.firstChild);
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.style.display = "block";
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => toast.style.display = "none", 3500);
+  }
+
+  // نغمة تنبيه مولدة داخل المتصفح، لا تحتاج ملفًا خارجيًا
+  let audioContext;
+  function playReminderSound() {
+    try {
+      audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+      if (audioContext.state === "suspended") audioContext.resume();
+
+      [880, 1174, 880].forEach((frequency, index) => {
+        const start = audioContext.currentTime + index * 0.22;
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+
+        oscillator.type = "sine";
+        oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(0.16, start + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.18);
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+        oscillator.start(start);
+        oscillator.stop(start + 0.2);
+      });
+    } catch {}
+  }
+
+  function openSettings() {
+    let backdrop = document.getElementById("injazSettingsBackdrop");
+
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.id = "injazSettingsBackdrop";
+      backdrop.className = "modal-backdrop";
+      backdrop.innerHTML = `
+        <section class="modal settings-modal" role="dialog" aria-modal="true"
+          aria-labelledby="injazSettingsTitle">
+          <h3 id="injazSettingsTitle">⚙ إعدادات إنجاز</h3>
+
+          <div class="field">
+            <label for="injazUserName">الاسم الظاهر</label>
+            <input id="injazUserName" maxlength="40" placeholder="اسمك">
+          </div>
+
+          <div class="setting-row">
+            <label for="injazThemeSelect">المظهر</label>
+            <select id="injazThemeSelect">
+              <option value="dark">داكن — أسود وذهبي</option>
+              <option value="light">فاتح</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <label for="injazReminders">تفعيل تذكيرات المواعيد</label>
+            <input class="setting-switch" id="injazReminders" type="checkbox">
+          </div>
+
+          <div class="field" style="margin-top:15px">
+            <label for="injazReminderLead">التنبيه قبل الموعد</label>
+            <select id="injazReminderLead">
+              <option value="0">في وقت الموعد</option>
+              <option value="5">قبل 5 دقائق</option>
+              <option value="10">قبل 10 دقائق</option>
+              <option value="15">قبل 15 دقيقة</option>
+              <option value="30">قبل 30 دقيقة</option>
+            </select>
+          </div>
+
+          <p style="font-size:11px;color:var(--muted);line-height:1.9">
+            يجب السماح بالإشعارات من المتصفح. تعمل التذكيرات أثناء بقاء التطبيق مفتوحًا،
+            وقد لا تصل عند إغلاق الصفحة أو تعليق المتصفح.
+          </p>
+
+          <div class="modal-actions">
+            <button class="primary-btn" id="injazSaveSettings">حفظ الإعدادات</button>
+            <button class="secondary-btn" id="injazTestSound">تجربة الصوت</button>
+            <button class="secondary-btn" id="injazCloseSettings">إغلاق</button>
+          </div>
+        </section>`;
+      document.body.appendChild(backdrop);
+
+      backdrop.addEventListener("click", e => {
+        if (e.target === backdrop) backdrop.style.display = "none";
+      });
+
+      document.getElementById("injazCloseSettings").onclick =
+        () => backdrop.style.display = "none";
+
+      document.getElementById("injazTestSound").onclick = () => {
+        playReminderSound();
+        showToast("جرّبنا نغمة التنبيه");
+      };
+
+      document.getElementById("injazSaveSettings").onclick = async () => {
+        const name = document.getElementById("injazUserName").value.trim();
+        const oldSettings = (() => {
+          try {
+            return JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
+          } catch { return {}; }
+        })();
+
+        config.theme = document.getElementById("injazThemeSelect").value;
+        config.reminders = document.getElementById("injazReminders").checked;
+        config.lead = Number(document.getElementById("injazReminderLead").value);
+
+        if (name) oldSettings.name = name;
+        saveConfig();
+
+        try {
+          if (config.reminders && "Notification" in window &&
+              Notification.permission === "default") {
+            await Notification.requestPermission();
+          }
+        } catch {}
+
+        applyTheme();
+
+        if (typeof render === "function") render();
+        backdrop.style.display = "none";
+        showToast("تم حفظ الإعدادات");
+      };
+    }
+
+    let currentSettings = {};
+    try {
+      currentSettings = JSON.parse(localStorage.getItem("injaz_luxe_settings_v1") || "{}");
+    } catch {}
+
+    document.getElementById("injazUserName").value = currentSettings.name || "عمران";
+    document.getElementById("injazThemeSelect").value = config.theme;
+    document.getElementById("injazReminders").checked = config.reminders;
+    document.getElementById("injazReminderLead").value = String(config.lead);
+    backdrop.style.display = "grid";
+  }
+
+  // استبدال نافذة الاسم البسيطة بنافذة الإعدادات الجديدة
+  const settingsButton = document.getElementById("settingsBtn");
+  if (settingsButton) settingsButton.onclick = openSettings;
+
+  const notified = new Set();
+
+  async function requestNotificationPermission() {
+    if (!("Notification" in window)) {
+      showToast("هذا المتصفح لا يدعم إشعارات النظام");
+      return false;
+    }
+
+    if (Notification.permission === "granted") return true;
+    if (Notification.permission === "denied") {
+      showToast("الإشعارات محظورة من إعدادات المتصفح");
+      return false;
+    }
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") showToast("لم يتم السماح بالإشعارات");
+    return permission === "granted";
+  }
+
+  function reminderDate(task) {
+    if (!task.date || !task.time) return null;
+    const date = new Date(`${task.date}T${task.time}:00`);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  async function checkReminders() {
+    if (!config.reminders || !Array.isArray(window.tasks)) return;
+    if (!("Notification" in window) || Notification.permission !== "granted") return;
+
+    const now = Date.now();
+    const leadMs = config.lead * 60 * 1000;
+
+    for (const task of window.tasks) {
+      if (!task || task.done || !task.id) continue;
+
+      const due = reminderDate(task);
+      if (!due) continue;
+
+      const key = `${task.id}_${task.date}_${task.time}`;
+      const diff = due.getTime() - now;
+
+      // مرة واحدة لكل موعد، خلال دقيقة من وقت التنبيه المحدد
+      if (diff <= leadMs && diff >= leadMs - 60000 && !notified.has(key)) {
+        notified.add(key);
+        try {
+          const notification = new Notification("إنجاز — تذكير بموعد", {
+            body: `${task.title}${task.time ? " · الساعة " + task.time : ""}`,
+            tag: key,
+            icon: "icon-192.jpeg"
+          });
+          notification.onclick = () => {
+            window.focus();
+            notification.close();
+          };
+          playReminderSound();
+        } catch {}
+      }
+    }
+  }
+
+  applyTheme();
+
+  // يتيح زر الإعدادات طلب الإذن عند تفعيل التذكيرات.
+  // لا يمكن ضمان إشعارات الخلفية بعد إغلاق الصفحة.
+  setInterval(checkReminders, 5000);
+
+  // لا نطلب الإذن تلقائيًا عند تحميل الصفحة؛ يجب أن يكون بطلب المستخدم.
+  window.injazRequestNotificationPermission = requestNotificationPermission;
+})();
 </script>
 </body>
 </html>
