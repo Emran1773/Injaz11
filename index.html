@@ -46,7 +46,7 @@
 <form id="taskForm"><input type="hidden" id="editTaskId"><div class="field"><label for="taskTitle">عنوان المهمة *</label><input id="taskTitle" maxlength="180" required placeholder="ما الذي تريد إنجازه؟"></div><div class="field-grid"><div class="field"><label for="taskCategory">الفئة</label><select id="taskCategory"><option>شخصي</option><option>دراسة</option><option>عمل</option><option>عبادة</option><option>صحة</option><option>قراءة</option><option>أخرى</option></select></div><div class="field"><label for="taskPriority">الأولوية</label><select id="taskPriority"><option value="medium">متوسطة</option><option value="high">عالية</option><option value="low">منخفضة</option></select></div><div class="field"><label for="taskDate">التاريخ</label><input id="taskDate" type="date"></div><div class="field"><label for="taskTime">الوقت (اختياري)</label><input id="taskTime" type="time"></div><div class="field"><label for="taskDuration">المدة بالدقائق</label><input id="taskDuration" type="number" min="0" max="1440" step="5" placeholder="30"></div></div><div class="modal-actions"><button class="btn primary" type="submit" id="saveTaskBtn">حفظ المهمة</button><button class="btn ghost" type="button" data-close="taskModal">إلغاء</button></div></form></div></div>
 <div class="overlay" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal"><div class="modal-head"><h3 id="settingsTitle">الإعدادات</h3><button class="close-btn" data-close="settingsModal" aria-label="إغلاق">×</button></div>
 <div class="settings-section"><h4>التخصيص</h4><div class="field"><label for="userNameInput">اسم العرض</label><input id="userNameInput" maxlength="40" placeholder="اسمك"></div><div class="field"><label for="themeSelect">المظهر</label><select id="themeSelect"><option value="dark">داكن — أسود وذهبي</option><option value="light">فاتح — عاجي وذهبي</option></select></div><button class="btn primary" id="saveProfileBtn">حفظ التفضيلات</button></div>
-<div class="settings-section"><h4>التذكيرات</h4><div class="setting-line"><div><strong>تفعيل التذكيرات</strong><p>أثناء فتح التطبيق فقط؛ حسب دعم المتصفح</p></div><label class="switch"><input id="remindersEnabled" type="checkbox"><span></span></label></div><div class="field"><label for="reminderLead">التنبيه قبل المهمة</label><select id="reminderLead"><option value="0">في موعد المهمة</option><option value="5">5 دقائق</option><option value="10">10 دقائق</option><option value="15">15 دقيقة</option><option value="30">30 دقيقة</option><option value="60">60 دقيقة</option></select></div><div class="setting-line"><div><strong>صوت التنبيه</strong><p>نغمة قصيرة باستخدام Web Audio</p></div><label class="switch"><input id="soundEnabled" type="checkbox"><span></span></label></div><div class="modal-actions"><button class="btn" id="testSoundBtn" type="button">♫ تجربة الصوت</button><button class="btn" id="enableNotificationsBtn" type="button">السماح بالإشعارات</button></div><p class="notice" id="notificationStatus" style="margin-top:12px">الإشعارات تعتمد على دعم المتصفح وإذنه.</p></div>
+<div class="settings-section"><h4>التذكيرات</h4><div class="setting-line"><div><strong>تفعيل التذكيرات</strong><p>أثناء فتح التطبيق فقط؛ حسب دعم المتصفح</p></div><label class="switch"><input id="remindersEnabled" type="checkbox"><span></span></label></div><div class="field"><label for="reminderLead">التنبيه قبل المهمة</label><select id="reminderLead"><option value="0">في موعد المهمة</option><option value="5">5 دقائق</option><option value="10">10 دقائق</option><option value="15">15 دقيقة</option><option value="30">30 دقيقة</option><option value="60">60 دقيقة</option></select></div><div class="setting-line"><div><strong>صوت التنبيه</strong><p>تشغيل نغمة صوتية من الملفات المرفقة</p></div><label class="switch"><input id="soundEnabled" type="checkbox"><span></span></label></div><div class="modal-actions"><button class="btn" id="testSoundBtn" type="button">♫ تجربة الصوت</button><button class="btn" id="enableNotificationsBtn" type="button">السماح بالإشعارات</button></div><p class="notice" id="notificationStatus" style="margin-top:12px">الإشعارات تعتمد على دعم المتصفح وإذنه.</p></div>
 <div class="settings-section"><h4>النسخ الاحتياطي</h4><div class="modal-actions" style="margin-top:0"><button class="btn" id="exportBtn" type="button">↓ تصدير البيانات</button><button class="btn" id="importBtn" type="button">↑ استيراد نسخة</button><input id="importFile" type="file" accept="application/json,.json" class="hidden"></div><p class="notice" style="margin-top:12px">الاستيراد يعرض معاينة أولًا. لا تُرفع بياناتك إلى أي خادم.</p></div><div class="modal-actions"><button class="btn ghost" data-close="settingsModal">إغلاق</button></div></div></div>
 <div class="overlay" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle"><div class="modal"><div class="modal-head"><h3 id="previewTitle">مراجعة المهام المستخرجة</h3><button class="close-btn" data-close="previewModal" aria-label="إغلاق">×</button></div><p id="previewDescription" style="color:var(--muted);font-size:12px;margin-top:-8px"></p><div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn small" id="selectAllPreview">تحديد الكل</button><button class="btn small ghost" id="deselectAllPreview">إلغاء التحديد</button></div><div class="preview-list" id="previewList"></div><div class="modal-actions"><button class="btn primary" id="confirmPreview">إضافة المحدد</button><button class="btn ghost" data-close="previewModal">إلغاء</button></div></div></div>
 <div class="overlay" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importTitle"><div class="modal"><div class="modal-head"><h3 id="importTitle">معاينة استيراد البيانات</h3><button class="close-btn" data-close="importModal" aria-label="إغلاق">×</button></div><p id="importDescription" style="font-size:12px;color:var(--muted)"></p><div class="notice">عند التأكيد ستُستبدل المهام الحالية بالنسخة المستوردة. يُنصح بتصدير نسخة احتياطية أولًا.</div><div class="modal-actions"><button class="btn primary" id="confirmImport">تأكيد الاستيراد</button><button class="btn ghost" data-close="importModal">إلغاء</button></div></div></div>
@@ -54,7 +54,24 @@
 (()=>{'use strict';
 const KEYS={tasks:'injaz_tasks',settings:'injaz_settings',legacyTasks:['tasks','tasksData','injazTasks'],legacySettings:['settings','injazSettings']};
 const $=id=>document.getElementById(id);
-const state={tasks:[],settings:{name:'عمران',theme:'dark',reminders:false,lead:10,sound:true},filter:'today',preview:[],pendingImport:null,notified:new Set(),audio:null,reminderTimer:null};
+const state={tasks:[],settings:{name:'عمران',theme:'dark',reminders:false,lead:10,sound:true},filter:'today',preview:[],pendingImport:null,notified:new Set(),reminderTimer:null};
+
+// تعريف ملفات الصوت من مجلد sounds/
+const sounds = {
+  success: new Audio('sounds/success.mp3'),
+  important: new Audio('sounds/important.mp3'),
+  reminder: new Audio('sounds/reminder.mp3')
+};
+
+const playSound = (type = 'reminder') => {
+  if (!state.settings.sound) return;
+  const audio = sounds[type] || sounds.reminder;
+  audio.currentTime = 0;
+  audio.play().catch(e => {
+    console.warn("تعذر تشغيل الصوت تلقائياً:", e);
+  });
+};
+
 const todayISO=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 const makeId=()=>`t_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,9)}`;
 const safeText=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -79,8 +96,8 @@ $('motivationTitle').textContent=percent===100&&total?'أحسنت! أتممت م
 function openModal(id){$(id).classList.add('open');document.body.style.overflow='hidden';const focus=$(id).querySelector('input:not([type=hidden]),button,select,textarea');if(focus)setTimeout(()=>focus.focus(),50)}
 function closeModal(id){$(id).classList.remove('open');if(!document.querySelector('.overlay.open'))document.body.style.overflow=''}
 function resetTaskForm(){$('taskForm').reset();$('editTaskId').value='';$('taskDate').value=todayISO();$('taskPriority').value='medium';$('taskModalTitle').textContent='مهمة جديدة';$('saveTaskBtn').textContent='حفظ المهمة'}
-function openTask(id){resetTaskForm();if(id){const t=state.tasks.find(x=>x.id===id);if(!t)return;$('editTaskId').value=t.id;$('taskTitle').value=t.title;$('taskCategory').value=[...$('taskCategory').options].some(o=>o.value===t.category)?t.category:'أخرى';$('taskPriority').value=t.priority;$('taskDate').value=t.date;$('taskTime').value=t.time;$('taskDuration').value=t.duration;$('taskModalTitle').textContent='تعديل المهمة';$('saveTaskBtn').textContent='حفظ التعديلات'}openModal('taskModal')}
-function addTask(title,extras={}){const t=normalizeTask({id:makeId(),title,...extras,createdAt:Date.now()});if(!t)return false;state.tasks.push(t);return true}
+function openTask(id){resetTaskForm();if(id){const t=state.tasks.find(x=>x.id===id);if(!t)return;$('editTaskId').value=t.id;$('taskTitle').value=t.title;$('taskCategory').value=[...$('taskCategory').options].some(o=>o.value===t.category)?t.category:'أخرى';$('taskPriority').value=t.priority;$('taskDate').value=t.date;$('taskTime').value=t.time;$('taskDuration').value=t.duration;$('taskModalTitle').textContent=' تعديل المهمة';$('saveTaskBtn').textContent='حفظ التعديلات'}openModal('taskModal')}
+function addTask(title,extras={}){const t=normalizeTask({id:makeId(),title,...extras,createdAt:Date.now()});if(!t)return false;state.tasks.push(t);if(t.priority === 'high') { playSound('important'); } return true}
 $('taskForm').addEventListener('submit',e=>{e.preventDefault();const title=$('taskTitle').value.trim();if(!title){toast('اكتب عنوان المهمة أولًا.','error');return}const id=$('editTaskId').value;const data={title,category:$('taskCategory').value,priority:$('taskPriority').value,date:validDate($('taskDate').value)?$('taskDate').value:todayISO(),time:$('taskTime').value,duration:Number($('taskDuration').value)||0};if(id){const i=state.tasks.findIndex(t=>t.id===id);if(i<0){toast('لم نعثر على المهمة المطلوبة.','error');return}state.tasks[i]={...state.tasks[i],...data}}else{if(state.tasks.some(t=>!t.completed&&t.title.toLowerCase()===title.toLowerCase()&&t.date===data.date)){if(!confirm('توجد مهمة بالعنوان نفسه في هذا التاريخ. هل تريد إضافتها رغم ذلك؟'))return}addTask(title,data)}save();closeModal('taskModal');toast(id?'تم تحديث المهمة':'تمت إضافة المهمة')});
 function quickAdd(){const title=$('quickTaskTitle').value.trim();if(!title){$('quickTaskTitle').focus();return}if(state.tasks.some(t=>!t.completed&&t.title.toLowerCase()===title.toLowerCase()&&t.date===todayISO())){toast('هذه المهمة موجودة بالفعل اليوم.','error');return}addTask(title,{date:todayISO(),category:'شخصي',priority:'medium',duration:0});$('quickTaskTitle').value='';state.filter='today';save();toast('أُضيفت المهمة بنجاح')}
 $('quickAddBtn').addEventListener('click',quickAdd);$('quickTaskTitle').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();quickAdd()}});
@@ -88,50 +105,16 @@ $('newTaskTop').addEventListener('click',()=>openTask());$('openSettings').addEv
 $('themeQuick').addEventListener('click',()=>{state.settings.theme=state.settings.theme==='dark'?'light':'dark';applyTheme();persist();toast('تم تغيير المظهر')});
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{state.filter=b.dataset.filter;render()}));
 $('taskList').addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const {action,id}=b.dataset;const t=state.tasks.find(x=>x.id===id);if(!t)return;if(action==='edit')openTask(id);if(action==='delete'&&confirm(`هل تريد حذف المهمة «${t.title}»؟`)){state.tasks=state.tasks.filter(x=>x.id!==id);save();toast('تم حذف المهمة')}});
-$('taskList').addEventListener('change',e=>{const el=e.target.closest('[data-action="toggle"]');if(!el)return;const t=state.tasks.find(x=>x.id===el.dataset.id);if(t){t.completed=el.checked;save();toast(t.completed?'أحسنت، تم إنجاز المهمة':'أُعيد فتح المهمة')}});
+$('taskList').addEventListener('change',e=>{const el=e.target.closest('[data-action="toggle"]');if(!el)return;const t=state.tasks.find(x=>x.id===el.dataset.id);if(t){t.completed=el.checked;save();if(t.completed){playSound('success');}toast(t.completed?'أحسنت، تم إنجاز المهمة':'أُعيد فتح المهمة')}});
 function openSettings(){$('userNameInput').value=state.settings.name;$('themeSelect').value=state.settings.theme;$('remindersEnabled').checked=!!state.settings.reminders;$('reminderLead').value=String(state.settings.lead);$('soundEnabled').checked=state.settings.sound!==false;updateNotificationStatus();openModal('settingsModal')}
 $('saveProfileBtn').addEventListener('click',()=>{state.settings.name=$('userNameInput').value.trim().slice(0,40)||'صديقي';state.settings.theme=$('themeSelect').value;state.settings.reminders=$('remindersEnabled').checked;state.settings.lead=Number($('reminderLead').value);state.settings.sound=$('soundEnabled').checked;applyTheme();save();toast('تم حفظ الإعدادات')});
 ['remindersEnabled','reminderLead','soundEnabled'].forEach(id=>$(id).addEventListener('change',async()=>{state.settings.reminders=$('remindersEnabled').checked;state.settings.lead=Number($('reminderLead').value);state.settings.sound=$('soundEnabled').checked;if(id==='remindersEnabled'&&state.settings.reminders&&'Notification'in window&&Notification.permission==='default'){try{const p=await Notification.requestPermission();toast(p==='granted'?'تم السماح بالإشعارات':p==='denied'?'تم رفض الإشعارات':'لم يُمنح الإذن')}catch(e){toast('تعذر طلب إذن الإشعارات','error')}}persist();updateNotificationStatus();scheduleReminderCheck()}));
 function updateNotificationStatus(){let msg='الإشعارات داخل الصفحة فقط، وقد لا تعمل إذا أُغلقت أو عُلّقت الصفحة.';if(!('Notification'in window))msg='هذا المتصفح لا يدعم إشعارات النظام. ستظل بياناتك محفوظة.';else if(Notification.permission==='denied')msg='إذن الإشعارات مرفوض. غيّره من إعدادات المتصفح إذا رغبت.';else if(Notification.permission==='granted')msg='إذن إشعارات النظام مسموح. قد تختلف الموثوقية حسب الجهاز والمتصفح.';$('notificationStatus').textContent=msg}
-const soundFiles = {
-  important: new Audio('sounds/important.mp3'),
-  reminder: new Audio('sounds/reminder.mp3'),
-  success: new Audio('sounds/success.mp3')
-};
 
-function playSound(type = 'reminder') {
-  if (state.settings.sound === false) return;
-
-  const audio = soundFiles[type];
-  if (!audio) return;
-
-  audio.pause();
-  audio.currentTime = 0;
-
-  audio.play().catch(() => {
-    toast('تعذّر تشغيل الصوت. تحقق من ملفات الأصوات.');
-  });
-}
+$('testSoundBtn').addEventListener('click',()=>playSound('reminder'));
+$('enableNotificationsBtn').addEventListener('click',async()=>{if(!('Notification'in window)){toast('المتصفح لا يدعم الإشعارات.','error');updateNotificationStatus();return}try{const p=await Notification.requestPermission();updateNotificationStatus();toast(p==='granted'?'تم السماح بالإشعارات':p==='denied'?'الإذن مرفوض':'لم يتم منح الإذن')}catch(e){toast('تعذر طلب الإذن.','error')}});
 function scheduleReminderCheck(){if(state.reminderTimer)clearInterval(state.reminderTimer);state.reminderTimer=setInterval(checkReminders,30000);checkReminders()}
-function checkReminders() {
-  if (!state.settings.reminders || !('Notification' in window) || Notification.permission !== 'granted') return;
-  const now = Date.now(), lead = Number(state.settings.lead) || 0;
-  state.tasks.forEach(t => {
-    if (t.completed || !t.time || !validDate(t.date)) return;
-    const due = new Date(`${t.date}T${t.time}:00`).getTime();
-    if (!Number.isFinite(due)) return;
-    const start = due - lead * 60000, key = `${t.id}:${start}`;
-    if (now >= start && now <= due + 30000 && !state.notified.has(key)) {
-      state.notified.add(key);
-      try {
-        new Notification('إنجاز — تذكير بمهمة', { body: t.title + (t.time ? ' · ' + t.time : ''), tag: key });
-        if (state.settings.sound) playSound('reminder');
-      } catch (e) {}
-    }
-  });
-  if (state.notified.size > 1000) state.notified.clear();
-}
-
+function checkReminders(){if(!state.settings.reminders||!('Notification'in window)||Notification.permission!=='granted')return;const now=Date.now(),lead=Number(state.settings.lead)||0;state.tasks.forEach(t=>{if(t.completed||!t.time||!validDate(t.date))return;const due=new Date(`${t.date}T${t.time}:00`).getTime();if(!Number.isFinite(due))return;const start=due-lead*60000,key=`${t.id}:${start}`;if(now>=start&&now<=due+30000&&!state.notified.has(key)){state.notified.add(key);try{new Notification('إنجاز — تذكير بمهمة',{body:t.title+(t.time?' · '+t.time:''),tag:key});playSound('reminder')}catch(e){}}});if(state.notified.size>1000)state.notified.clear()}
 function splitTasks(text){return text.replace(/\r/g,'\n').replace(/[•●▪◦]/g,'\n').replace(/\s+(?:ثم|وبعدها|بعد ذلك|كذلك|وأيضًا|وايضا|كمان)\s+/g,'\n').replace(/[؛;،,]\s*/g,'\n').replace(/[.!؟?]\s+/g,'\n').split(/\n+/).map(x=>x.trim().replace(/^(?:و)?(?:ثم\s*)?(?:أريد|عايز|عاوز|لازم|يجب|مطلوب مني|سوف|سأ)\s*/,'').trim()).filter(x=>x.length>1)}
 const dayNames={'الأحد':0,'الاحد':0,'الإثنين':1,'الاثنين':1,'الثلاثاء':2,'الأربعاء':3,'الاربعاء':3,'الخميس':4,'الجمعة':5,'السبت':6};
 function dateFromText(text){const now=new Date();let d=new Date(now.getFullYear(),now.getMonth(),now.getDate());if(/بعد غد|بعد بكرة|بعد غداً/.test(text))d.setDate(d.getDate()+2);else if(/غدًا|غدا|بكرة|غداً/.test(text))d.setDate(d.getDate()+1);else{for(const [name,day] of Object.entries(dayNames)){if(text.includes(name)){let diff=(day-d.getDay()+7)%7;if(diff===0)diff=7;d.setDate(d.getDate()+diff);break}}}return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
