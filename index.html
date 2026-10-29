@@ -93,11 +93,45 @@ function openSettings(){$('userNameInput').value=state.settings.name;$('themeSel
 $('saveProfileBtn').addEventListener('click',()=>{state.settings.name=$('userNameInput').value.trim().slice(0,40)||'صديقي';state.settings.theme=$('themeSelect').value;state.settings.reminders=$('remindersEnabled').checked;state.settings.lead=Number($('reminderLead').value);state.settings.sound=$('soundEnabled').checked;applyTheme();save();toast('تم حفظ الإعدادات')});
 ['remindersEnabled','reminderLead','soundEnabled'].forEach(id=>$(id).addEventListener('change',async()=>{state.settings.reminders=$('remindersEnabled').checked;state.settings.lead=Number($('reminderLead').value);state.settings.sound=$('soundEnabled').checked;if(id==='remindersEnabled'&&state.settings.reminders&&'Notification'in window&&Notification.permission==='default'){try{const p=await Notification.requestPermission();toast(p==='granted'?'تم السماح بالإشعارات':p==='denied'?'تم رفض الإشعارات':'لم يُمنح الإذن')}catch(e){toast('تعذر طلب إذن الإشعارات','error')}}persist();updateNotificationStatus();scheduleReminderCheck()}));
 function updateNotificationStatus(){let msg='الإشعارات داخل الصفحة فقط، وقد لا تعمل إذا أُغلقت أو عُلّقت الصفحة.';if(!('Notification'in window))msg='هذا المتصفح لا يدعم إشعارات النظام. ستظل بياناتك محفوظة.';else if(Notification.permission==='denied')msg='إذن الإشعارات مرفوض. غيّره من إعدادات المتصفح إذا رغبت.';else if(Notification.permission==='granted')msg='إذن إشعارات النظام مسموح. قد تختلف الموثوقية حسب الجهاز والمتصفح.';$('notificationStatus').textContent=msg}
-function playSound(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C){toast('الصوت غير مدعوم في هذا المتصفح.','error');return}if(!state.audio)state.audio=new C();if(state.audio.state==='suspended')state.audio.resume();[0,.18].forEach((delay,i)=>{const osc=state.audio.createOscillator(),gain=state.audio.createGain();osc.type='sine';osc.frequency.value=i?880:660;gain.gain.setValueAtTime(.0001,state.audio.currentTime+delay);gain.gain.exponentialRampToValueAtTime(.13,state.audio.currentTime+delay+.025);gain.gain.exponentialRampToValueAtTime(.0001,state.audio.currentTime+delay+.15);osc.connect(gain);gain.connect(state.audio.destination);osc.start(state.audio.currentTime+delay);osc.stop(state.audio.currentTime+delay+.17)})}catch(e){toast('تعذر تشغيل الصوت. جرّب بعد لمس الصفحة.','error')}}
-$('testSoundBtn').addEventListener('click',playSound);
-$('enableNotificationsBtn').addEventListener('click',async()=>{if(!('Notification'in window)){toast('المتصفح لا يدعم الإشعارات.','error');updateNotificationStatus();return}try{const p=await Notification.requestPermission();updateNotificationStatus();toast(p==='granted'?'تم السماح بالإشعارات':p==='denied'?'الإذن مرفوض':'لم يتم منح الإذن')}catch(e){toast('تعذر طلب الإذن.','error')}});
+const soundFiles = {
+  important: new Audio('sounds/important.mp3'),
+  reminder: new Audio('sounds/reminder.mp3'),
+  success: new Audio('sounds/success.mp3')
+};
+
+function playSound(type = 'reminder') {
+  if (state.settings.sound === false) return;
+
+  const audio = soundFiles[type];
+  if (!audio) return;
+
+  audio.pause();
+  audio.currentTime = 0;
+
+  audio.play().catch(() => {
+    toast('تعذّر تشغيل الصوت. تحقق من ملفات الأصوات.');
+  });
+}
 function scheduleReminderCheck(){if(state.reminderTimer)clearInterval(state.reminderTimer);state.reminderTimer=setInterval(checkReminders,30000);checkReminders()}
-function checkReminders(){if(!state.settings.reminders||!('Notification'in window)||Notification.permission!=='granted')return;const now=Date.now(),lead=Number(state.settings.lead)||0;state.tasks.forEach(t=>{if(t.completed||!t.time||!validDate(t.date))return;const due=new Date(`${t.date}T${t.time}:00`).getTime();if(!Number.isFinite(due))return;const start=due-lead*60000,key=`${t.id}:${start}`;if(now>=start&&now<=due+30000&&!state.notified.has(key)){state.notified.add(key);try{new Notification('إنجاز — تذكير بمهمة',{body:t.title+(t.time?' · '+t.time:''),tag:key});if(state.settings.sound)playSound()}catch(e){}}});if(state.notified.size>1000)state.notified.clear()}
+function checkReminders() {
+  if (!state.settings.reminders || !('Notification' in window) || Notification.permission !== 'granted') return;
+  const now = Date.now(), lead = Number(state.settings.lead) || 0;
+  state.tasks.forEach(t => {
+    if (t.completed || !t.time || !validDate(t.date)) return;
+    const due = new Date(`${t.date}T${t.time}:00`).getTime();
+    if (!Number.isFinite(due)) return;
+    const start = due - lead * 60000, key = `${t.id}:${start}`;
+    if (now >= start && now <= due + 30000 && !state.notified.has(key)) {
+      state.notified.add(key);
+      try {
+        new Notification('إنجاز — تذكير بمهمة', { body: t.title + (t.time ? ' · ' + t.time : ''), tag: key });
+        if (state.settings.sound) playSound('reminder');
+      } catch (e) {}
+    }
+  });
+  if (state.notified.size > 1000) state.notified.clear();
+}
+
 function splitTasks(text){return text.replace(/\r/g,'\n').replace(/[•●▪◦]/g,'\n').replace(/\s+(?:ثم|وبعدها|بعد ذلك|كذلك|وأيضًا|وايضا|كمان)\s+/g,'\n').replace(/[؛;،,]\s*/g,'\n').replace(/[.!؟?]\s+/g,'\n').split(/\n+/).map(x=>x.trim().replace(/^(?:و)?(?:ثم\s*)?(?:أريد|عايز|عاوز|لازم|يجب|مطلوب مني|سوف|سأ)\s*/,'').trim()).filter(x=>x.length>1)}
 const dayNames={'الأحد':0,'الاحد':0,'الإثنين':1,'الاثنين':1,'الثلاثاء':2,'الأربعاء':3,'الاربعاء':3,'الخميس':4,'الجمعة':5,'السبت':6};
 function dateFromText(text){const now=new Date();let d=new Date(now.getFullYear(),now.getMonth(),now.getDate());if(/بعد غد|بعد بكرة|بعد غداً/.test(text))d.setDate(d.getDate()+2);else if(/غدًا|غدا|بكرة|غداً/.test(text))d.setDate(d.getDate()+1);else{for(const [name,day] of Object.entries(dayNames)){if(text.includes(name)){let diff=(day-d.getDay()+7)%7;if(diff===0)diff=7;d.setDate(d.getDate()+diff);break}}}return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
