@@ -1,7 +1,7 @@
 {
+  "id": "./",
   "name": "إنجاز",
   "short_name": "إنجاز",
-  "description": "تطبيق إنجاز لإدارة المهام والإنتاجية",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,16 +9,14 @@
   "theme_color": "#171512",
   "icons": [
     {
-      "src": "./icon-512.jpeg",
+      "src": "icon-512.jpeg",
       "sizes": "512x512",
-      "type": "image/jpeg",
-      "purpose": "any"
+      "type": "image/jpeg"
     },
     {
-      "src": "./icon-192.jpeg",
+      "src": "icon-192.jpeg",
       "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any"
+      "type": "image/jpeg"
     }
   ]
 }
